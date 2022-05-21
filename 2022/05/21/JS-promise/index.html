@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>JS-promise | Xiaodanye</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="PromisePromise 是一个对象，它代表了一个异步操作的最终完成或者失败及其结果值：异步方法并不会立即返回最终的值，而是会返回一个 promise，以便在未来某个时候把值交给使用者。 Promise 必然处于以下几种状态之一：待定（Pending）、已兑现（Fulfilled）、已拒绝（Rejected） Promise 状态只能在内部进行操作，内部操作在Promise执行器函数执行。Pr">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JS-promise">
+<meta property="og:url" content="http://xiaodanye.github.io/2022/05/21/JS-promise/index.html">
+<meta property="og:site_name" content="Xiaodanye">
+<meta property="og:description" content="PromisePromise 是一个对象，它代表了一个异步操作的最终完成或者失败及其结果值：异步方法并不会立即返回最终的值，而是会返回一个 promise，以便在未来某个时候把值交给使用者。 Promise 必然处于以下几种状态之一：待定（Pending）、已兑现（Fulfilled）、已拒绝（Rejected） Promise 状态只能在内部进行操作，内部操作在Promise执行器函数执行。Pr">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-05-21T11:10:12.000Z">
+<meta property="article:modified_time" content="2022-05-21T11:10:30.870Z">
+<meta property="article:author" content="Xiaodanye">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Xiaodanye" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Xiaodanye</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://xiaodanye.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-JS-promise" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2022/05/21/JS-promise/" class="article-date">
+  <time datetime="2022-05-21T11:10:12.000Z" itemprop="datePublished">2022-05-21</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      JS-promise
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="Promise"><a href="#Promise" class="headerlink" title="Promise"></a>Promise</h3><p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Promise"><code>Promise</code></a> 是一个对象，它代表了一个异步操作的最终完成或者失败及其结果值：异步方法并不会立即返回最终的值，而是会返回一个 <code>promise</code>，以便在未来某个时候把值交给使用者。</p>
+<p><code>Promise</code> 必然处于以下几种状态之一：待定（<code>Pending</code>）、已兑现（<code>Fulfilled</code>）、已拒绝（<code>Rejected</code>）</p>
+<p><code>Promise</code> 状态只能在内部进行操作，内部操作在<code>Promise</code>执行器函数执行。<code>Promise</code>必须接受一个函数作为参数，我们称该函数为执行器函数，执行器函数又包含<code>resolve</code>和<code>reject</code>两个参数，它们是两个必须要有返回值的回调函数：</p>
+<ul>
+<li><p><code>resolve</code> : 将Promise对象的状态从 <code>Pending</code>(进行中) 变为 <code>Fulfilled</code>(已成功)，并传入的值。</p>
+</li>
+<li><p><code>reject</code> : 将Promise对象的状态从 <code>Pending</code>(进行中) 变为 <code>Rejected</code>(已失败)，并抛出错误。</p>
+</li>
+</ul>
+<p><strong>静态方法</strong>：返回一个<code>Promise</code>对象，带着上一步操作所返回的结果，便于<strong>链式调用</strong></p>
+<table>
+<thead>
+<tr>
+<th align="left">方法</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Promise/all"><code>Promise.all(iterable)</code></a></td>
+<td>这个方法返回一个新的promise对象，该promise对象在iterable参数对象里所有的promise对象都成功的时候才会触发成功，一旦有任何一个iterable里面的promise对象失败则立即触发该promise对象的失败。</td>
+</tr>
+<tr>
+<td align="left"><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Promise/allSettled"><code>Promise.allSettled(iterable)</code></a></td>
+<td>等到所有promises都已敲定（settled）（每个promise都已兑现（fulfilled）或已拒绝（rejected））。返回一个promise，该promise在所有promise完成后完成。并带有一个对象数组，每个对象对应每个promise的结果。</td>
+</tr>
+<tr>
+<td align="left"><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Promise/any"><code>Promise.any(iterable)</code></a></td>
+<td>接收一个Promise对象的集合，当其中的一个 promise 成功，就返回那个成功的promise的值。</td>
+</tr>
+<tr>
+<td align="left"><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Promise/race"><code>Promise.race(iterable)</code></a></td>
+<td>当iterable参数里的任意一个子promise被成功或失败后，父promise马上也会用子promise的成功返回值或失败详情作为参数调用父promise绑定的相应句柄，并返回该promise对象。</td>
+</tr>
+<tr>
+<td align="left"><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Promise/reject"><code>Promise.reject(reason)</code></a></td>
+<td>返回一个状态为失败的Promise对象，并将给定的失败信息传递给对应的处理方法</td>
+</tr>
+<tr>
+<td align="left"><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Promise/resolve"><code>Promise.resolve(value)</code></a></td>
+<td>返回一个状态由给定value决定的Promise对象，并将该value传递给对应的处理方法</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>通常，一遇到异常抛出，浏览器就会顺着 Promise 链寻找下一个 <code>onRejected</code> 失败回调函数或者由 <code>.catch()</code> 指定的回调函数。因此，链式调用可以在最后一个 <code>.catch()</code> 之前把所有的 <code>handleRejection</code> 都省略掉。类似地， <code>.catch()</code> 其实只是没有给 <code>handleFulfilled</code> 预留参数位置的 <code>.then()</code> 而已。</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> myFirstPromise = <span class="keyword">new</span> <span class="title class_">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="comment">// 做一些异步操作，最终会调用下面两者之一:</span></span><br><span class="line">  <span class="title function_">resolve</span>(someValue); <span class="comment">// fulfilled</span></span><br><span class="line">  <span class="title function_">reject</span>(<span class="string">&quot;failure reason&quot;</span>); <span class="comment">// rejected</span></span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// AJAX请求</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">myAsyncFunction</span>(<span class="params">url</span>) &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> xhr = <span class="keyword">new</span> <span class="title class_">XMLHttpRequest</span>();</span><br><span class="line">    xhr.<span class="title function_">open</span>(<span class="string">&quot;GET&quot;</span>, url);</span><br><span class="line">    xhr.<span class="property">onload</span> = <span class="function">() =&gt;</span> <span class="title function_">resolve</span>(xhr.<span class="property">responseText</span>);</span><br><span class="line">    xhr.<span class="property">onerror</span> = <span class="function">() =&gt;</span> <span class="title function_">reject</span>(xhr.<span class="property">statusText</span>);</span><br><span class="line">    xhr.<span class="title function_">send</span>();</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// async/await 语法糖</span></span><br><span class="line"><span class="keyword">async</span> <span class="keyword">function</span> <span class="title function_">foo</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">try</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> result = <span class="keyword">await</span> <span class="title function_">doSomething</span>();</span><br><span class="line">    <span class="keyword">const</span> newResult = <span class="keyword">await</span> <span class="title function_">doSomethingElse</span>(result);</span><br><span class="line">    <span class="keyword">const</span> finalResult = <span class="keyword">await</span> <span class="title function_">doThirdThing</span>(newResult);</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">`Got the final result: <span class="subst">$&#123;finalResult&#125;</span>`</span>);</span><br><span class="line">  &#125; <span class="keyword">catch</span>(error) &#123;</span><br><span class="line">    <span class="title function_">failureCallback</span>(error);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://xiaodanye.github.io/2022/05/21/JS-promise/" data-id="cl3frvgie00052i5jbvd2fbp8" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2022/05/21/JS%E7%AE%AD%E5%A4%B4%E5%87%BD%E6%95%B0/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          JS箭头函数
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2022/05/21/JS-this/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">JS-this</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/05/">May 2022</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2022/05/21/JS-ES6%E6%96%B0%E5%A2%9E%E7%89%B9%E6%80%A7/">JS-ES6新增特性</a>
+          </li>
+        
+          <li>
+            <a href="/2022/05/21/JS%E6%B7%B1%E6%8B%B7%E8%B4%9D%E4%B8%8E%E6%B5%85%E6%8B%B7%E8%B4%9D/">JS深拷贝与浅拷贝</a>
+          </li>
+        
+          <li>
+            <a href="/2022/05/21/JS%E7%BB%A7%E6%89%BF%E4%B8%8E%E5%8E%9F%E5%9E%8B%E9%93%BE/">JS继承与原型链</a>
+          </li>
+        
+          <li>
+            <a href="/2022/05/21/JS%E4%BD%9C%E7%94%A8%E5%9F%9F%E9%93%BE/">JS作用域链</a>
+          </li>
+        
+          <li>
+            <a href="/2022/05/21/JS%E7%AE%AD%E5%A4%B4%E5%87%BD%E6%95%B0/">JS箭头函数</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2022 Xiaodanye<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>

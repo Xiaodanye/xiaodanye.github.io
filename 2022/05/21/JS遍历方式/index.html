@@ -15,7 +15,7 @@
 <meta property="og:description" content="遍历方式数组（有序）  推荐：for ... of：for (let item of list) &amp;#123; ... &amp;#125; for循环：for (let i &#x3D; 0, len &#x3D; list.length; i &lt; len; i++) &amp;#123; ... &amp;#125; forEach方法：list.forEach((item, index, arr) &#x3D;&gt; &amp;#123; ..">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2022-05-21T07:11:11.000Z">
-<meta property="article:modified_time" content="2022-05-21T07:11:46.305Z">
+<meta property="article:modified_time" content="2022-05-21T11:07:08.907Z">
 <meta property="article:author" content="Xiaodanye">
 <meta name="twitter:card" content="summary">
   
@@ -94,15 +94,13 @@
 <li><code>for循环</code>：<code>for (let i = 0, len = list.length; i &lt; len; i++) &#123; ... &#125;</code></li>
 <li><code>forEach方法</code>：<code>list.forEach((item, index, arr) =&gt; &#123; ... &#125;</code></li>
 </ul>
-<blockquote>
-<p>三者都是基本的由左到右遍历数组，但具体有下列不同：</p>
+<p>PS：三者都是基本的由左到右遍历数组，但具体有下列不同：</p>
 <ol>
 <li><code>for ... of</code> 直接访问的是实际元素；<code>for循环</code> 遍历数组索引；<code>forEach方法</code> 回调函数参数都可访问</li>
 <li><code>forEach方法</code> 无法跳出循环；<code>for循环</code> 和 <code>for ... of </code> 可以使用 break 或者 continue 跳过或中断</li>
 <li>如果数组中存在空元素，<code>forEach方法</code> 会跳过，而<code>for循环</code> 和 <code>for ... of </code> 同样会执行</li>
 </ol>
 <p>数组原型自带遍历方法，以执行特定功能：some、every、filter、map、find、findIndex、reduce ……</p>
-</blockquote>
 <p><strong>对象（无序）</strong></p>
 <ul>
 <li>遍历自身属性名组成的数组<code>Object.keys()</code>：<code>for (let key of Object.keys(obj))</code></li>
@@ -117,7 +115,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://xiaodanye.github.io/2022/05/21/JS%E9%81%8D%E5%8E%86%E6%96%B9%E5%BC%8F/" data-id="cl3fjmfkz000aav5j2k628xd3" class="article-share-link">Share</a>
+      <a data-url="http://xiaodanye.github.io/2022/05/21/JS%E9%81%8D%E5%8E%86%E6%96%B9%E5%BC%8F/" data-id="cl3frvgiq000j2i5je8pl11rd" class="article-share-link">Share</a>
       
       
     </footer>
@@ -175,23 +173,23 @@
       <ul>
         
           <li>
-            <a href="/2022/05/21/JS-attribute-property/">JS-attribute_property</a>
+            <a href="/2022/05/21/JS-ES6%E6%96%B0%E5%A2%9E%E7%89%B9%E6%80%A7/">JS-ES6新增特性</a>
           </li>
         
           <li>
-            <a href="/2022/05/21/JS-toString-valueOf/">JS-toString_valueOf</a>
+            <a href="/2022/05/21/JS%E6%B7%B1%E6%8B%B7%E8%B4%9D%E4%B8%8E%E6%B5%85%E6%8B%B7%E8%B4%9D/">JS深拷贝与浅拷贝</a>
           </li>
         
           <li>
-            <a href="/2022/05/21/JS-call-apply-bind/">JS-call_apply_bind</a>
+            <a href="/2022/05/21/JS%E7%BB%A7%E6%89%BF%E4%B8%8E%E5%8E%9F%E5%9E%8B%E9%93%BE/">JS继承与原型链</a>
           </li>
         
           <li>
-            <a href="/2022/05/21/JS-var-let-const/">JS-var_let_const</a>
+            <a href="/2022/05/21/JS%E4%BD%9C%E7%94%A8%E5%9F%9F%E9%93%BE/">JS作用域链</a>
           </li>
         
           <li>
-            <a href="/2022/05/21/JS-Null_undefined/">JS-Null_undefined</a>
+            <a href="/2022/05/21/JS%E7%AE%AD%E5%A4%B4%E5%87%BD%E6%95%B0/">JS箭头函数</a>
           </li>
         
       </ul>

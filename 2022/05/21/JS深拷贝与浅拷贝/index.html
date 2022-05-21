@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>JS深拷贝与浅拷贝 | Xiaodanye</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="浅拷贝 &amp; 深拷贝浅拷贝是创建一个新对象，这个对象有着原始对象属性值的一份精确拷贝。如果属性是基本类型，拷贝的就是基本类型的值；如果属性是引用类型，拷贝的就是内存地址 ，所以如果其中一个对象改变了这个地址，就会影响到另一个对象。深拷贝是将一个对象从内存中完整的拷贝一份出来，从堆内存中开辟一个新的区域存放新对象，且修改新对象不会影响原对象。 总而言之，浅拷贝只复制指向某个对象的指针，而不复制">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JS深拷贝与浅拷贝">
+<meta property="og:url" content="http://xiaodanye.github.io/2022/05/21/JS%E6%B7%B1%E6%8B%B7%E8%B4%9D%E4%B8%8E%E6%B5%85%E6%8B%B7%E8%B4%9D/index.html">
+<meta property="og:site_name" content="Xiaodanye">
+<meta property="og:description" content="浅拷贝 &amp; 深拷贝浅拷贝是创建一个新对象，这个对象有着原始对象属性值的一份精确拷贝。如果属性是基本类型，拷贝的就是基本类型的值；如果属性是引用类型，拷贝的就是内存地址 ，所以如果其中一个对象改变了这个地址，就会影响到另一个对象。深拷贝是将一个对象从内存中完整的拷贝一份出来，从堆内存中开辟一个新的区域存放新对象，且修改新对象不会影响原对象。 总而言之，浅拷贝只复制指向某个对象的指针，而不复制">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-05-21T11:12:11.000Z">
+<meta property="article:modified_time" content="2022-05-21T11:12:26.806Z">
+<meta property="article:author" content="Xiaodanye">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Xiaodanye" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Xiaodanye</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://xiaodanye.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-JS深拷贝与浅拷贝" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2022/05/21/JS%E6%B7%B1%E6%8B%B7%E8%B4%9D%E4%B8%8E%E6%B5%85%E6%8B%B7%E8%B4%9D/" class="article-date">
+  <time datetime="2022-05-21T11:12:11.000Z" itemprop="datePublished">2022-05-21</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      JS深拷贝与浅拷贝
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="浅拷贝-amp-深拷贝"><a href="#浅拷贝-amp-深拷贝" class="headerlink" title="浅拷贝 &amp; 深拷贝"></a>浅拷贝 &amp; 深拷贝</h3><p><strong>浅拷贝</strong>是创建一个新对象，这个对象有着原始对象属性值的一份精确拷贝。如果属性是基本类型，拷贝的就是基本类型的值；如果属性是引用类型，拷贝的就是内存地址 ，所以如果其中一个对象改变了这个地址，就会影响到另一个对象。<strong>深拷贝</strong>是将一个对象从内存中完整的拷贝一份出来，从堆内存中开辟一个新的区域存放新对象，且修改新对象不会影响原对象。</p>
+<p>总而言之，浅拷贝只复制指向某个对象的指针，而不复制对象本身，<strong>新旧对象还是共享同一块内存</strong>。但深拷贝会另外创造一个一模一样的对象，<strong>新对象跟原对象不共享内存</strong>，修改新对象不会改到原对象。</p>
+<p><strong>浅拷贝</strong></p>
+<ul>
+<li><code>Object.assign()</code>：将所有可枚举属性的值从一个或多个源对象分配到目标对象。它将返回目标对象。</li>
+<li><code>...展开运算符</code>：将可迭代对象转为用逗号分隔的参数序列，与<code>Object.assign()</code>功能类似。</li>
+<li><code>Array.from()</code> 方法对一个类似数组或可迭代对象创建一个新的，浅拷贝的数组实例。</li>
+<li><code>concat()</code>  | <code>slice()</code> 方法都可以返回一个新的数组对象（浅拷贝），不会改变原始数组。</li>
+<li>函数库lodash的<code>_.clone</code>方法</li>
+</ul>
+<p><strong>深拷贝</strong></p>
+<ul>
+<li><code>JSON.parse(JSON.stringify())</code>：可以实现数组或对象深拷贝，但不能处理函数和正则</li>
+<li><code>jQuery.extend()</code>：<code>$.extend(deepCopy, target, object1, [objectN]) </code></li>
+<li>函数库lodash的<code>_.cloneDeep</code>方法</li>
+<li>手写：递归算法</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://xiaodanye.github.io/2022/05/21/JS%E6%B7%B1%E6%8B%B7%E8%B4%9D%E4%B8%8E%E6%B5%85%E6%8B%B7%E8%B4%9D/" data-id="cl3frvgim000e2i5j63t334ed" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2022/05/21/JS-ES6%E6%96%B0%E5%A2%9E%E7%89%B9%E6%80%A7/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          JS-ES6新增特性
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2022/05/21/JS%E7%BB%A7%E6%89%BF%E4%B8%8E%E5%8E%9F%E5%9E%8B%E9%93%BE/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">JS继承与原型链</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/05/">May 2022</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2022/05/21/JS-ES6%E6%96%B0%E5%A2%9E%E7%89%B9%E6%80%A7/">JS-ES6新增特性</a>
+          </li>
+        
+          <li>
+            <a href="/2022/05/21/JS%E6%B7%B1%E6%8B%B7%E8%B4%9D%E4%B8%8E%E6%B5%85%E6%8B%B7%E8%B4%9D/">JS深拷贝与浅拷贝</a>
+          </li>
+        
+          <li>
+            <a href="/2022/05/21/JS%E7%BB%A7%E6%89%BF%E4%B8%8E%E5%8E%9F%E5%9E%8B%E9%93%BE/">JS继承与原型链</a>
+          </li>
+        
+          <li>
+            <a href="/2022/05/21/JS%E4%BD%9C%E7%94%A8%E5%9F%9F%E9%93%BE/">JS作用域链</a>
+          </li>
+        
+          <li>
+            <a href="/2022/05/21/JS%E7%AE%AD%E5%A4%B4%E5%87%BD%E6%95%B0/">JS箭头函数</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2022 Xiaodanye<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>

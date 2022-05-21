@@ -5,17 +5,17 @@
   
 
   
-  <title>JS数据类型 | Xiaodanye</title>
+  <title>JS脚本引入 | Xiaodanye</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="基本数据类型  number、string、boolean、null、undefined、symbol、bigInt  引用数据类型  Object：Array、Date、Function、RegExp …… PS：NaN是一个数值类型，但不是一个具体的数字；另外，NaN 与任何数据都不想等。 Object就是 key-value 的集合，是一种无序的复合数据：  创建自定义对象有两种方式：对象">
+  <meta name="description" content="脚本引入在HTML文档中引入JavaScript文件主要有三种：行内式、嵌入式、外链式  行内式：&lt;input type&#x3D;&quot;button&quot; onclick&#x3D;&quot;alert(&#39;Hello World!&#39;); &quot; value&#x3D;&quot;click&quot; &gt;  嵌入式：&lt;script&gt; ... &lt;&#x2F;script&amp;">
 <meta property="og:type" content="article">
-<meta property="og:title" content="JS数据类型">
-<meta property="og:url" content="http://xiaodanye.github.io/2022/05/21/JS%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/index.html">
+<meta property="og:title" content="JS脚本引入">
+<meta property="og:url" content="http://xiaodanye.github.io/2022/05/21/JS%E8%84%9A%E6%9C%AC%E5%BC%95%E5%85%A5/index.html">
 <meta property="og:site_name" content="Xiaodanye">
-<meta property="og:description" content="基本数据类型  number、string、boolean、null、undefined、symbol、bigInt  引用数据类型  Object：Array、Date、Function、RegExp …… PS：NaN是一个数值类型，但不是一个具体的数字；另外，NaN 与任何数据都不想等。 Object就是 key-value 的集合，是一种无序的复合数据：  创建自定义对象有两种方式：对象">
+<meta property="og:description" content="脚本引入在HTML文档中引入JavaScript文件主要有三种：行内式、嵌入式、外链式  行内式：&lt;input type&#x3D;&quot;button&quot; onclick&#x3D;&quot;alert(&#39;Hello World!&#39;); &quot; value&#x3D;&quot;click&quot; &gt;  嵌入式：&lt;script&gt; ... &lt;&#x2F;script&amp;">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2022-05-21T06:20:49.000Z">
-<meta property="article:modified_time" content="2022-05-21T06:37:33.748Z">
+<meta property="article:published_time" content="2022-05-21T07:13:40.000Z">
+<meta property="article:modified_time" content="2022-05-21T07:13:58.693Z">
 <meta property="article:author" content="Xiaodanye">
 <meta name="twitter:card" content="summary">
   
@@ -66,10 +66,10 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-JS数据类型" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-JS脚本引入" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2022/05/21/JS%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" class="article-date">
-  <time datetime="2022-05-21T06:20:49.000Z" itemprop="datePublished">2022-05-21</time>
+    <a href="/2022/05/21/JS%E8%84%9A%E6%9C%AC%E5%BC%95%E5%85%A5/" class="article-date">
+  <time datetime="2022-05-21T07:13:40.000Z" itemprop="datePublished">2022-05-21</time>
 </a>
     
   </div>
@@ -80,7 +80,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      JS数据类型
+      JS脚本引入
     </h1>
   
 
@@ -88,48 +88,26 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <ul>
-<li>基本数据类型</li>
-</ul>
-<p><code>number</code>、<code>string</code>、<code>boolean</code>、<code>null</code>、<code>undefined</code>、<code>symbol</code>、<code>bigInt</code></p>
-<ul>
-<li>引用数据类型</li>
-</ul>
-<p><code>Object</code>：<code>Array</code>、<code>Date</code>、<code>Function</code>、<code>RegExp</code> ……</p>
-<p>PS：<code>NaN</code>是一个数值类型，但不是一个具体的数字；另外，<code>NaN</code> 与任何数据都不想等。</p>
-<p><code>Object</code>就是 key-value 的集合，是一种无序的复合数据：</p>
+        <h3 id="脚本引入"><a href="#脚本引入" class="headerlink" title="脚本引入"></a>脚本引入</h3><p>在HTML文档中引入JavaScript文件主要有三种：行内式、嵌入式、外链式</p>
 <ol>
-<li>创建自定义对象有两种方式：对象字面量 和 构造函数new</li>
-<li>访问对象也有两种方式：<code>objectName.propertyName</code> 和 <code>objectName[&quot;propertyName&quot;]</code></li>
-<li>对象本身是引用类型，且对象的 key 都是字符串类型</li>
-<li>访问一个对象的属性会访问对应的原型链</li>
-<li>请不要把字符串、数值和布尔值声明为对象</li>
-</ol>
-<p><strong>判断数据类型</strong></p>
-<ol>
-<li><p>基本类型：<code>typeof</code>。返回基本类型字符串表示，比如<code>&#39;number&#39;</code>……</p>
+<li><p>行内式：<code>&lt;input type=&quot;button&quot; onclick=&quot;alert(&#39;Hello World!&#39;); &quot; value=&quot;click&quot; &gt;</code></p>
 </li>
-<li><p>引用类型：<code>Object.prototype.isPrototypeOf(obj)</code>用于判断 obj 是否是一个引用类型。</p>
+<li><p>嵌入式：<code>&lt;script&gt; ... &lt;/script&gt;</code></p>
+</li>
+<li><p>外链式：<code>&lt;script src=&quot;脚本文件路径&quot;&gt;&lt;/script&gt;</code></p>
+<p><strong>默认引入</strong></p>
+<p>当浏览器遇到 script 标签时，文档的解析将停止，并立即下载并执行脚本，脚本执行完毕后将继续解析文档</p>
+<p><strong>延迟加载</strong></p>
+<p>&lt;script defer&gt; : 用于开启新的线程下载脚本文件，并使脚本在DOM文档解析完成后顺序执行</p>
+<p>&lt;script async&gt; : HTML5 新增属性，用于异步下载脚本文件，下载完毕立即解释执行脚本</p>
 </li>
 </ol>
-<p>PS：需要注意的是 <code>typeof null</code>  返回 <code>&#39;object&#39;</code>，但是<code>null instanceof Object</code>返回<code>false</code></p>
-<p><strong>数组判断</strong></p>
-<ul>
-<li><p>推荐（ES6）：<code>Array.isArray(arr)</code></p>
-</li>
-<li><p>原型：<code>Array.prototype.isPrototypeOf(arr)</code> || <code>arr.constructor === Array</code> || </p>
-<p><code>Object.getPrototypeOf(arr) === Array.prototype</code> ||</p>
-<p><code>Object.prototype.toString.call(arr) === &#39;[object Array]&#39;</code></p>
-</li>
-<li><p>不推荐（框架）： <code>arr instanceof Array</code></p>
-</li>
-</ul>
-<p>PS：**<code>instanceof</code>** <strong>运算符</strong>用于检测构造函数的 <code>prototype</code> 属性是否出现在某个实例对象的原型链上。</p>
+<p>PS：CSS脚本引入类似</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://xiaodanye.github.io/2022/05/21/JS%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" data-id="cl3fjmfkv0006av5jherx718c" class="article-share-link">Share</a>
+      <a data-url="http://xiaodanye.github.io/2022/05/21/JS%E8%84%9A%E6%9C%AC%E5%BC%95%E5%85%A5/" data-id="cl3fjmfky0009av5j9m7jafk0" class="article-share-link">Share</a>
       
       
     </footer>
@@ -138,19 +116,19 @@
     
 <nav id="article-nav">
   
-    <a href="/2022/05/21/JS%E6%95%B0%E7%BB%84%E6%96%B9%E6%B3%95/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2022/05/21/JS%E7%9B%B8%E7%AD%89%E6%AF%94%E8%BE%83/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Newer</strong>
       <div class="article-nav-title">
         
-          JS数组方法
+          JS相等比较
         
       </div>
     </a>
   
   
-    <a href="/2022/05/21/hello-world/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2022/05/21/JS%E9%81%8D%E5%8E%86%E6%96%B9%E5%BC%8F/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">Hello World</div>
+      <div class="article-nav-title">JS遍历方式</div>
     </a>
   
 </nav>

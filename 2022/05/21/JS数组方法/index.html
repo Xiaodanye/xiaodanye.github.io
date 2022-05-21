@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>JS数组方法 | Xiaodanye</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="数组方法参照：JavaScript 数组参考手册 Array 属性    属性 描述    constructor 返回创建 Array 对象原型的函数。   length 设置或返回数组中元素的数量。   prototype 允许您向数组添加属性和方法。   Array 方法    方法 描述    concat() 连接两个或多个数组，并返回已连接数组的副本。   copyWithin() 将">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JS数组方法">
+<meta property="og:url" content="http://xiaodanye.github.io/2022/05/21/JS%E6%95%B0%E7%BB%84%E6%96%B9%E6%B3%95/index.html">
+<meta property="og:site_name" content="Xiaodanye">
+<meta property="og:description" content="数组方法参照：JavaScript 数组参考手册 Array 属性    属性 描述    constructor 返回创建 Array 对象原型的函数。   length 设置或返回数组中元素的数量。   prototype 允许您向数组添加属性和方法。   Array 方法    方法 描述    concat() 连接两个或多个数组，并返回已连接数组的副本。   copyWithin() 将">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-05-21T07:01:31.000Z">
+<meta property="article:modified_time" content="2022-05-21T07:05:56.959Z">
+<meta property="article:author" content="Xiaodanye">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Xiaodanye" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Xiaodanye</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://xiaodanye.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-JS数组方法" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2022/05/21/JS%E6%95%B0%E7%BB%84%E6%96%B9%E6%B3%95/" class="article-date">
+  <time datetime="2022-05-21T07:01:31.000Z" itemprop="datePublished">2022-05-21</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      JS数组方法
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="数组方法"><a href="#数组方法" class="headerlink" title="数组方法"></a>数组方法</h3><p>参照：<a target="_blank" rel="noopener" href="https://www.w3school.com.cn/jsref/jsref_obj_array.asp">JavaScript 数组参考手册</a></p>
+<p><strong>Array 属性</strong></p>
+<table>
+<thead>
+<tr>
+<th align="left">属性</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/jsref/jsref_constructor_array.asp">constructor</a></td>
+<td align="left">返回创建 Array 对象原型的函数。</td>
+</tr>
+<tr>
+<td align="left"><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/jsref/jsref_length_array.asp">length</a></td>
+<td align="left">设置或返回数组中元素的数量。</td>
+</tr>
+<tr>
+<td align="left"><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/jsref/jsref_prototype_array.asp">prototype</a></td>
+<td align="left">允许您向数组添加属性和方法。</td>
+</tr>
+</tbody></table>
+<p><strong>Array 方法</strong></p>
+<table>
+<thead>
+<tr>
+<th align="left">方法</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/jsref/jsref_concat_array.asp">concat()</a></td>
+<td align="left">连接两个或多个数组，并返回已连接数组的副本。</td>
+</tr>
+<tr>
+<td align="left"><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/jsref/jsref_copywithin.asp">copyWithin()</a></td>
+<td align="left">将数组中的数组元素复制到指定位置或从指定位置复制。</td>
+</tr>
+<tr>
+<td align="left"><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/jsref/jsref_entries.asp">entries()</a></td>
+<td align="left">返回键/值对数组迭代对象。</td>
+</tr>
+<tr>
+<td align="left"><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/jsref/jsref_every.asp">every()</a></td>
+<td align="left">检查数组中的每个元素是否通过测试。</td>
+</tr>
+<tr>
+<td align="left"><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/jsref/jsref_fill.asp">fill()</a></td>
+<td align="left">用静态值填充数组中的元素。</td>
+</tr>
+<tr>
+<td align="left"><strong><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/jsref/jsref_filter.asp">filter()</a></strong></td>
+<td align="left">使用数组中通过测试的每个元素创建新数组。</td>
+</tr>
+<tr>
+<td align="left"><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/jsref/jsref_find.asp">find()</a></td>
+<td align="left">返回数组中第一个通过测试的元素的值。</td>
+</tr>
+<tr>
+<td align="left"><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/jsref/jsref_findindex.asp">findIndex()</a></td>
+<td align="left">返回数组中通过测试的第一个元素的索引。</td>
+</tr>
+<tr>
+<td align="left"><strong><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/jsref/jsref_foreach.asp">forEach()</a></strong></td>
+<td align="left">为每个数组元素调用函数。</td>
+</tr>
+<tr>
+<td align="left"><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/jsref/jsref_from.asp">from()</a></td>
+<td align="left">从对象创建数组。</td>
+</tr>
+<tr>
+<td align="left"><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/jsref/jsref_includes_array.asp">includes()</a></td>
+<td align="left">检查数组是否包含指定的元素。</td>
+</tr>
+<tr>
+<td align="left"><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/jsref/jsref_indexof_array.asp">indexOf()</a></td>
+<td align="left">在数组中搜索元素并返回其位置。</td>
+</tr>
+<tr>
+<td align="left"><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/jsref/jsref_isarray.asp">isArray()</a></td>
+<td align="left">检查对象是否为数组。</td>
+</tr>
+<tr>
+<td align="left"><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/jsref/jsref_join.asp">join()</a></td>
+<td align="left">将数组的所有元素连接成一个字符串。</td>
+</tr>
+<tr>
+<td align="left"><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/jsref/jsref_keys.asp">keys()</a></td>
+<td align="left">返回 Array Iteration 对象，包含原始数组的键.</td>
+</tr>
+<tr>
+<td align="left"><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/jsref/jsref_lastindexof_array.asp">lastIndexOf()</a></td>
+<td align="left">在数组中搜索元素，从末尾开始，并返回其位置。</td>
+</tr>
+<tr>
+<td align="left"><strong><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/jsref/jsref_map.asp">map()</a></strong></td>
+<td align="left">使用为每个数组元素调用函数的结果创建新数组。</td>
+</tr>
+<tr>
+<td align="left"><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/jsref/jsref_pop.asp">pop()</a></td>
+<td align="left">删除数组的最后一个元素，并返回该元素。</td>
+</tr>
+<tr>
+<td align="left"><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/jsref/jsref_push.asp">push()</a></td>
+<td align="left">将新元素添加到数组的末尾，<strong>并返回新的长度</strong>。</td>
+</tr>
+<tr>
+<td align="left"><strong><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/jsref/jsref_reduce.asp">reduce()</a></strong></td>
+<td align="left">将数组的值减为单个值（从左到右）。</td>
+</tr>
+<tr>
+<td align="left"><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/jsref/jsref_reduceright.asp">reduceRight()</a></td>
+<td align="left">将数组的值减为单个值（从右到左）。</td>
+</tr>
+<tr>
+<td align="left"><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/jsref/jsref_reverse.asp">reverse()</a></td>
+<td align="left">反转数组中元素的顺序。</td>
+</tr>
+<tr>
+<td align="left"><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/jsref/jsref_shift.asp">shift()</a></td>
+<td align="left">删除数组的第一个元素，并返回该元素。</td>
+</tr>
+<tr>
+<td align="left"><strong><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/jsref/jsref_slice_array.asp">slice()</a></strong></td>
+<td align="left">选择数组的一部分，并返回新数组。</td>
+</tr>
+<tr>
+<td align="left"><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/jsref/jsref_some.asp">some()</a></td>
+<td align="left">检查数组中的任何元素是否通过测试。</td>
+</tr>
+<tr>
+<td align="left"><strong><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/jsref/jsref_sort.asp">sort()</a></strong></td>
+<td align="left">对数组的元素进行排序。</td>
+</tr>
+<tr>
+<td align="left"><strong><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/jsref/jsref_splice.asp">splice()</a></strong></td>
+<td align="left">从数组中添加/删除元素。</td>
+</tr>
+<tr>
+<td align="left"><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/jsref/jsref_tostring_array.asp">toString()</a></td>
+<td align="left">将数组转换为字符串，并返回结果。</td>
+</tr>
+<tr>
+<td align="left"><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/jsref/jsref_unshift.asp">unshift()</a></td>
+<td align="left">将新元素添加到数组的开头，并返回新的长度。</td>
+</tr>
+<tr>
+<td align="left"><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/jsref/jsref_valueof_array.asp">valueOf()</a></td>
+<td align="left">返回数组的原始值。</td>
+</tr>
+</tbody></table>
+<p>PS：<code>sort() </code>方法对数组的项目进行排序，默认情况按照ASCII码数值进行排序，可以通过提供“比较函数”来改变比较规则，结果<strong>返回已完成排序后的 Array 对象</strong>，该方法会改变原始数组。“比较函数”接受两个参数，返回一个数值，负值代表第一个值比第二个值“小”，零表示两值相等，正值代表第一个值比第二个值“大”。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">inputArr.<span class="title function_">sort</span>(<span class="function">(<span class="params">a, b</span>) =&gt;</span> a - b);</span><br></pre></td></tr></table></figure>
+
+<p>参照：<a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/sort">Array.prototype.sort()</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://xiaodanye.github.io/2022/05/21/JS%E6%95%B0%E7%BB%84%E6%96%B9%E6%B3%95/" data-id="cl3fjmfkw0007av5jbm6m9etn" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2022/05/21/JS%E4%B8%A5%E6%A0%BC%E6%A8%A1%E5%BC%8F/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          JS严格模式
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2022/05/21/JS%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">JS数据类型</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/05/">May 2022</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2022/05/21/JS-attribute-property/">JS-attribute_property</a>
+          </li>
+        
+          <li>
+            <a href="/2022/05/21/JS-toString-valueOf/">JS-toString_valueOf</a>
+          </li>
+        
+          <li>
+            <a href="/2022/05/21/JS-call-apply-bind/">JS-call_apply_bind</a>
+          </li>
+        
+          <li>
+            <a href="/2022/05/21/JS-var-let-const/">JS-var_let_const</a>
+          </li>
+        
+          <li>
+            <a href="/2022/05/21/JS-Null_undefined/">JS-Null_undefined</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2022 Xiaodanye<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>

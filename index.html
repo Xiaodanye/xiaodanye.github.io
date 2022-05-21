@@ -66,10 +66,10 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-JS数据类型" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-JS-attribute-property" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2022/05/21/JS%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" class="article-date">
-  <time datetime="2022-05-21T06:20:49.000Z" itemprop="datePublished">2022-05-21</time>
+    <a href="/2022/05/21/JS-attribute-property/" class="article-date">
+  <time datetime="2022-05-21T07:21:49.000Z" itemprop="datePublished">2022-05-21</time>
 </a>
     
   </div>
@@ -80,7 +80,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2022/05/21/JS%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/">JS数据类型</a>
+      <a class="article-title" href="/2022/05/21/JS-attribute-property/">JS-attribute_property</a>
     </h1>
   
 
@@ -88,48 +88,28 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <ul>
-<li>基本数据类型</li>
+        <h3 id="attribute-amp-property"><a href="#attribute-amp-property" class="headerlink" title="attribute &amp; property"></a>attribute &amp; property</h3><ol>
+<li><strong>attribute</strong> 是 DOM 元素在 <strong>Html</strong> 标签上拥有的特性<ul>
+<li>大小写不敏感</li>
+<li>值永远是字符串或 <code>null</code></li>
+<li>能够自定义特性 <code>data-*</code></li>
+<li>从语义上，更倾向于不可变更的（例如<code>href</code>）</li>
 </ul>
-<p><code>number</code>、<code>string</code>、<code>boolean</code>、<code>null</code>、<code>undefined</code>、<code>symbol</code>、<code>bigInt</code></p>
-<ul>
-<li>引用数据类型</li>
-</ul>
-<p><code>Object</code>：<code>Array</code>、<code>Date</code>、<code>Function</code>、<code>RegExp</code> ……</p>
-<p>PS：<code>NaN</code>是一个数值类型，但不是一个具体的数字；另外，<code>NaN</code> 与任何数据都不想等。</p>
-<p><code>Object</code>就是 key-value 的集合，是一种无序的复合数据：</p>
-<ol>
-<li>创建自定义对象有两种方式：对象字面量 和 构造函数new</li>
-<li>访问对象也有两种方式：<code>objectName.propertyName</code> 和 <code>objectName[&quot;propertyName&quot;]</code></li>
-<li>对象本身是引用类型，且对象的 key 都是字符串类型</li>
-<li>访问一个对象的属性会访问对应的原型链</li>
-<li>请不要把字符串、数值和布尔值声明为对象</li>
-</ol>
-<p><strong>判断数据类型</strong></p>
-<ol>
-<li><p>基本类型：<code>typeof</code>。返回基本类型字符串表示，比如<code>&#39;number&#39;</code>……</p>
 </li>
-<li><p>引用类型：<code>Object.prototype.isPrototypeOf(obj)</code>用于判断 obj 是否是一个引用类型。</p>
+<li><strong>property</strong> 是 DOM 元素在 <strong>JavaScript</strong> 中作为对象拥有的属性<ul>
+<li>大小写敏感</li>
+<li>值可以是任意合法 js 类型</li>
+<li>无法获取自定义属性 <code>data-*</code></li>
+<li>从语义上，更倾向于在其生命周期中是可变的</li>
+</ul>
 </li>
 </ol>
-<p>PS：需要注意的是 <code>typeof null</code>  返回 <code>&#39;object&#39;</code>，但是<code>null instanceof Object</code>返回<code>false</code></p>
-<p><strong>数组判断</strong></p>
-<ul>
-<li><p>推荐（ES6）：<code>Array.isArray(arr)</code></p>
-</li>
-<li><p>原型：<code>Array.prototype.isPrototypeOf(arr)</code> || <code>arr.constructor === Array</code> || </p>
-<p><code>Object.getPrototypeOf(arr) === Array.prototype</code> ||</p>
-<p><code>Object.prototype.toString.call(arr) === &#39;[object Array]&#39;</code></p>
-</li>
-<li><p>不推荐（框架）： <code>arr instanceof Array</code></p>
-</li>
-</ul>
-<p>PS：**<code>instanceof</code>** <strong>运算符</strong>用于检测构造函数的 <code>prototype</code> 属性是否出现在某个实例对象的原型链上。</p>
+<p>PS：对于 html 的标准属性来说，attribute 和 property 是同步的，是会自动更新的。（<code>input</code>例外）</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://xiaodanye.github.io/2022/05/21/JS%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" data-id="cl3fi3pio0000zj5j5h88h670" class="article-share-link">Share</a>
+      <a data-url="http://xiaodanye.github.io/2022/05/21/JS-attribute-property/" data-id="cl3fjmfka0000av5j1zt82ljr" class="article-share-link">Share</a>
       
       
     </footer>
@@ -139,10 +119,10 @@
 
 
   
-    <article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-JS-toString-valueOf" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2022/05/21/hello-world/" class="article-date">
-  <time datetime="2022-05-21T05:47:24.422Z" itemprop="datePublished">2022-05-21</time>
+    <a href="/2022/05/21/JS-toString-valueOf/" class="article-date">
+  <time datetime="2022-05-21T07:20:09.000Z" itemprop="datePublished">2022-05-21</time>
 </a>
     
   </div>
@@ -153,7 +133,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2022/05/21/hello-world/">Hello World</a>
+      <a class="article-title" href="/2022/05/21/JS-toString-valueOf/">JS-toString_valueOf</a>
     </h1>
   
 
@@ -161,24 +141,592 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
+        <h3 id="toString-amp-valueOf"><a href="#toString-amp-valueOf" class="headerlink" title="toString &amp; valueOf"></a>toString &amp; valueOf</h3><p><code>toString()</code> 和 <code>valueOf()</code> 是所有JS数据类型都拥有的两个方法（<code>null</code>除外）。它们俩是位于原型链上的方法，也是为了解决 javascript 值运算与显示的问题，在出现操作符<code>(+-*/==&gt;&lt;)</code>时被调用（隐式转换）</p>
+<p><strong>toString</strong></p>
+<p><code>toString()</code>返回一个表示该对象的字符串，当对象表示为文本值或以期望的字符串方式被引用时，<code>toString</code>方法被自动调用。不过当表示数组的时候，就变成数组内容以逗号连接的字符串，相当于<code>Array.join(&#39;,&#39;)</code></p>
+<p>PS: 比较特殊的地方就是，<code>Object.prototype.toString.call(obj)</code>返回的是字符串<code>[object Object]</code>。</p>
+<p><strong>valueOf</strong></p>
+<p><code>valueOf()</code> 返回当前对象的原始值。</p>
+<p><strong>总结：<code>valueOf()</code>偏向于运算，<code>toString()</code>偏向于显示。</strong></p>
+<ol>
+<li>在进行对象转换时，将优先调用<code>toString</code>方法，如若没有重写 <code>toString</code>，将调用 <code>valueOf</code> 方法；如果两个方法都没有重写，则按<code>Object</code>的<code>toString</code>输出。</li>
+<li>强转字符串类型时优先调用 <code>toString</code> 方法，强转为数字类型时优先调用 <code>valueOf</code>方法。</li>
+<li>使用运算操作符的情况下，<code>valueOf</code>的优先级高于<code>toString</code>。</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">A</span> &#123;</span><br><span class="line">  <span class="title function_">constructor</span>(<span class="params">value</span>) &#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">value</span> = value;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="title function_">valueOf</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="variable language_">this</span>.<span class="property">value</span>++;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> a = <span class="keyword">new</span> <span class="title function_">A</span>(<span class="number">1</span>);</span><br><span class="line"><span class="comment">// 全等请使用 Object.defineProperty 数据劫持get方法 </span></span><br><span class="line"><span class="keyword">if</span> (a == <span class="number">1</span> &amp;&amp; a == <span class="number">2</span> &amp;&amp; a == <span class="number">3</span>) &#123; <span class="comment">// 为ture</span></span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;Hello World!&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+<p>PS：常使用 <code>Object.prototype.toString().call( ... )</code> 来进行类型识别，返回字符串表示<code>[object 数据类型]</code>，再通过<code>slice(8, -1)</code>方法返回真正的数据类型。</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://xiaodanye.github.io/2022/05/21/hello-world/" data-id="cl3fi3piu0001zj5j4ic351gp" class="article-share-link">Share</a>
+      <a data-url="http://xiaodanye.github.io/2022/05/21/JS-toString-valueOf/" data-id="cl3fjmfkr0003av5j0hdo1nca" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-JS-call-apply-bind" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2022/05/21/JS-call-apply-bind/" class="article-date">
+  <time datetime="2022-05-21T07:19:31.000Z" itemprop="datePublished">2022-05-21</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2022/05/21/JS-call-apply-bind/">JS-call_apply_bind</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="call-amp-apply-amp-bind"><a href="#call-amp-apply-amp-bind" class="headerlink" title="call &amp; apply &amp; bind"></a>call &amp; apply &amp; bind</h3><p>在JavaScript中，所有的函数在被调用的时候都会默认传入两个参数，一个是this，还有一个是arguments。在默认情况下this都是指当前的调用函数的对象。但是有时候我们需要<strong>改变函数中this的指向</strong>，这时候我们就可以使用call，apply和bind方法了。call，apply和bind都是Function原型中的方法，而所有的函数都是Function的实例，因此所有的函数都可以使用这三种方法。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">func.<span class="title function_">call</span>( <span class="variable language_">this</span>, param1, param2, param3 ); <span class="comment">// 可以传多个参数，返回func执行后的结果</span></span><br><span class="line">func.<span class="title function_">apply</span>( <span class="variable language_">this</span>, [param1, param2, param3] ); <span class="comment">// 可以传两个参数，返回func执行后的结果</span></span><br><span class="line">func.<span class="title function_">bind</span>( <span class="variable language_">this</span>, param1, param2, param3 ); <span class="comment">// 形式类似于call，返回一个绑定参数后的函数</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>区别</strong></p>
+<ol>
+<li><p>call 和 apply 的接受参数的方式不一样：</p>
+<p>call方法接受的是若干个参数列表，从第二个参数开始，参数之间用逗号分隔；</p>
+<p>apply方法接收的是一个包含多个参数的数组，作为其第二个参数；</p>
+</li>
+<li><p>call 或 apply 会自动执行对应的函数；而bind返回一个绑定新this的函数，等待调用；</p>
+</li>
+</ol>
+<p>PS：如果<code>this</code>是<code>null</code>或<code>undefined</code>，执行作用域的 <code>this</code> 将被视为新函数的 <code>this</code>。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://xiaodanye.github.io/2022/05/21/JS-call-apply-bind/" data-id="cl3fjmfko0002av5j6cvmgdid" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-JS-var-let-const" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2022/05/21/JS-var-let-const/" class="article-date">
+  <time datetime="2022-05-21T07:18:21.000Z" itemprop="datePublished">2022-05-21</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2022/05/21/JS-var-let-const/">JS-var_let_const</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="var-amp-let-amp-const"><a href="#var-amp-let-amp-const" class="headerlink" title="var &amp; let &amp; const"></a>var &amp; let &amp; const</h3><p><code>var</code>、<code>let</code>和<code>const</code>三个关键字都可以用来声明变量。<code>var</code>在 ECMAScript 的所有版本中都可以使用，而<code>let</code>和<code>const</code>只能在 ES6 及更晚的版本中使用。</p>
+<table>
+<thead>
+<tr>
+<th>关键字</th>
+<th>特点</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>var</code></td>
+<td>1. 相同变量名可以重复声明<br>2. 不初始化的情况下，变量会保存一个特殊值undefined<br>3. 变量具有函数作用域 &amp; 全局作用域，且能够进行作用域提升</td>
+</tr>
+<tr>
+<td><code>let</code></td>
+<td>1. 变量禁止重复声明<br>2. 变量具有块作用域，仅限于<code>&#123; ... &#125;</code><br>3. 变量不会在作用域中被提升（暂时性死区）</td>
+</tr>
+<tr>
+<td><code>const</code></td>
+<td>同<code>let</code>；此外还有<br>4. 声明变量时必须同时初始化变量（一般用来声明常量）<br>5. 尝试修改变量会导致运行时报错（限制只适用于它指向的变量的引用）</td>
+</tr>
+</tbody></table>
+<p>PS：使用<code>var</code>在全局作用域中声明的变量会成为window对象的属性，<code>let</code>和<code>const</code>声明的变量则不会</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://xiaodanye.github.io/2022/05/21/JS-var-let-const/" data-id="cl3fjmfkt0004av5j8s1ggumo" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-JS-Null_undefined" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2022/05/21/JS-Null_undefined/" class="article-date">
+  <time datetime="2022-05-21T07:16:26.000Z" itemprop="datePublished">2022-05-21</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2022/05/21/JS-Null_undefined/">JS-Null_undefined</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="null-amp-undefined"><a href="#null-amp-undefined" class="headerlink" title="null &amp; undefined"></a>null &amp; undefined</h3><p><code>undefined</code>和<code>null</code>在js中都代表”空”的含义。二者都是假值<code>falsy</code>，都能作为条件进行判断，所以在<strong>绝大多数情况下两者在使用上没有区别。</strong></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typeof</span> <span class="literal">undefined</span>; <span class="comment">//&quot;undefined&quot;</span></span><br><span class="line"><span class="keyword">typeof</span> <span class="literal">null</span>; <span class="comment">//&quot;object&quot; 这是JS错误规定</span></span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title class_">Number</span>(<span class="literal">null</span>)) <span class="comment">//0</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title class_">Number</span>(<span class="literal">undefined</span>)) <span class="comment">//NaN</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> <span class="literal">undefined</span> = <span class="string">&#x27;&#x27;</span> <span class="comment">//undefined</span></span><br><span class="line"><span class="keyword">var</span> <span class="literal">null</span> = <span class="string">&#x27;&#x27;</span> <span class="comment">//Uncaught SyntaxError 关键字</span></span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="literal">null</span> == <span class="literal">undefined</span>); <span class="comment">//true 松散比较(loose equality)</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="literal">null</span> === <span class="literal">undefined</span>); <span class="comment">//false 严格比较(strict equality)</span></span><br></pre></td></tr></table></figure>
+
+<p><strong><code>undefined</code>就是没有值（“不存在的东西“）</strong>，不论是没赋值、没传参、没返回、没属性，都会导致系统无法找到对应的内容，从而返回<code>undefined</code>作为”备选方案”。（被动触发）</p>
+<p><strong><code>null</code>表示尚未创建的对象</strong>，是一个普通值，需要”主动使用”。</p>
+<p>本质上讲，<code>null</code>是有值的，逻辑上相当于数字0，但不等于0；而<code>undefined</code>则是JavaScript特有的机制（等价于“没有传”、“没有给”），在什么情况下都没有必要把一个变量的值显示的设置为<code>undefined</code>。</p>
+<p>PS：判断<code>null</code>和<code>undefined</code>时，应永远使用严格判断（===）</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://xiaodanye.github.io/2022/05/21/JS-Null_undefined/" data-id="cl3fjmfkk0001av5jcowj4r6l" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-JS相等比较" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2022/05/21/JS%E7%9B%B8%E7%AD%89%E6%AF%94%E8%BE%83/" class="article-date">
+  <time datetime="2022-05-21T07:14:20.000Z" itemprop="datePublished">2022-05-21</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2022/05/21/JS%E7%9B%B8%E7%AD%89%E6%AF%94%E8%BE%83/">JS相等比较</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="相等比较"><a href="#相等比较" class="headerlink" title="相等比较"></a>相等比较</h3><p><code>==</code>是非严格意义上的相等，值相等就相等（执行过程中会自动转换以进行比较）</p>
+<p><code>===</code>是严格意义上的相等（全等），会比较两边的数据类型和值大小，值和引用地址都相等才相等</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// true</span></span><br><span class="line"><span class="literal">undefined</span> === <span class="literal">undefined</span>;</span><br><span class="line"><span class="literal">null</span> === <span class="literal">null</span>;</span><br><span class="line"><span class="literal">null</span> == <span class="literal">undefined</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// false</span></span><br><span class="line"><span class="title class_">NaN</span> = *; <span class="comment">// NaN不等于任何对象</span></span><br><span class="line"><span class="literal">null</span> === <span class="literal">undefined</span>;</span><br><span class="line"><span class="literal">null</span> == <span class="number">0</span> | <span class="literal">false</span>;</span><br><span class="line"><span class="literal">undefined</span> == <span class="number">0</span> | <span class="literal">false</span>;</span><br></pre></td></tr></table></figure>
+
+<p>PS：在执行相等<code>==</code>比较时，如果一方是对象的话，会自动调用<code>valueof()</code>方法进行隐式转换。</p>
+<p>参照：<a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Object/valueOf">Object.prototype.valueOf()</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://xiaodanye.github.io/2022/05/21/JS%E7%9B%B8%E7%AD%89%E6%AF%94%E8%BE%83/" data-id="cl3fjmfkx0008av5jg33zdeqy" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-JS脚本引入" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2022/05/21/JS%E8%84%9A%E6%9C%AC%E5%BC%95%E5%85%A5/" class="article-date">
+  <time datetime="2022-05-21T07:13:40.000Z" itemprop="datePublished">2022-05-21</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2022/05/21/JS%E8%84%9A%E6%9C%AC%E5%BC%95%E5%85%A5/">JS脚本引入</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="脚本引入"><a href="#脚本引入" class="headerlink" title="脚本引入"></a>脚本引入</h3><p>在HTML文档中引入JavaScript文件主要有三种：行内式、嵌入式、外链式</p>
+<ol>
+<li><p>行内式：<code>&lt;input type=&quot;button&quot; onclick=&quot;alert(&#39;Hello World!&#39;); &quot; value=&quot;click&quot; &gt;</code></p>
+</li>
+<li><p>嵌入式：<code>&lt;script&gt; ... &lt;/script&gt;</code></p>
+</li>
+<li><p>外链式：<code>&lt;script src=&quot;脚本文件路径&quot;&gt;&lt;/script&gt;</code></p>
+<p><strong>默认引入</strong></p>
+<p>当浏览器遇到 script 标签时，文档的解析将停止，并立即下载并执行脚本，脚本执行完毕后将继续解析文档</p>
+<p><strong>延迟加载</strong></p>
+<p>&lt;script defer&gt; : 用于开启新的线程下载脚本文件，并使脚本在DOM文档解析完成后顺序执行</p>
+<p>&lt;script async&gt; : HTML5 新增属性，用于异步下载脚本文件，下载完毕立即解释执行脚本</p>
+</li>
+</ol>
+<p>PS：CSS脚本引入类似</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://xiaodanye.github.io/2022/05/21/JS%E8%84%9A%E6%9C%AC%E5%BC%95%E5%85%A5/" data-id="cl3fjmfky0009av5j9m7jafk0" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-JS遍历方式" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2022/05/21/JS%E9%81%8D%E5%8E%86%E6%96%B9%E5%BC%8F/" class="article-date">
+  <time datetime="2022-05-21T07:11:11.000Z" itemprop="datePublished">2022-05-21</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2022/05/21/JS%E9%81%8D%E5%8E%86%E6%96%B9%E5%BC%8F/">JS遍历方式</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="遍历方式"><a href="#遍历方式" class="headerlink" title="遍历方式"></a>遍历方式</h3><p><strong>数组（有序）</strong></p>
+<ul>
+<li><code>推荐：for ... of</code>：<code>for (let item of list) &#123; ... &#125;</code></li>
+<li><code>for循环</code>：<code>for (let i = 0, len = list.length; i &lt; len; i++) &#123; ... &#125;</code></li>
+<li><code>forEach方法</code>：<code>list.forEach((item, index, arr) =&gt; &#123; ... &#125;</code></li>
+</ul>
+<blockquote>
+<p>三者都是基本的由左到右遍历数组，但具体有下列不同：</p>
+<ol>
+<li><code>for ... of</code> 直接访问的是实际元素；<code>for循环</code> 遍历数组索引；<code>forEach方法</code> 回调函数参数都可访问</li>
+<li><code>forEach方法</code> 无法跳出循环；<code>for循环</code> 和 <code>for ... of </code> 可以使用 break 或者 continue 跳过或中断</li>
+<li>如果数组中存在空元素，<code>forEach方法</code> 会跳过，而<code>for循环</code> 和 <code>for ... of </code> 同样会执行</li>
+</ol>
+<p>数组原型自带遍历方法，以执行特定功能：some、every、filter、map、find、findIndex、reduce ……</p>
+</blockquote>
+<p><strong>对象（无序）</strong></p>
+<ul>
+<li>遍历自身属性名组成的数组<code>Object.keys()</code>：<code>for (let key of Object.keys(obj))</code></li>
+<li>遍历自身属性值组成的数组<code>Object.values()</code>：<code>for (let value of Object.values(obj))</code></li>
+<li>遍历自身键值对组成的数组<code>Object.entries()</code>：<code>for (let [key, value] of Object.entries(obj))</code></li>
+<li>遍历可访问的属性（包括原型链）<code>for ... in</code>：<code>for (let prop in obj) &#123; ... &#125;</code></li>
+<li>遍历自身所有的可枚举的属性值：<code>Object.getOwnPropertyNames()</code></li>
+</ul>
+<p>PS：遍历对象需要注意是否需要遍历原型链上的属性：**<code>hasOwnProperty()</code>**用于判断属性是否为自身属性</p>
+<p>PS：一句话：数组使用<code>for ... of</code>；对象使用<code>for ... in</code>。实际需要具体问题具体分析</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://xiaodanye.github.io/2022/05/21/JS%E9%81%8D%E5%8E%86%E6%96%B9%E5%BC%8F/" data-id="cl3fjmfkz000aav5j2k628xd3" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-JS严格模式" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2022/05/21/JS%E4%B8%A5%E6%A0%BC%E6%A8%A1%E5%BC%8F/" class="article-date">
+  <time datetime="2022-05-21T07:04:48.000Z" itemprop="datePublished">2022-05-21</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2022/05/21/JS%E4%B8%A5%E6%A0%BC%E6%A8%A1%E5%BC%8F/">JS严格模式</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="严格模式"><a href="#严格模式" class="headerlink" title="严格模式"></a>严格模式</h3><p>严格模式的概念，是从 ECMAScript5 引入的，通过严格模式，可以在函数内部选择进行较为严格的全局或局部的错误条件检测。要选择进入严格模式，可以使用严格模式的<strong>编译指示（pragma）</strong>: <code>&quot;use strict&quot;</code></p>
+<p><strong>严格模式下</strong>：</p>
+<ol>
+<li><p>变量</p>
+<ul>
+<li><p>不再提升，必须声明后再使用</p>
+</li>
+<li><p>不允许意外创建全局变量</p>
+</li>
+<li><p>删除变量也会导致错误</p>
+</li>
+<li><p>变量名限制</p>
+</li>
+</ul>
+</li>
+<li><p>对象</p>
+<ul>
+<li>在使用对象字面量时，属性名必须唯一</li>
+<li>对不可配置属性进行操作时，抛出<code>TypeError</code></li>
+<li><code>this</code> 值始终是指定的值，不会隐式绑定到<code>windows</code>全局对象</li>
+</ul>
+</li>
+<li><p>函数</p>
+<ul>
+<li>命名函数的参数必须唯一</li>
+<li><code>arguments</code> 对象内容不可更改</li>
+<li><code>if</code> 语句中声明函数会导致语法错误</li>
+<li><code>eval()</code>函数在包含上下文中不再创建变量或函数</li>
+</ul>
+</li>
+<li><p>抛弃了 <code>with</code> 语句</p>
+</li>
+<li><p>去掉了 <code>JavaScript</code> 中的八进制字面量</p>
+</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://xiaodanye.github.io/2022/05/21/JS%E4%B8%A5%E6%A0%BC%E6%A8%A1%E5%BC%8F/" data-id="cl3fjmfku0005av5j154y24h7" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-JS数组方法" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2022/05/21/JS%E6%95%B0%E7%BB%84%E6%96%B9%E6%B3%95/" class="article-date">
+  <time datetime="2022-05-21T07:01:31.000Z" itemprop="datePublished">2022-05-21</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2022/05/21/JS%E6%95%B0%E7%BB%84%E6%96%B9%E6%B3%95/">JS数组方法</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="数组方法"><a href="#数组方法" class="headerlink" title="数组方法"></a>数组方法</h3><p>参照：<a target="_blank" rel="noopener" href="https://www.w3school.com.cn/jsref/jsref_obj_array.asp">JavaScript 数组参考手册</a></p>
+<p><strong>Array 属性</strong></p>
+<table>
+<thead>
+<tr>
+<th align="left">属性</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/jsref/jsref_constructor_array.asp">constructor</a></td>
+<td align="left">返回创建 Array 对象原型的函数。</td>
+</tr>
+<tr>
+<td align="left"><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/jsref/jsref_length_array.asp">length</a></td>
+<td align="left">设置或返回数组中元素的数量。</td>
+</tr>
+<tr>
+<td align="left"><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/jsref/jsref_prototype_array.asp">prototype</a></td>
+<td align="left">允许您向数组添加属性和方法。</td>
+</tr>
+</tbody></table>
+<p><strong>Array 方法</strong></p>
+<table>
+<thead>
+<tr>
+<th align="left">方法</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/jsref/jsref_concat_array.asp">concat()</a></td>
+<td align="left">连接两个或多个数组，并返回已连接数组的副本。</td>
+</tr>
+<tr>
+<td align="left"><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/jsref/jsref_copywithin.asp">copyWithin()</a></td>
+<td align="left">将数组中的数组元素复制到指定位置或从指定位置复制。</td>
+</tr>
+<tr>
+<td align="left"><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/jsref/jsref_entries.asp">entries()</a></td>
+<td align="left">返回键/值对数组迭代对象。</td>
+</tr>
+<tr>
+<td align="left"><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/jsref/jsref_every.asp">every()</a></td>
+<td align="left">检查数组中的每个元素是否通过测试。</td>
+</tr>
+<tr>
+<td align="left"><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/jsref/jsref_fill.asp">fill()</a></td>
+<td align="left">用静态值填充数组中的元素。</td>
+</tr>
+<tr>
+<td align="left"><strong><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/jsref/jsref_filter.asp">filter()</a></strong></td>
+<td align="left">使用数组中通过测试的每个元素创建新数组。</td>
+</tr>
+<tr>
+<td align="left"><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/jsref/jsref_find.asp">find()</a></td>
+<td align="left">返回数组中第一个通过测试的元素的值。</td>
+</tr>
+<tr>
+<td align="left"><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/jsref/jsref_findindex.asp">findIndex()</a></td>
+<td align="left">返回数组中通过测试的第一个元素的索引。</td>
+</tr>
+<tr>
+<td align="left"><strong><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/jsref/jsref_foreach.asp">forEach()</a></strong></td>
+<td align="left">为每个数组元素调用函数。</td>
+</tr>
+<tr>
+<td align="left"><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/jsref/jsref_from.asp">from()</a></td>
+<td align="left">从对象创建数组。</td>
+</tr>
+<tr>
+<td align="left"><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/jsref/jsref_includes_array.asp">includes()</a></td>
+<td align="left">检查数组是否包含指定的元素。</td>
+</tr>
+<tr>
+<td align="left"><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/jsref/jsref_indexof_array.asp">indexOf()</a></td>
+<td align="left">在数组中搜索元素并返回其位置。</td>
+</tr>
+<tr>
+<td align="left"><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/jsref/jsref_isarray.asp">isArray()</a></td>
+<td align="left">检查对象是否为数组。</td>
+</tr>
+<tr>
+<td align="left"><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/jsref/jsref_join.asp">join()</a></td>
+<td align="left">将数组的所有元素连接成一个字符串。</td>
+</tr>
+<tr>
+<td align="left"><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/jsref/jsref_keys.asp">keys()</a></td>
+<td align="left">返回 Array Iteration 对象，包含原始数组的键.</td>
+</tr>
+<tr>
+<td align="left"><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/jsref/jsref_lastindexof_array.asp">lastIndexOf()</a></td>
+<td align="left">在数组中搜索元素，从末尾开始，并返回其位置。</td>
+</tr>
+<tr>
+<td align="left"><strong><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/jsref/jsref_map.asp">map()</a></strong></td>
+<td align="left">使用为每个数组元素调用函数的结果创建新数组。</td>
+</tr>
+<tr>
+<td align="left"><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/jsref/jsref_pop.asp">pop()</a></td>
+<td align="left">删除数组的最后一个元素，并返回该元素。</td>
+</tr>
+<tr>
+<td align="left"><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/jsref/jsref_push.asp">push()</a></td>
+<td align="left">将新元素添加到数组的末尾，<strong>并返回新的长度</strong>。</td>
+</tr>
+<tr>
+<td align="left"><strong><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/jsref/jsref_reduce.asp">reduce()</a></strong></td>
+<td align="left">将数组的值减为单个值（从左到右）。</td>
+</tr>
+<tr>
+<td align="left"><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/jsref/jsref_reduceright.asp">reduceRight()</a></td>
+<td align="left">将数组的值减为单个值（从右到左）。</td>
+</tr>
+<tr>
+<td align="left"><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/jsref/jsref_reverse.asp">reverse()</a></td>
+<td align="left">反转数组中元素的顺序。</td>
+</tr>
+<tr>
+<td align="left"><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/jsref/jsref_shift.asp">shift()</a></td>
+<td align="left">删除数组的第一个元素，并返回该元素。</td>
+</tr>
+<tr>
+<td align="left"><strong><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/jsref/jsref_slice_array.asp">slice()</a></strong></td>
+<td align="left">选择数组的一部分，并返回新数组。</td>
+</tr>
+<tr>
+<td align="left"><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/jsref/jsref_some.asp">some()</a></td>
+<td align="left">检查数组中的任何元素是否通过测试。</td>
+</tr>
+<tr>
+<td align="left"><strong><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/jsref/jsref_sort.asp">sort()</a></strong></td>
+<td align="left">对数组的元素进行排序。</td>
+</tr>
+<tr>
+<td align="left"><strong><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/jsref/jsref_splice.asp">splice()</a></strong></td>
+<td align="left">从数组中添加/删除元素。</td>
+</tr>
+<tr>
+<td align="left"><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/jsref/jsref_tostring_array.asp">toString()</a></td>
+<td align="left">将数组转换为字符串，并返回结果。</td>
+</tr>
+<tr>
+<td align="left"><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/jsref/jsref_unshift.asp">unshift()</a></td>
+<td align="left">将新元素添加到数组的开头，并返回新的长度。</td>
+</tr>
+<tr>
+<td align="left"><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/jsref/jsref_valueof_array.asp">valueOf()</a></td>
+<td align="left">返回数组的原始值。</td>
+</tr>
+</tbody></table>
+<p>PS：<code>sort() </code>方法对数组的项目进行排序，默认情况按照ASCII码数值进行排序，可以通过提供“比较函数”来改变比较规则，结果<strong>返回已完成排序后的 Array 对象</strong>，该方法会改变原始数组。“比较函数”接受两个参数，返回一个数值，负值代表第一个值比第二个值“小”，零表示两值相等，正值代表第一个值比第二个值“大”。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">inputArr.<span class="title function_">sort</span>(<span class="function">(<span class="params">a, b</span>) =&gt;</span> a - b);</span><br></pre></td></tr></table></figure>
+
+<p>参照：<a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/sort">Array.prototype.sort()</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://xiaodanye.github.io/2022/05/21/JS%E6%95%B0%E7%BB%84%E6%96%B9%E6%B3%95/" data-id="cl3fjmfkw0007av5jbm6m9etn" class="article-share-link">Share</a>
       
       
     </footer>
@@ -189,6 +737,11 @@
 
   
 
+
+  <nav id="page-nav">
+    
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &amp;raquo;</a>
+  </nav>
 
 </section>
         
@@ -219,11 +772,23 @@
       <ul>
         
           <li>
-            <a href="/2022/05/21/JS%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/">JS数据类型</a>
+            <a href="/2022/05/21/JS-attribute-property/">JS-attribute_property</a>
           </li>
         
           <li>
-            <a href="/2022/05/21/hello-world/">Hello World</a>
+            <a href="/2022/05/21/JS-toString-valueOf/">JS-toString_valueOf</a>
+          </li>
+        
+          <li>
+            <a href="/2022/05/21/JS-call-apply-bind/">JS-call_apply_bind</a>
+          </li>
+        
+          <li>
+            <a href="/2022/05/21/JS-var-let-const/">JS-var_let_const</a>
+          </li>
+        
+          <li>
+            <a href="/2022/05/21/JS-Null_undefined/">JS-Null_undefined</a>
           </li>
         
       </ul>

@@ -5,17 +5,17 @@
   
 
   
-  <title>JS数据类型 | Xiaodanye</title>
+  <title>JS严格模式 | Xiaodanye</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="基本数据类型  number、string、boolean、null、undefined、symbol、bigInt  引用数据类型  Object：Array、Date、Function、RegExp …… PS：NaN是一个数值类型，但不是一个具体的数字；另外，NaN 与任何数据都不想等。 Object就是 key-value 的集合，是一种无序的复合数据：  创建自定义对象有两种方式：对象">
+  <meta name="description" content="严格模式严格模式的概念，是从 ECMAScript5 引入的，通过严格模式，可以在函数内部选择进行较为严格的全局或局部的错误条件检测。要选择进入严格模式，可以使用严格模式的编译指示（pragma）: &quot;use strict&quot; 严格模式下：  变量  不再提升，必须声明后再使用  不允许意外创建全局变量  删除变量也会导致错误  变量名限制    对象  在使用对象字面量时，属性">
 <meta property="og:type" content="article">
-<meta property="og:title" content="JS数据类型">
-<meta property="og:url" content="http://xiaodanye.github.io/2022/05/21/JS%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/index.html">
+<meta property="og:title" content="JS严格模式">
+<meta property="og:url" content="http://xiaodanye.github.io/2022/05/21/JS%E4%B8%A5%E6%A0%BC%E6%A8%A1%E5%BC%8F/index.html">
 <meta property="og:site_name" content="Xiaodanye">
-<meta property="og:description" content="基本数据类型  number、string、boolean、null、undefined、symbol、bigInt  引用数据类型  Object：Array、Date、Function、RegExp …… PS：NaN是一个数值类型，但不是一个具体的数字；另外，NaN 与任何数据都不想等。 Object就是 key-value 的集合，是一种无序的复合数据：  创建自定义对象有两种方式：对象">
+<meta property="og:description" content="严格模式严格模式的概念，是从 ECMAScript5 引入的，通过严格模式，可以在函数内部选择进行较为严格的全局或局部的错误条件检测。要选择进入严格模式，可以使用严格模式的编译指示（pragma）: &quot;use strict&quot; 严格模式下：  变量  不再提升，必须声明后再使用  不允许意外创建全局变量  删除变量也会导致错误  变量名限制    对象  在使用对象字面量时，属性">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2022-05-21T06:20:49.000Z">
-<meta property="article:modified_time" content="2022-05-21T06:37:33.748Z">
+<meta property="article:published_time" content="2022-05-21T07:04:48.000Z">
+<meta property="article:modified_time" content="2022-05-21T07:06:05.042Z">
 <meta property="article:author" content="Xiaodanye">
 <meta name="twitter:card" content="summary">
   
@@ -66,10 +66,10 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-JS数据类型" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-JS严格模式" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2022/05/21/JS%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" class="article-date">
-  <time datetime="2022-05-21T06:20:49.000Z" itemprop="datePublished">2022-05-21</time>
+    <a href="/2022/05/21/JS%E4%B8%A5%E6%A0%BC%E6%A8%A1%E5%BC%8F/" class="article-date">
+  <time datetime="2022-05-21T07:04:48.000Z" itemprop="datePublished">2022-05-21</time>
 </a>
     
   </div>
@@ -80,7 +80,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      JS数据类型
+      JS严格模式
     </h1>
   
 
@@ -88,48 +88,46 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <ul>
-<li>基本数据类型</li>
-</ul>
-<p><code>number</code>、<code>string</code>、<code>boolean</code>、<code>null</code>、<code>undefined</code>、<code>symbol</code>、<code>bigInt</code></p>
-<ul>
-<li>引用数据类型</li>
-</ul>
-<p><code>Object</code>：<code>Array</code>、<code>Date</code>、<code>Function</code>、<code>RegExp</code> ……</p>
-<p>PS：<code>NaN</code>是一个数值类型，但不是一个具体的数字；另外，<code>NaN</code> 与任何数据都不想等。</p>
-<p><code>Object</code>就是 key-value 的集合，是一种无序的复合数据：</p>
+        <h3 id="严格模式"><a href="#严格模式" class="headerlink" title="严格模式"></a>严格模式</h3><p>严格模式的概念，是从 ECMAScript5 引入的，通过严格模式，可以在函数内部选择进行较为严格的全局或局部的错误条件检测。要选择进入严格模式，可以使用严格模式的<strong>编译指示（pragma）</strong>: <code>&quot;use strict&quot;</code></p>
+<p><strong>严格模式下</strong>：</p>
 <ol>
-<li>创建自定义对象有两种方式：对象字面量 和 构造函数new</li>
-<li>访问对象也有两种方式：<code>objectName.propertyName</code> 和 <code>objectName[&quot;propertyName&quot;]</code></li>
-<li>对象本身是引用类型，且对象的 key 都是字符串类型</li>
-<li>访问一个对象的属性会访问对应的原型链</li>
-<li>请不要把字符串、数值和布尔值声明为对象</li>
-</ol>
-<p><strong>判断数据类型</strong></p>
-<ol>
-<li><p>基本类型：<code>typeof</code>。返回基本类型字符串表示，比如<code>&#39;number&#39;</code>……</p>
-</li>
-<li><p>引用类型：<code>Object.prototype.isPrototypeOf(obj)</code>用于判断 obj 是否是一个引用类型。</p>
-</li>
-</ol>
-<p>PS：需要注意的是 <code>typeof null</code>  返回 <code>&#39;object&#39;</code>，但是<code>null instanceof Object</code>返回<code>false</code></p>
-<p><strong>数组判断</strong></p>
+<li><p>变量</p>
 <ul>
-<li><p>推荐（ES6）：<code>Array.isArray(arr)</code></p>
+<li><p>不再提升，必须声明后再使用</p>
 </li>
-<li><p>原型：<code>Array.prototype.isPrototypeOf(arr)</code> || <code>arr.constructor === Array</code> || </p>
-<p><code>Object.getPrototypeOf(arr) === Array.prototype</code> ||</p>
-<p><code>Object.prototype.toString.call(arr) === &#39;[object Array]&#39;</code></p>
+<li><p>不允许意外创建全局变量</p>
 </li>
-<li><p>不推荐（框架）： <code>arr instanceof Array</code></p>
+<li><p>删除变量也会导致错误</p>
+</li>
+<li><p>变量名限制</p>
 </li>
 </ul>
-<p>PS：**<code>instanceof</code>** <strong>运算符</strong>用于检测构造函数的 <code>prototype</code> 属性是否出现在某个实例对象的原型链上。</p>
+</li>
+<li><p>对象</p>
+<ul>
+<li>在使用对象字面量时，属性名必须唯一</li>
+<li>对不可配置属性进行操作时，抛出<code>TypeError</code></li>
+<li><code>this</code> 值始终是指定的值，不会隐式绑定到<code>windows</code>全局对象</li>
+</ul>
+</li>
+<li><p>函数</p>
+<ul>
+<li>命名函数的参数必须唯一</li>
+<li><code>arguments</code> 对象内容不可更改</li>
+<li><code>if</code> 语句中声明函数会导致语法错误</li>
+<li><code>eval()</code>函数在包含上下文中不再创建变量或函数</li>
+</ul>
+</li>
+<li><p>抛弃了 <code>with</code> 语句</p>
+</li>
+<li><p>去掉了 <code>JavaScript</code> 中的八进制字面量</p>
+</li>
+</ol>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://xiaodanye.github.io/2022/05/21/JS%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" data-id="cl3fjmfkv0006av5jherx718c" class="article-share-link">Share</a>
+      <a data-url="http://xiaodanye.github.io/2022/05/21/JS%E4%B8%A5%E6%A0%BC%E6%A8%A1%E5%BC%8F/" data-id="cl3fjmfku0005av5j154y24h7" class="article-share-link">Share</a>
       
       
     </footer>
@@ -138,19 +136,19 @@
     
 <nav id="article-nav">
   
-    <a href="/2022/05/21/JS%E6%95%B0%E7%BB%84%E6%96%B9%E6%B3%95/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2022/05/21/JS%E9%81%8D%E5%8E%86%E6%96%B9%E5%BC%8F/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Newer</strong>
       <div class="article-nav-title">
         
-          JS数组方法
+          JS遍历方式
         
       </div>
     </a>
   
   
-    <a href="/2022/05/21/hello-world/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2022/05/21/JS%E6%95%B0%E7%BB%84%E6%96%B9%E6%B3%95/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">Hello World</div>
+      <div class="article-nav-title">JS数组方法</div>
     </a>
   
 </nav>

@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>JS-toString_valueOf | Xiaodanye</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="toString &amp; valueOftoString() 和 valueOf() 是所有JS数据类型都拥有的两个方法（null除外）。它们俩是位于原型链上的方法，也是为了解决 javascript 值运算与显示的问题，在出现操作符(+-*&#x2F;&#x3D;&#x3D;&gt;&lt;)时被调用（隐式转换） toString toString()返回一个表示该对象的字符串，当对象表示为文本值或以期望的字符串方式被引">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JS-toString_valueOf">
+<meta property="og:url" content="http://xiaodanye.github.io/2022/05/21/JS-toString-valueOf/index.html">
+<meta property="og:site_name" content="Xiaodanye">
+<meta property="og:description" content="toString &amp; valueOftoString() 和 valueOf() 是所有JS数据类型都拥有的两个方法（null除外）。它们俩是位于原型链上的方法，也是为了解决 javascript 值运算与显示的问题，在出现操作符(+-*&#x2F;&#x3D;&#x3D;&gt;&lt;)时被调用（隐式转换） toString toString()返回一个表示该对象的字符串，当对象表示为文本值或以期望的字符串方式被引">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-05-21T07:20:09.000Z">
+<meta property="article:modified_time" content="2022-05-21T07:20:21.327Z">
+<meta property="article:author" content="Xiaodanye">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Xiaodanye" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Xiaodanye</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://xiaodanye.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-JS-toString-valueOf" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2022/05/21/JS-toString-valueOf/" class="article-date">
+  <time datetime="2022-05-21T07:20:09.000Z" itemprop="datePublished">2022-05-21</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      JS-toString_valueOf
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="toString-amp-valueOf"><a href="#toString-amp-valueOf" class="headerlink" title="toString &amp; valueOf"></a>toString &amp; valueOf</h3><p><code>toString()</code> 和 <code>valueOf()</code> 是所有JS数据类型都拥有的两个方法（<code>null</code>除外）。它们俩是位于原型链上的方法，也是为了解决 javascript 值运算与显示的问题，在出现操作符<code>(+-*/==&gt;&lt;)</code>时被调用（隐式转换）</p>
+<p><strong>toString</strong></p>
+<p><code>toString()</code>返回一个表示该对象的字符串，当对象表示为文本值或以期望的字符串方式被引用时，<code>toString</code>方法被自动调用。不过当表示数组的时候，就变成数组内容以逗号连接的字符串，相当于<code>Array.join(&#39;,&#39;)</code></p>
+<p>PS: 比较特殊的地方就是，<code>Object.prototype.toString.call(obj)</code>返回的是字符串<code>[object Object]</code>。</p>
+<p><strong>valueOf</strong></p>
+<p><code>valueOf()</code> 返回当前对象的原始值。</p>
+<p><strong>总结：<code>valueOf()</code>偏向于运算，<code>toString()</code>偏向于显示。</strong></p>
+<ol>
+<li>在进行对象转换时，将优先调用<code>toString</code>方法，如若没有重写 <code>toString</code>，将调用 <code>valueOf</code> 方法；如果两个方法都没有重写，则按<code>Object</code>的<code>toString</code>输出。</li>
+<li>强转字符串类型时优先调用 <code>toString</code> 方法，强转为数字类型时优先调用 <code>valueOf</code>方法。</li>
+<li>使用运算操作符的情况下，<code>valueOf</code>的优先级高于<code>toString</code>。</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">A</span> &#123;</span><br><span class="line">  <span class="title function_">constructor</span>(<span class="params">value</span>) &#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">value</span> = value;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="title function_">valueOf</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="variable language_">this</span>.<span class="property">value</span>++;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> a = <span class="keyword">new</span> <span class="title function_">A</span>(<span class="number">1</span>);</span><br><span class="line"><span class="comment">// 全等请使用 Object.defineProperty 数据劫持get方法 </span></span><br><span class="line"><span class="keyword">if</span> (a == <span class="number">1</span> &amp;&amp; a == <span class="number">2</span> &amp;&amp; a == <span class="number">3</span>) &#123; <span class="comment">// 为ture</span></span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;Hello World!&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>PS：常使用 <code>Object.prototype.toString().call( ... )</code> 来进行类型识别，返回字符串表示<code>[object 数据类型]</code>，再通过<code>slice(8, -1)</code>方法返回真正的数据类型。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://xiaodanye.github.io/2022/05/21/JS-toString-valueOf/" data-id="cl3fjmfkr0003av5j0hdo1nca" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2022/05/21/JS-attribute-property/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          JS-attribute_property
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2022/05/21/JS-call-apply-bind/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">JS-call_apply_bind</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/05/">May 2022</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2022/05/21/JS-attribute-property/">JS-attribute_property</a>
+          </li>
+        
+          <li>
+            <a href="/2022/05/21/JS-toString-valueOf/">JS-toString_valueOf</a>
+          </li>
+        
+          <li>
+            <a href="/2022/05/21/JS-call-apply-bind/">JS-call_apply_bind</a>
+          </li>
+        
+          <li>
+            <a href="/2022/05/21/JS-var-let-const/">JS-var_let_const</a>
+          </li>
+        
+          <li>
+            <a href="/2022/05/21/JS-Null_undefined/">JS-Null_undefined</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2022 Xiaodanye<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>

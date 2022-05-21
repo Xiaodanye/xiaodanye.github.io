@@ -5,17 +5,17 @@
   
 
   
-  <title>JS数据类型 | Xiaodanye</title>
+  <title>JS-attribute_property | Xiaodanye</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="基本数据类型  number、string、boolean、null、undefined、symbol、bigInt  引用数据类型  Object：Array、Date、Function、RegExp …… PS：NaN是一个数值类型，但不是一个具体的数字；另外，NaN 与任何数据都不想等。 Object就是 key-value 的集合，是一种无序的复合数据：  创建自定义对象有两种方式：对象">
+  <meta name="description" content="attribute &amp; property attribute 是 DOM 元素在 Html 标签上拥有的特性 大小写不敏感 值永远是字符串或 null 能够自定义特性 data-* 从语义上，更倾向于不可变更的（例如href）   property 是 DOM 元素在 JavaScript 中作为对象拥有的属性 大小写敏感 值可以是任意合法 js 类型 无法获取自定义属性 data-* 从">
 <meta property="og:type" content="article">
-<meta property="og:title" content="JS数据类型">
-<meta property="og:url" content="http://xiaodanye.github.io/2022/05/21/JS%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/index.html">
+<meta property="og:title" content="JS-attribute_property">
+<meta property="og:url" content="http://xiaodanye.github.io/2022/05/21/JS-attribute-property/index.html">
 <meta property="og:site_name" content="Xiaodanye">
-<meta property="og:description" content="基本数据类型  number、string、boolean、null、undefined、symbol、bigInt  引用数据类型  Object：Array、Date、Function、RegExp …… PS：NaN是一个数值类型，但不是一个具体的数字；另外，NaN 与任何数据都不想等。 Object就是 key-value 的集合，是一种无序的复合数据：  创建自定义对象有两种方式：对象">
+<meta property="og:description" content="attribute &amp; property attribute 是 DOM 元素在 Html 标签上拥有的特性 大小写不敏感 值永远是字符串或 null 能够自定义特性 data-* 从语义上，更倾向于不可变更的（例如href）   property 是 DOM 元素在 JavaScript 中作为对象拥有的属性 大小写敏感 值可以是任意合法 js 类型 无法获取自定义属性 data-* 从">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2022-05-21T06:20:49.000Z">
-<meta property="article:modified_time" content="2022-05-21T06:37:33.748Z">
+<meta property="article:published_time" content="2022-05-21T07:21:49.000Z">
+<meta property="article:modified_time" content="2022-05-21T07:22:02.216Z">
 <meta property="article:author" content="Xiaodanye">
 <meta name="twitter:card" content="summary">
   
@@ -66,10 +66,10 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-JS数据类型" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-JS-attribute-property" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2022/05/21/JS%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" class="article-date">
-  <time datetime="2022-05-21T06:20:49.000Z" itemprop="datePublished">2022-05-21</time>
+    <a href="/2022/05/21/JS-attribute-property/" class="article-date">
+  <time datetime="2022-05-21T07:21:49.000Z" itemprop="datePublished">2022-05-21</time>
 </a>
     
   </div>
@@ -80,7 +80,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      JS数据类型
+      JS-attribute_property
     </h1>
   
 
@@ -88,48 +88,28 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <ul>
-<li>基本数据类型</li>
+        <h3 id="attribute-amp-property"><a href="#attribute-amp-property" class="headerlink" title="attribute &amp; property"></a>attribute &amp; property</h3><ol>
+<li><strong>attribute</strong> 是 DOM 元素在 <strong>Html</strong> 标签上拥有的特性<ul>
+<li>大小写不敏感</li>
+<li>值永远是字符串或 <code>null</code></li>
+<li>能够自定义特性 <code>data-*</code></li>
+<li>从语义上，更倾向于不可变更的（例如<code>href</code>）</li>
 </ul>
-<p><code>number</code>、<code>string</code>、<code>boolean</code>、<code>null</code>、<code>undefined</code>、<code>symbol</code>、<code>bigInt</code></p>
-<ul>
-<li>引用数据类型</li>
-</ul>
-<p><code>Object</code>：<code>Array</code>、<code>Date</code>、<code>Function</code>、<code>RegExp</code> ……</p>
-<p>PS：<code>NaN</code>是一个数值类型，但不是一个具体的数字；另外，<code>NaN</code> 与任何数据都不想等。</p>
-<p><code>Object</code>就是 key-value 的集合，是一种无序的复合数据：</p>
-<ol>
-<li>创建自定义对象有两种方式：对象字面量 和 构造函数new</li>
-<li>访问对象也有两种方式：<code>objectName.propertyName</code> 和 <code>objectName[&quot;propertyName&quot;]</code></li>
-<li>对象本身是引用类型，且对象的 key 都是字符串类型</li>
-<li>访问一个对象的属性会访问对应的原型链</li>
-<li>请不要把字符串、数值和布尔值声明为对象</li>
-</ol>
-<p><strong>判断数据类型</strong></p>
-<ol>
-<li><p>基本类型：<code>typeof</code>。返回基本类型字符串表示，比如<code>&#39;number&#39;</code>……</p>
 </li>
-<li><p>引用类型：<code>Object.prototype.isPrototypeOf(obj)</code>用于判断 obj 是否是一个引用类型。</p>
+<li><strong>property</strong> 是 DOM 元素在 <strong>JavaScript</strong> 中作为对象拥有的属性<ul>
+<li>大小写敏感</li>
+<li>值可以是任意合法 js 类型</li>
+<li>无法获取自定义属性 <code>data-*</code></li>
+<li>从语义上，更倾向于在其生命周期中是可变的</li>
+</ul>
 </li>
 </ol>
-<p>PS：需要注意的是 <code>typeof null</code>  返回 <code>&#39;object&#39;</code>，但是<code>null instanceof Object</code>返回<code>false</code></p>
-<p><strong>数组判断</strong></p>
-<ul>
-<li><p>推荐（ES6）：<code>Array.isArray(arr)</code></p>
-</li>
-<li><p>原型：<code>Array.prototype.isPrototypeOf(arr)</code> || <code>arr.constructor === Array</code> || </p>
-<p><code>Object.getPrototypeOf(arr) === Array.prototype</code> ||</p>
-<p><code>Object.prototype.toString.call(arr) === &#39;[object Array]&#39;</code></p>
-</li>
-<li><p>不推荐（框架）： <code>arr instanceof Array</code></p>
-</li>
-</ul>
-<p>PS：**<code>instanceof</code>** <strong>运算符</strong>用于检测构造函数的 <code>prototype</code> 属性是否出现在某个实例对象的原型链上。</p>
+<p>PS：对于 html 的标准属性来说，attribute 和 property 是同步的，是会自动更新的。（<code>input</code>例外）</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://xiaodanye.github.io/2022/05/21/JS%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" data-id="cl3fjmfkv0006av5jherx718c" class="article-share-link">Share</a>
+      <a data-url="http://xiaodanye.github.io/2022/05/21/JS-attribute-property/" data-id="cl3fjmfka0000av5j1zt82ljr" class="article-share-link">Share</a>
       
       
     </footer>
@@ -138,19 +118,10 @@
     
 <nav id="article-nav">
   
-    <a href="/2022/05/21/JS%E6%95%B0%E7%BB%84%E6%96%B9%E6%B3%95/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          JS数组方法
-        
-      </div>
-    </a>
   
-  
-    <a href="/2022/05/21/hello-world/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2022/05/21/JS-toString-valueOf/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">Hello World</div>
+      <div class="article-nav-title">JS-toString_valueOf</div>
     </a>
   
 </nav>

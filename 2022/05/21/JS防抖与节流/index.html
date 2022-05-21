@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>JS防抖与节流 | Xiaodanye</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="防抖 &amp; 节流防抖(debounce)在事件被触发n秒后再执行回调，如果在这n秒内又被触发，则重新计时 123456789101112&#x2F;***   防抖(debounce)   ***&#x2F;function debounce(fn, wait) &amp;#123;  var timeout; &#x2F;&#x2F; 闭包 私有化变量  return function () &amp;#123;    var context">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JS防抖与节流">
+<meta property="og:url" content="http://xiaodanye.github.io/2022/05/21/JS%E9%98%B2%E6%8A%96%E4%B8%8E%E8%8A%82%E6%B5%81/index.html">
+<meta property="og:site_name" content="Xiaodanye">
+<meta property="og:description" content="防抖 &amp; 节流防抖(debounce)在事件被触发n秒后再执行回调，如果在这n秒内又被触发，则重新计时 123456789101112&#x2F;***   防抖(debounce)   ***&#x2F;function debounce(fn, wait) &amp;#123;  var timeout; &#x2F;&#x2F; 闭包 私有化变量  return function () &amp;#123;    var context">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-05-21T11:28:31.000Z">
+<meta property="article:modified_time" content="2022-05-21T11:28:59.719Z">
+<meta property="article:author" content="Xiaodanye">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Xiaodanye" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Xiaodanye</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://xiaodanye.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-JS防抖与节流" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2022/05/21/JS%E9%98%B2%E6%8A%96%E4%B8%8E%E8%8A%82%E6%B5%81/" class="article-date">
+  <time datetime="2022-05-21T11:28:31.000Z" itemprop="datePublished">2022-05-21</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      JS防抖与节流
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="防抖-amp-节流"><a href="#防抖-amp-节流" class="headerlink" title="防抖 &amp; 节流"></a>防抖 &amp; 节流</h3><h4 id="防抖-debounce"><a href="#防抖-debounce" class="headerlink" title="防抖(debounce)"></a><strong>防抖(debounce)</strong></h4><p>在事件被触发n秒后再执行回调，如果在这n秒内又被触发，则重新计时</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/***   防抖(debounce)   ***/</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">debounce</span>(<span class="params">fn, wait</span>) &#123;</span><br><span class="line">  <span class="keyword">var</span> timeout; <span class="comment">// 闭包 私有化变量</span></span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">var</span> context = <span class="variable language_">this</span>, args = <span class="variable language_">arguments</span>; <span class="comment">// context：绑定this；args：接收传入参数</span></span><br><span class="line">    <span class="built_in">clearTimeout</span>(timeout); <span class="comment">// 清除计时</span></span><br><span class="line"></span><br><span class="line">    timeout = <span class="built_in">setTimeout</span>(<span class="keyword">function</span> (<span class="params"></span>) &#123; <span class="comment">// 重新计时</span></span><br><span class="line">      fn.<span class="title function_">apply</span>(context, args)</span><br><span class="line">    &#125;, wait);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>应用场景</strong></p>
+<ul>
+<li>search搜索联想，用户在不断输入值时，用防抖来节约请求资源。</li>
+<li>window触发resize的时候，不断的调整浏览器窗口大小会不断的触发这个事件，用防抖来让其只触发一次</li>
+</ul>
+<h4 id="节流-throttle"><a href="#节流-throttle" class="headerlink" title="节流(throttle)"></a><strong>节流(throttle)</strong></h4><p>规定在一个单位时间内，只能触发一次函数。如果这个单位时间内触发多次函数，只有一次生效。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/***   节流(throttle)   ***/</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">throttle</span>(<span class="params">fn, wait</span>) &#123;</span><br><span class="line">  <span class="keyword">var</span> timeout; <span class="comment">// 闭包 私有化变量</span></span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">var</span> context = <span class="variable language_">this</span>, args = <span class="variable language_">arguments</span>; <span class="comment">// context：绑定this；args：接收传入参数</span></span><br><span class="line">    <span class="keyword">if</span> (!timeout) &#123; <span class="comment">// 如果timeout为假，说明值为 undefined | null，可以触发</span></span><br><span class="line">      timeout = <span class="built_in">setTimeout</span>(<span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line">        timeout = <span class="literal">null</span>; <span class="comment">// 清除 变量</span></span><br><span class="line">        fn.<span class="title function_">apply</span>(context, args);</span><br><span class="line">      &#125;, wait);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>应用场景</strong></p>
+<ul>
+<li>鼠标不断点击触发，mousedown(单位时间内只触发一次)</li>
+<li>监听滚动事件，比如是否滑到底部自动加载更多，用throttle来判断</li>
+</ul>
+<p><strong>总结</strong>：函数节流与函数防抖都是为了限制函数的执行频次，都是一种性能优化的方法。区别是防抖是有条件的周期性动作，而节流是无条件的周期性动作。对于防抖和节流一个最主观的判断方法就是：在10s内你疯狂点击一个按钮，如果使用了防抖则会只执行一次，而你使用了节流则会每隔一段时间执行一次，这个时间可以自己来掌控。</p>
+<p>PS：函数节流与函数防抖的实现细节：</p>
+<ol>
+<li>外部函数中都定义了一个私有化变量timeout，这也是使用<strong>闭包</strong>的原因</li>
+<li>闭包中重新定义了context、args，这是为了避免修改 this 指向和默认参数</li>
+<li>二者都有对应的立即执行版本：触发事件后函数会立即执行，主要依据是对timeout的判断。</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://xiaodanye.github.io/2022/05/21/JS%E9%98%B2%E6%8A%96%E4%B8%8E%E8%8A%82%E6%B5%81/" data-id="cl3fsl3g5000u9b5jh2mjdvf7" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2022/05/21/JS%E5%86%85%E5%AD%98%E6%B3%84%E6%BC%8F/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          JS内存泄漏
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2022/05/21/JS%E5%90%8C%E6%AD%A5%E4%B8%8E%E5%BC%82%E6%AD%A5/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">JS同步与异步</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/05/">May 2022</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2022/05/21/JS%E5%89%8D%E7%AB%AF%E4%B8%BB%E6%B5%81%E5%B8%83%E5%B1%80/">JS前端主流布局</a>
+          </li>
+        
+          <li>
+            <a href="/2022/05/21/JS%E6%B5%8F%E8%A7%88%E5%99%A8%E8%BE%93%E5%85%A5URL%E5%90%8E/">JS浏览器输入URL后</a>
+          </li>
+        
+          <li>
+            <a href="/2022/05/21/JS%E4%BC%98%E9%9B%85%E9%99%8D%E7%BA%A7%E4%B8%8E%E6%B8%90%E8%BF%9B%E5%A2%9E%E5%BC%BA/">JS优雅降级与渐进增强</a>
+          </li>
+        
+          <li>
+            <a href="/2022/05/21/JS%E9%A1%B9%E7%9B%AE%E4%BC%98%E5%8C%96/">JS项目优化</a>
+          </li>
+        
+          <li>
+            <a href="/2022/05/21/JS%E5%86%85%E5%AD%98%E6%B3%84%E6%BC%8F/">JS内存泄漏</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2022 Xiaodanye<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>

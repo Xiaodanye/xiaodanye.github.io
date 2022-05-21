@@ -15,7 +15,7 @@
 <meta property="og:description" content="PromisePromise 是一个对象，它代表了一个异步操作的最终完成或者失败及其结果值：异步方法并不会立即返回最终的值，而是会返回一个 promise，以便在未来某个时候把值交给使用者。 Promise 必然处于以下几种状态之一：待定（Pending）、已兑现（Fulfilled）、已拒绝（Rejected） Promise 状态只能在内部进行操作，内部操作在Promise执行器函数执行。Pr">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2022-05-21T11:10:12.000Z">
-<meta property="article:modified_time" content="2022-05-21T11:10:30.870Z">
+<meta property="article:modified_time" content="2022-05-21T11:19:12.091Z">
 <meta property="article:author" content="Xiaodanye">
 <meta name="twitter:card" content="summary">
   
@@ -130,15 +130,13 @@
 <td>返回一个状态由给定value决定的Promise对象，并将该value传递给对应的处理方法</td>
 </tr>
 </tbody></table>
-<blockquote>
-<p>通常，一遇到异常抛出，浏览器就会顺着 Promise 链寻找下一个 <code>onRejected</code> 失败回调函数或者由 <code>.catch()</code> 指定的回调函数。因此，链式调用可以在最后一个 <code>.catch()</code> 之前把所有的 <code>handleRejection</code> 都省略掉。类似地， <code>.catch()</code> 其实只是没有给 <code>handleFulfilled</code> 预留参数位置的 <code>.then()</code> 而已。</p>
-</blockquote>
+<p>PS：通常，一遇到异常抛出，浏览器就会顺着 Promise 链寻找下一个 <code>onRejected</code> 失败回调函数或者由 <code>.catch()</code> 指定的回调函数。因此，链式调用可以在最后一个 <code>.catch()</code> 之前把所有的 <code>handleRejection</code> 都省略掉。类似地， <code>.catch()</code> 其实只是没有给 <code>handleFulfilled</code> 预留参数位置的 <code>.then()</code> 而已。</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> myFirstPromise = <span class="keyword">new</span> <span class="title class_">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="comment">// 做一些异步操作，最终会调用下面两者之一:</span></span><br><span class="line">  <span class="title function_">resolve</span>(someValue); <span class="comment">// fulfilled</span></span><br><span class="line">  <span class="title function_">reject</span>(<span class="string">&quot;failure reason&quot;</span>); <span class="comment">// rejected</span></span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// AJAX请求</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">myAsyncFunction</span>(<span class="params">url</span>) &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> xhr = <span class="keyword">new</span> <span class="title class_">XMLHttpRequest</span>();</span><br><span class="line">    xhr.<span class="title function_">open</span>(<span class="string">&quot;GET&quot;</span>, url);</span><br><span class="line">    xhr.<span class="property">onload</span> = <span class="function">() =&gt;</span> <span class="title function_">resolve</span>(xhr.<span class="property">responseText</span>);</span><br><span class="line">    xhr.<span class="property">onerror</span> = <span class="function">() =&gt;</span> <span class="title function_">reject</span>(xhr.<span class="property">statusText</span>);</span><br><span class="line">    xhr.<span class="title function_">send</span>();</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// async/await 语法糖</span></span><br><span class="line"><span class="keyword">async</span> <span class="keyword">function</span> <span class="title function_">foo</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">try</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> result = <span class="keyword">await</span> <span class="title function_">doSomething</span>();</span><br><span class="line">    <span class="keyword">const</span> newResult = <span class="keyword">await</span> <span class="title function_">doSomethingElse</span>(result);</span><br><span class="line">    <span class="keyword">const</span> finalResult = <span class="keyword">await</span> <span class="title function_">doThirdThing</span>(newResult);</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">`Got the final result: <span class="subst">$&#123;finalResult&#125;</span>`</span>);</span><br><span class="line">  &#125; <span class="keyword">catch</span>(error) &#123;</span><br><span class="line">    <span class="title function_">failureCallback</span>(error);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://xiaodanye.github.io/2022/05/21/JS-promise/" data-id="cl3fs04eq0004475j7co183qu" class="article-share-link">Share</a>
+      <a data-url="http://xiaodanye.github.io/2022/05/21/JS-promise/" data-id="cl3fsl3fe00059b5jf4snhs5q" class="article-share-link">Share</a>
       
       
     </footer>
@@ -196,23 +194,23 @@
       <ul>
         
           <li>
-            <a href="/2022/05/21/JS-ES6%E6%96%B0%E5%A2%9E%E7%89%B9%E6%80%A7/">JS-ES6新增特性</a>
+            <a href="/2022/05/21/JS%E5%89%8D%E7%AB%AF%E4%B8%BB%E6%B5%81%E5%B8%83%E5%B1%80/">JS前端主流布局</a>
           </li>
         
           <li>
-            <a href="/2022/05/21/JS%E6%B7%B1%E6%8B%B7%E8%B4%9D%E4%B8%8E%E6%B5%85%E6%8B%B7%E8%B4%9D/">JS深拷贝与浅拷贝</a>
+            <a href="/2022/05/21/JS%E6%B5%8F%E8%A7%88%E5%99%A8%E8%BE%93%E5%85%A5URL%E5%90%8E/">JS浏览器输入URL后</a>
           </li>
         
           <li>
-            <a href="/2022/05/21/JS%E7%BB%A7%E6%89%BF%E4%B8%8E%E5%8E%9F%E5%9E%8B%E9%93%BE/">JS继承与原型链</a>
+            <a href="/2022/05/21/JS%E4%BC%98%E9%9B%85%E9%99%8D%E7%BA%A7%E4%B8%8E%E6%B8%90%E8%BF%9B%E5%A2%9E%E5%BC%BA/">JS优雅降级与渐进增强</a>
           </li>
         
           <li>
-            <a href="/2022/05/21/JS%E4%BD%9C%E7%94%A8%E5%9F%9F%E9%93%BE/">JS作用域链</a>
+            <a href="/2022/05/21/JS%E9%A1%B9%E7%9B%AE%E4%BC%98%E5%8C%96/">JS项目优化</a>
           </li>
         
           <li>
-            <a href="/2022/05/21/JS%E7%AE%AD%E5%A4%B4%E5%87%BD%E6%95%B0/">JS箭头函数</a>
+            <a href="/2022/05/21/JS%E5%86%85%E5%AD%98%E6%B3%84%E6%BC%8F/">JS内存泄漏</a>
           </li>
         
       </ul>

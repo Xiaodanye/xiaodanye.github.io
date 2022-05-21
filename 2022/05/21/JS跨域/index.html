@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>JS跨域 | Xiaodanye</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="跨域同源策略是一种约定，它是浏览器最核心也最基本的安全功能。所谓同源是指”协议+域名+端口”三者相同，当协议、域名、端口号中任意一个不相同时，都算作不同源，即便两个不同的域名指向同一个ip地址，也非同源。不同源之间相互请求资源，就算作“跨域”。XMLHttpRequest 和 Fetch API 遵循同源策略。  跨域并不是请求发不出去，请求能发出去，服务端能收到请求并正常返回结果，只是结果被浏览">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JS跨域">
+<meta property="og:url" content="http://xiaodanye.github.io/2022/05/21/JS%E8%B7%A8%E5%9F%9F/index.html">
+<meta property="og:site_name" content="Xiaodanye">
+<meta property="og:description" content="跨域同源策略是一种约定，它是浏览器最核心也最基本的安全功能。所谓同源是指”协议+域名+端口”三者相同，当协议、域名、端口号中任意一个不相同时，都算作不同源，即便两个不同的域名指向同一个ip地址，也非同源。不同源之间相互请求资源，就算作“跨域”。XMLHttpRequest 和 Fetch API 遵循同源策略。  跨域并不是请求发不出去，请求能发出去，服务端能收到请求并正常返回结果，只是结果被浏览">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-05-21T11:21:06.000Z">
+<meta property="article:modified_time" content="2022-05-21T11:23:20.310Z">
+<meta property="article:author" content="Xiaodanye">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Xiaodanye" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Xiaodanye</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://xiaodanye.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-JS跨域" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2022/05/21/JS%E8%B7%A8%E5%9F%9F/" class="article-date">
+  <time datetime="2022-05-21T11:21:06.000Z" itemprop="datePublished">2022-05-21</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      JS跨域
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="跨域"><a href="#跨域" class="headerlink" title="跨域"></a>跨域</h3><p>同源策略是一种约定，它是浏览器最核心也最基本的安全功能。所谓同源是指”协议+域名+端口”三者相同，当协议、域名、端口号中任意一个不相同时，都算作不同源，即便两个不同的域名指向同一个ip地址，也非同源。不同源之间相互请求资源，就算作“跨域”。<code>XMLHttpRequest</code> 和 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/API/Fetch_API">Fetch API</a> 遵循<a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/Security/Same-origin_policy">同源策略</a>。</p>
+<blockquote>
+<p>跨域并不是请求发不出去，请求能发出去，服务端能收到请求并正常返回结果，只是结果被浏览器拦截了。</p>
+</blockquote>
+<p>有多种方式解决跨域问题，常见的有：代理（常用）、CORS（常用）、JSONP</p>
+<h4 id="代理"><a href="#代理" class="headerlink" title="代理"></a><strong>代理</strong></h4><p>同源策略是浏览器需要遵循的标准，而如果是服务器向服务器请求就无需遵循同源策略。代理(proxy)服务器，需要做以下几个步骤：接受客户端请求、将请求转发给服务器、拿到服务器响应数据、将响应转发给客户端。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// vue 的开发服务器代理配置: vue.config.js</span></span><br><span class="line"><span class="comment">// origin: http://localhost:8080</span></span><br><span class="line"><span class="comment">// proxy服务器: http://localhost:8080</span></span><br><span class="line"><span class="comment">// target服务器: http://dev.server.com</span></span><br><span class="line"><span class="comment">// 请求URL: http://localhost:8080/api/products</span></span><br><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = &#123;</span><br><span class="line">  <span class="attr">devServer</span>: &#123;	<span class="comment">// 配置开发服务器</span></span><br><span class="line">    <span class="attr">proxy</span>: &#123;		<span class="comment">// 配置代理</span></span><br><span class="line">      <span class="string">&quot;/api&quot;</span>: &#123; <span class="comment">// 若请求路径以 /api 开头</span></span><br><span class="line">        <span class="attr">target</span>: <span class="string">&quot;http://dev.server.com&quot;</span>, <span class="comment">// 将其转发到 http://dev.server.com</span></span><br><span class="line">      &#125;,</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h4 id="CORS"><a href="#CORS" class="headerlink" title="CORS"></a><strong>CORS</strong></h4><p>CORS（Cross-Origin Resource Sharing，跨源资源共享）是一种基于 HTTP 头的机制，该机制通过允许服务器标示除了它自己以外的其它 origin，使得浏览器允许这些 origin 访问加载自己的资源。针对不同的请求，CORS 规定了三种不同的交互模式，分别是：简单请求、需要预检的请求、附带身份凭证的请求。 HTTP 头核心： <code>Access-Control-Allow-Origin</code> </p>
+<table>
+<thead>
+<tr>
+<th>请求类型</th>
+<th>条件判定</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>简单请求</td>
+<td>1. 请求方法属于下面的一种：<code>get</code>、<code>post</code>、<code>head</code><br>2. 请求头仅包含安全的字段：<br>例如：<code>Accept</code>、<code>Accept-Language</code>、<code>Content-Language</code>、<code>Content-Type</code>等<br>3. 请求头如果包含<code>Content-Type</code>，仅限下面的值之一：<br><code>text/plain</code></td>
+</tr>
+<tr>
+<td>预检请求</td>
+<td>HTTP 请求头不满足简单请求规则，比如<code>&#39;content-type&#39;: &#39;application/json&#39;</code></td>
+</tr>
+</tbody></table>
+<p><strong>简单请求</strong></p>
+<ol>
+<li><strong>请求头中会自动添加<code>Origin</code>字段表明该请求来源</strong></li>
+<li><strong>服务器响应头中应包含<code>Access-Control-Allow-Origin</code>字段</strong><ul>
+<li>字段值为 <code>*</code> 表示该资源可以被 <strong>任意</strong> 外域访问</li>
+<li>字段子为具体的源表示该资源可以被 <strong>指定</strong> 外域访问</li>
+</ul>
+</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 客户端请求 Origin</span></span><br><span class="line"><span class="variable constant_">GET</span> /api/products/ <span class="variable constant_">HTTP</span>/<span class="number">1.1</span></span><br><span class="line"><span class="title class_">Host</span>: <span class="attr">http</span>:<span class="comment">//dev.server.com</span></span><br><span class="line"><span class="title class_">Connection</span>: keep-alive</span><br><span class="line">...</span><br><span class="line"><span class="title class_">Referer</span>: <span class="attr">http</span>:<span class="comment">//localhost:8080/index.html</span></span><br><span class="line"><span class="title class_">Origin</span>: <span class="attr">http</span>:<span class="comment">//localhost:8080</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 服务器响应 Access-Control-Allow-Origin</span></span><br><span class="line"><span class="variable constant_">HTTP</span>/<span class="number">1.1</span> <span class="number">200</span> <span class="variable constant_">OK</span></span><br><span class="line"><span class="title class_">Date</span>: <span class="title class_">Tue</span>, <span class="number">21</span> <span class="title class_">Apr</span> <span class="number">2020</span> <span class="number">08</span>:<span class="number">03</span>:<span class="number">35</span> <span class="variable constant_">GMT</span></span><br><span class="line">...</span><br><span class="line"><span class="title class_">Access</span>-<span class="title class_">Control</span>-<span class="title class_">Allow</span>-<span class="title class_">Origin</span>: *</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+
+<p><strong>预检请求</strong></p>
+<p>与前述简单请求不同，“需预检的请求”要求必须首先使用 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Methods/OPTIONS"><code>OPTIONS</code></a> 方法发起一个预检请求到服务器，以获知服务器是否允许该实际请求。”预检请求“的使用，可以避免跨域请求对服务器的用户数据产生未预期的影响。如果浏览器不认为这是一种简单请求，就会按照下面的流程进行：</p>
+<ol>
+<li><p><strong>浏览器发送预检请求，询问服务器是否允许</strong></p>
+<ul>
+<li>请求方法为<code>OPTIONS</code></li>
+<li>请求头中包含：<code>Origin</code>、<code>Access-Control-Request-Method</code>、<code>Access-Control-Request-Headers</code></li>
+<li>不包含请求体</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable constant_">OPTIONS</span> /api/products <span class="variable constant_">HTTP</span>/<span class="number">1.1</span></span><br><span class="line"><span class="title class_">Host</span>: <span class="attr">http</span>:<span class="comment">//dev.server.com</span></span><br><span class="line">...</span><br><span class="line"><span class="title class_">Origin</span>: <span class="attr">http</span>:<span class="comment">//localhost:8080</span></span><br><span class="line"><span class="title class_">Access</span>-<span class="title class_">Control</span>-<span class="title class_">Request</span>-<span class="title class_">Method</span>: <span class="variable constant_">POST</span></span><br><span class="line"><span class="title class_">Access</span>-<span class="title class_">Control</span>-<span class="title class_">Request</span>-<span class="title class_">Headers</span>: a, b, content-type</span><br></pre></td></tr></table></figure></li>
+<li><p><strong>服务器允许</strong></p>
+<ul>
+<li>正常响应，没有响应体</li>
+<li>响应头中包含：<code>Access-Control-Allow-Origin</code>、<code>Access-Control-Allow-Methods</code>、<code>Access-Control-Allow-Headers</code>、<code>Access-Control-Max-Age</code></li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable constant_">HTTP</span>/<span class="number">1.1</span> <span class="number">200</span> <span class="variable constant_">OK</span></span><br><span class="line"><span class="title class_">Date</span>: <span class="title class_">Tue</span>, <span class="number">21</span> <span class="title class_">Apr</span> <span class="number">2020</span> <span class="number">08</span>:<span class="number">03</span>:<span class="number">35</span> <span class="variable constant_">GMT</span></span><br><span class="line">...</span><br><span class="line"><span class="title class_">Access</span>-<span class="title class_">Control</span>-<span class="title class_">Allow</span>-<span class="title class_">Origin</span>: <span class="attr">http</span>:<span class="comment">//localhost:8080</span></span><br><span class="line"><span class="title class_">Access</span>-<span class="title class_">Control</span>-<span class="title class_">Allow</span>-<span class="title class_">Methods</span>: <span class="variable constant_">POST</span></span><br><span class="line"><span class="title class_">Access</span>-<span class="title class_">Control</span>-<span class="title class_">Allow</span>-<span class="title class_">Headers</span>: a, b, content-type</span><br><span class="line"><span class="title class_">Access</span>-<span class="title class_">Control</span>-<span class="title class_">Max</span>-<span class="title class_">Age</span>: <span class="number">86400</span></span><br></pre></td></tr></table></figure></li>
+<li><p><strong>浏览器发送真实请求</strong></p>
+</li>
+<li><p><strong>服务器完成真实的响应</strong></p>
+</li>
+</ol>
+<p>PS：<strong>附带身份凭证的请求</strong>：默认情况下，对于跨源 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/API/XMLHttpRequest"><code>XMLHttpRequest</code></a> 或 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/API/Fetch_API">Fetch</a> 请求，浏览器不会发送身份凭证信息。如果要发送凭证信息，需要设置 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/API/XMLHttpRequest"><code>XMLHttpRequest</code></a> 的某个特殊标志位。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> xhr = <span class="keyword">new</span> <span class="title class_">XMLHttpRequest</span>();</span><br><span class="line">xhr.<span class="property">withCredentials</span> = <span class="literal">true</span>;</span><br></pre></td></tr></table></figure>
+
+<p>当一个请求需要附带身份凭证时，无论它是简单请求，还是预检请求，都会在请求头中添加<code>cookie</code>字段。而服务器响应时，必须在响应头中添加：<code>Access-Control-Allow-Credentials: true</code>，否则浏览器将不会把响应内容返回给请求的发送者。</p>
+<p>PS：在响应附带身份凭证的请求时，服务器不能将 <code>Access-Control-Allow-Origin</code> 、 <code>Access-Control-Allow-Headers</code> 、 <code>Access-Control-Allow-Methods</code> 的值设为通配符“<code>*</code>”，而应将其设置为具体的值。</p>
+<h4 id="JSONP"><a href="#JSONP" class="headerlink" title="JSONP"></a><strong>JSONP</strong></h4><p>HTML 中有三个标签是允许跨域加载资源：<code>&lt;img src=XXX&gt;</code>、<code>&lt;link href=XXX&gt;</code>、<code>&lt;script src=XXX&gt;</code></p>
+<p>JSONP的原理</p>
+<ol>
+<li><p>当需要跨域请求时，不使用AJAX，转而生成一个script元素去请求服务器，由于浏览器并不阻止script元素的请求，这样请求可以到达服务器。</p>
+<p>PS：该请求应该包含需要传输的 <strong>参数</strong> 和处理响应的 <strong>回调函数</strong>。</p>
+</li>
+<li><p>服务器拿到请求后，响应一段JS代码，这段代码实际上是一个函数调用，调用的是客户端预先生成好的函数，并把浏览器需要的数据作为参数传递到函数中，从而间接的把数据传递给客户端。</p>
+<p>PS：响应实际上就是 <strong>回调函数的调用</strong>，响应真正内容实际上是回调函数的 <strong>参数</strong></p>
+</li>
+<li><p>浏览器处理script元素中的JS代码</p>
+</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">客户端：index.html</span><br><span class="line">...</span><br><span class="line">&lt;script src=&quot;http://localhost:3000/api/products?wd=xiaoye&amp;callback=show&quot;&gt;&lt;/script&gt;</span><br><span class="line">...</span><br><span class="line">&lt;script&gt;</span><br><span class="line">  function show(data) &#123;</span><br><span class="line">    console.log(data)</span><br><span class="line">  &#125;</span><br><span class="line">&lt;/script&gt;</span><br><span class="line"></span><br><span class="line">// 服务器端：server.js</span><br><span class="line">let express = require(&#x27;express&#x27;)</span><br><span class="line"></span><br><span class="line">let app = express()</span><br><span class="line">app.get(&#x27;/api/products&#x27;, function(req, res) &#123;</span><br><span class="line">  let &#123; wd, callback &#125; = req.query</span><br><span class="line">  console.log(wd) // xiaoye</span><br><span class="line">  console.log(callback) // show</span><br><span class="line">  res.end(`$&#123;callback&#125;(&#x27;响应数据&#x27;)`) // 返回：show(&#x27;响应数据&#x27;)</span><br><span class="line">&#125;)</span><br><span class="line">app.listen(3000)</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://xiaodanye.github.io/2022/05/21/JS%E8%B7%A8%E5%9F%9F/" data-id="cl3fsl3g3000r9b5j8lbg7koq" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2022/05/21/JS%E7%BB%A7%E6%89%BF/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          JS继承
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2022/05/21/JS-ES6%E6%96%B0%E5%A2%9E%E7%89%B9%E6%80%A7/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">JS-ES6新增特性</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/05/">May 2022</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2022/05/21/JS%E5%89%8D%E7%AB%AF%E4%B8%BB%E6%B5%81%E5%B8%83%E5%B1%80/">JS前端主流布局</a>
+          </li>
+        
+          <li>
+            <a href="/2022/05/21/JS%E6%B5%8F%E8%A7%88%E5%99%A8%E8%BE%93%E5%85%A5URL%E5%90%8E/">JS浏览器输入URL后</a>
+          </li>
+        
+          <li>
+            <a href="/2022/05/21/JS%E4%BC%98%E9%9B%85%E9%99%8D%E7%BA%A7%E4%B8%8E%E6%B8%90%E8%BF%9B%E5%A2%9E%E5%BC%BA/">JS优雅降级与渐进增强</a>
+          </li>
+        
+          <li>
+            <a href="/2022/05/21/JS%E9%A1%B9%E7%9B%AE%E4%BC%98%E5%8C%96/">JS项目优化</a>
+          </li>
+        
+          <li>
+            <a href="/2022/05/21/JS%E5%86%85%E5%AD%98%E6%B3%84%E6%BC%8F/">JS内存泄漏</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2022 Xiaodanye<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>

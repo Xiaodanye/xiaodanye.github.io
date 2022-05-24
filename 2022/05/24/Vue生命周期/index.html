@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>Vue生命周期 | Xiaodanye</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="生命周期每个vue实例在被创建之前都要经过一系列的初始化过程——例如，需要设置数据监听、编译模板、将实例挂载到 DOM 并在数据变化时更新 DOM 等，这个过程就是vue的生命周期。同时在这个过程中也会运行一些叫做生命周期钩子的函数，这给了用户在不同阶段添加自己的代码的机会。 生命周期图示   生命周期钩子  beforeCreate 表示实例完全被创建出来之前，vue 实例的挂载元素 $el 和">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Vue生命周期">
+<meta property="og:url" content="http://xiaodanye.github.io/2022/05/24/Vue%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/index.html">
+<meta property="og:site_name" content="Xiaodanye">
+<meta property="og:description" content="生命周期每个vue实例在被创建之前都要经过一系列的初始化过程——例如，需要设置数据监听、编译模板、将实例挂载到 DOM 并在数据变化时更新 DOM 等，这个过程就是vue的生命周期。同时在这个过程中也会运行一些叫做生命周期钩子的函数，这给了用户在不同阶段添加自己的代码的机会。 生命周期图示   生命周期钩子  beforeCreate 表示实例完全被创建出来之前，vue 实例的挂载元素 $el 和">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://xiaodanye.github.io/Users/fjp_xiaoye999/Desktop/FJP/工作/知识图谱/lifecycle.svg">
+<meta property="article:published_time" content="2022-05-24T07:21:51.000Z">
+<meta property="article:modified_time" content="2022-05-24T07:22:24.087Z">
+<meta property="article:author" content="Xiaodanye">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://xiaodanye.github.io/Users/fjp_xiaoye999/Desktop/FJP/工作/知识图谱/lifecycle.svg">
+  
+    <link rel="alternate" href="/atom.xml" title="Xiaodanye" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Xiaodanye</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://xiaodanye.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-Vue生命周期" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2022/05/24/Vue%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/" class="article-date">
+  <time datetime="2022-05-24T07:21:51.000Z" itemprop="datePublished">2022-05-24</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Vue生命周期
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="生命周期"><a href="#生命周期" class="headerlink" title="生命周期"></a>生命周期</h3><p>每个vue实例在被创建之前都要经过一系列的初始化过程——例如，需要设置数据监听、编译模板、将实例挂载到 DOM 并在数据变化时更新 DOM 等，这个过程就是vue的生命周期。同时在这个过程中也会运行一些叫做<strong>生命周期钩子</strong>的函数，这给了用户在不同阶段添加自己的代码的机会。</p>
+<p><a target="_blank" rel="noopener" href="https://v3.cn.vuejs.org/guide/instance.html#%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E5%9B%BE%E7%A4%BA"><strong>生命周期图示</strong></a></p>
+<img src="/Users/fjp_xiaoye999/Desktop/FJP/工作/知识图谱/lifecycle.svg" style="zoom:70%;" />
+
+<p><a target="_blank" rel="noopener" href="https://v3.cn.vuejs.org/guide/composition-api-lifecycle-hooks.html#%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E9%92%A9%E5%AD%90"><strong>生命周期钩子</strong></a></p>
+<ul>
+<li><p><strong>beforeCreate</strong></p>
+<p>表示实例完全被创建出来之前，vue 实例的挂载元素 $el 和数据对象 data 都为undefined，还未初始化。</p>
+</li>
+<li><p><strong>created</strong></p>
+<p>数据对象 data 已存在，可以调用 methods 中的方法，操作 data 中的数据，但 dom 未生成，$el 未存在 。</p>
+</li>
+<li><p><strong>beforeMount</strong></p>
+<p>vue 实例的 $el 和 data 都已初始化，挂载之前为虚拟的 dom节点，模板已经在内存中编辑完成了，但是尚未把模板渲染到页面中。 未替换。</p>
+</li>
+<li><p><strong>mounted</strong></p>
+<p>vue 实例挂载完成，data.message 成功渲染。内存中的模板，已经真实的挂载到了页面中，用户已经可以看到渲染好的页面了。实例创建期间的最后一个生命周期函数，当执行完 mounted 就表示，实例已经被完全创建好了，DOM 渲染在 mounted 中就已经完成了。</p>
+</li>
+<li><p><strong>beforeUpdate</strong></p>
+<p>当 data 变化时，会触发beforeUpdate方法 。data 数据尚未和最新的数据保持同步。</p>
+</li>
+<li><p><strong>updated</strong></p>
+<p>当 data 变化时，会触发 updated 方法。页面和 data 数据已经保持同步了。</p>
+</li>
+<li><p><strong>beforeDestroy</strong></p>
+<p>组件销毁之前调用 ，在这一步，实例仍然完全可用。</p>
+</li>
+<li><p><strong>destroyed</strong></p>
+<p>组件销毁之后调用，对 data 的改变不会再触发周期函数，vue 实例已解除事件监听和 DOM 绑定，但 DOM 结构依然存在。</p>
+</li>
+</ul>
+<p>参照：<a target="_blank" rel="noopener" href="https://segmentfault.com/a/1190000011381906">详解vue生命周期</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://xiaodanye.github.io/2022/05/24/Vue%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/" data-id="cl3jw7tiy001b9o5jeyyf9eux" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2022/05/24/Vue%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Vue环境变量
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2022/05/24/Vue%E6%8C%87%E4%BB%A4/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Vue指令</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/05/">May 2022</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2022/05/24/Vue%E8%99%9A%E6%8B%9FDOM-diff%E7%AE%97%E6%B3%95/">Vue虚拟DOM-diff算法</a>
+          </li>
+        
+          <li>
+            <a href="/2022/05/24/Vue%E7%88%B6%E5%AD%90%E7%BB%84%E4%BB%B6/">Vue父子组件</a>
+          </li>
+        
+          <li>
+            <a href="/2022/05/24/Vue%E5%8F%8C%E5%90%91%E7%BB%91%E5%AE%9A/">Vue双向绑定</a>
+          </li>
+        
+          <li>
+            <a href="/2022/05/24/Vue-SPA/">Vue-SPA</a>
+          </li>
+        
+          <li>
+            <a href="/2022/05/24/Vue-computed-methods-watch/">Vue-computed_methods_watch</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2022 Xiaodanye<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>

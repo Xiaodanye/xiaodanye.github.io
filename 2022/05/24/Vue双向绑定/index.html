@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>Vue双向绑定 | Xiaodanye</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="双向绑定双向绑定依赖于数据劫持 + 发布-订阅者的方式，包括两个方面：数据变化更新视图，视图变化更新数据。视图变化更新数据可以通过事件监听实现，比如 input 标签监听 input 事件就可以实现了。重点在于数据变化更新视图。 当一个 Vue 实例创建时，Vue 会遍历 data 选项的属性，通过 Object.defineProperty() 重写 getter&#x2F;setter 实现数据劫持；并">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Vue双向绑定">
+<meta property="og:url" content="http://xiaodanye.github.io/2022/05/24/Vue%E5%8F%8C%E5%90%91%E7%BB%91%E5%AE%9A/index.html">
+<meta property="og:site_name" content="Xiaodanye">
+<meta property="og:description" content="双向绑定双向绑定依赖于数据劫持 + 发布-订阅者的方式，包括两个方面：数据变化更新视图，视图变化更新数据。视图变化更新数据可以通过事件监听实现，比如 input 标签监听 input 事件就可以实现了。重点在于数据变化更新视图。 当一个 Vue 实例创建时，Vue 会遍历 data 选项的属性，通过 Object.defineProperty() 重写 getter&#x2F;setter 实现数据劫持；并">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-05-24T08:10:42.000Z">
+<meta property="article:modified_time" content="2022-05-24T08:14:52.396Z">
+<meta property="article:author" content="Xiaodanye">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Xiaodanye" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Xiaodanye</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://xiaodanye.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-Vue双向绑定" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2022/05/24/Vue%E5%8F%8C%E5%90%91%E7%BB%91%E5%AE%9A/" class="article-date">
+  <time datetime="2022-05-24T08:10:42.000Z" itemprop="datePublished">2022-05-24</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Vue双向绑定
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="双向绑定"><a href="#双向绑定" class="headerlink" title="双向绑定"></a>双向绑定</h3><p>双向绑定依赖于<strong>数据劫持</strong> + <strong>发布-订阅者</strong>的方式，包括两个方面：数据变化更新视图，视图变化更新数据。视图变化更新数据可以通过事件监听实现，比如 input 标签监听 input 事件就可以实现了。重点在于数据变化更新视图。</p>
+<p>当一个 Vue 实例创建时，Vue 会遍历 data 选项的属性，通过 Object.defineProperty() 重写 getter/setter 实现数据劫持；并且在内部追踪相关依赖（订阅者），在属性被修改时通知变化（监听者）。具体实现通过为每个属性分配一个订阅者集合的管理数组，然后在编译的时候在访问相关属性会触发 get 方法，在 get 方法中向该属性的数组中添加订阅者（理论上只要用到该属性的指令：v-model、v-bind以及字符串模版）。之后当相关属性发生变更时，会触发该属性的 set 方法，在 set 方法内发布通知订阅者数组，订阅者数组循环调用各订阅者的 update 方法更新视图。</p>
+<p>参照：<a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_43912081/article/details/119708969">Vue数据双向绑定</a>；<a target="_blank" rel="noopener" href="https://juejin.cn/post/6844903942254510087">Vue数据双向绑定</a></p>
+<p>PS：实现双向绑定 Proxy 与 Object.defineProperty 相比优劣如何?</p>
+<ol>
+<li>Object.definedProperty 的作用是劫持一个对象的属性，劫持属性的 getter 和 setter 方法，在对象的属性发生变化时进行特定的操作。而 Proxy 劫持的是整个对象。</li>
+<li>Proxy 会返回一个代理对象，我们只需要操作新对象即可，而 Object.defineProperty 只能遍历对象属性直接修改。</li>
+<li>Object.definedProperty 不支持数组，更准确的说是不支持数组的各种API，因为如果仅仅考虑arry[i] = value 这种情况，是可以劫持的，但是这种劫持意义不大。而 Proxy 可以支持数组的各种API。</li>
+<li>尽管 Object.defineProperty 有诸多缺陷，但是其兼容性要好于 Proxy 。</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://xiaodanye.github.io/2022/05/24/Vue%E5%8F%8C%E5%90%91%E7%BB%91%E5%AE%9A/" data-id="cl3jw7tix00189o5j1z28bf4w" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2022/05/24/Vue%E7%88%B6%E5%AD%90%E7%BB%84%E4%BB%B6/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Vue父子组件
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2022/05/24/Vue-SPA/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Vue-SPA</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/05/">May 2022</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2022/05/24/Vue%E8%99%9A%E6%8B%9FDOM-diff%E7%AE%97%E6%B3%95/">Vue虚拟DOM-diff算法</a>
+          </li>
+        
+          <li>
+            <a href="/2022/05/24/Vue%E7%88%B6%E5%AD%90%E7%BB%84%E4%BB%B6/">Vue父子组件</a>
+          </li>
+        
+          <li>
+            <a href="/2022/05/24/Vue%E5%8F%8C%E5%90%91%E7%BB%91%E5%AE%9A/">Vue双向绑定</a>
+          </li>
+        
+          <li>
+            <a href="/2022/05/24/Vue-SPA/">Vue-SPA</a>
+          </li>
+        
+          <li>
+            <a href="/2022/05/24/Vue-computed-methods-watch/">Vue-computed_methods_watch</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2022 Xiaodanye<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>

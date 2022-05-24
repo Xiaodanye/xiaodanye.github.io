@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>Vue-computed_methods_watch | Xiaodanye</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="computed &amp; methods &amp; watchmethods：函数方法  methods 里面定义的是函数，适合用于业务逻辑处理 methods 每次需要重新加载，调用需要执行函数  computed：计算属性（一个数据受多个数据影响）  computed 是计算属性，与 data 对象里的数据属性类似，用来防止文本插值中逻辑过重，导致不易维护 computed 支持缓存数据">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Vue-computed_methods_watch">
+<meta property="og:url" content="http://xiaodanye.github.io/2022/05/24/Vue-computed-methods-watch/index.html">
+<meta property="og:site_name" content="Xiaodanye">
+<meta property="og:description" content="computed &amp; methods &amp; watchmethods：函数方法  methods 里面定义的是函数，适合用于业务逻辑处理 methods 每次需要重新加载，调用需要执行函数  computed：计算属性（一个数据受多个数据影响）  computed 是计算属性，与 data 对象里的数据属性类似，用来防止文本插值中逻辑过重，导致不易维护 computed 支持缓存数据">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-05-24T08:01:33.000Z">
+<meta property="article:modified_time" content="2022-05-24T08:04:57.825Z">
+<meta property="article:author" content="Xiaodanye">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Xiaodanye" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Xiaodanye</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://xiaodanye.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-Vue-computed-methods-watch" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2022/05/24/Vue-computed-methods-watch/" class="article-date">
+  <time datetime="2022-05-24T08:01:33.000Z" itemprop="datePublished">2022-05-24</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Vue-computed_methods_watch
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="computed-amp-methods-amp-watch"><a href="#computed-amp-methods-amp-watch" class="headerlink" title="computed &amp; methods &amp; watch"></a>computed &amp; methods &amp; watch</h3><p><strong>methods：函数方法</strong></p>
+<ul>
+<li>methods 里面定义的是函数，适合用于业务逻辑处理</li>
+<li>methods 每次需要重新加载，调用需要执行函数</li>
+</ul>
+<p><strong>computed：计算属性（一个数据受多个数据影响）</strong></p>
+<ul>
+<li>computed 是计算属性，与 data 对象里的数据属性类似，用来防止文本插值中逻辑过重，导致不易维护</li>
+<li>computed 支持缓存数据，如果函数所依赖的属性没有发生变化，那么调用当前的函数的时候会从缓存中读取</li>
+<li>computed 可以完成各种复杂的逻辑，但无法传递参数，函数最后必须有 return 返回值</li>
+</ul>
+<p><strong>watch：属性监听（一个数据影响多个数据）</strong></p>
+<ul>
+<li><p>当想要执行异步或者路由变化时使用watch，函数名称必须要和data中的属性名一致</p>
+</li>
+<li><p>watch只会监听数据的值是否发生改变，而不会去监听数据的地址是否发生改变（引用无效）</p>
+</li>
+<li><p>watch 不支持数据缓存，在每次监听的值发生变化的时候都会执行回调</p>
+</li>
+<li><p>watch 中的函数有两个参数，前者是newVal，后者是oldVal</p>
+</li>
+<li><p>页面首次加载的时候做一次监听 immediate: true</p>
+</li>
+</ul>
+<p><strong>总结</strong>：</p>
+<ol>
+<li>methods，watch 和 computed 都是以函数为基础的，但各自却都不同</li>
+<li>methods 里面是用来定义函数的，它需要手动调用才能执行。而不像 watch 和 computed 那样，“自动执行”预先定义的函数，相比于 watch / computed，methods 不处理数据逻辑关系，只提供可调用的函数</li>
+<li>watch 和 computed 都是以 Vue 的依赖追踪机制为基础的，当某一个数据发生变化的时候，所有依赖这个数据的“相关”数据“自动”发生变化，也就是自动调用相关的函数去实现数据的变动</li>
+</ol>
+<p>参照：<a target="_blank" rel="noopener" href="https://cloud.tencent.com/developer/article/1705551">Vue核心知识：computed、methods和watch的区别</a>; <a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_52998620/article/details/122861912">vue中Computed、Methods、Watch区别</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://xiaodanye.github.io/2022/05/24/Vue-computed-methods-watch/" data-id="cl3jw7tiq000y9o5jd2993acc" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2022/05/24/Vue-SPA/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Vue-SPA
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2022/05/24/Vue-v-if-v-for/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Vue-v-if_v-for</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/05/">May 2022</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2022/05/24/Vue%E8%99%9A%E6%8B%9FDOM-diff%E7%AE%97%E6%B3%95/">Vue虚拟DOM-diff算法</a>
+          </li>
+        
+          <li>
+            <a href="/2022/05/24/Vue%E7%88%B6%E5%AD%90%E7%BB%84%E4%BB%B6/">Vue父子组件</a>
+          </li>
+        
+          <li>
+            <a href="/2022/05/24/Vue%E5%8F%8C%E5%90%91%E7%BB%91%E5%AE%9A/">Vue双向绑定</a>
+          </li>
+        
+          <li>
+            <a href="/2022/05/24/Vue-SPA/">Vue-SPA</a>
+          </li>
+        
+          <li>
+            <a href="/2022/05/24/Vue-computed-methods-watch/">Vue-computed_methods_watch</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2022 Xiaodanye<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>

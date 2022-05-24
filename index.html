@@ -66,10 +66,10 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-JS前端主流布局" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-Vue虚拟DOM-diff算法" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2022/05/21/JS%E5%89%8D%E7%AB%AF%E4%B8%BB%E6%B5%81%E5%B8%83%E5%B1%80/" class="article-date">
-  <time datetime="2022-05-21T11:31:56.000Z" itemprop="datePublished">2022-05-21</time>
+    <a href="/2022/05/24/Vue%E8%99%9A%E6%8B%9FDOM-diff%E7%AE%97%E6%B3%95/" class="article-date">
+  <time datetime="2022-05-24T08:19:36.000Z" itemprop="datePublished">2022-05-24</time>
 </a>
     
   </div>
@@ -80,7 +80,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2022/05/21/JS%E5%89%8D%E7%AB%AF%E4%B8%BB%E6%B5%81%E5%B8%83%E5%B1%80/">JS前端主流布局</a>
+      <a class="article-title" href="/2022/05/24/Vue%E8%99%9A%E6%8B%9FDOM-diff%E7%AE%97%E6%B3%95/">Vue虚拟DOM-diff算法</a>
     </h1>
   
 
@@ -88,74 +88,46 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="Web前端中的几种主流布局"><a href="#Web前端中的几种主流布局" class="headerlink" title="Web前端中的几种主流布局"></a>Web前端中的几种主流布局</h3><ol>
-<li>静态布局(Static Layout)</li>
-<li>弹性布局(Flexible Layout)</li>
-<li>自适应布局(Adaptive Layout)</li>
-<li>流式布局(Fluid Layout)</li>
-<li>响应式布局(Responsive Layout)</li>
-<li>表格布局(Table Layout)</li>
-<li>浮动布局(Float Layout)<ul>
-<li>圣杯布局</li>
-<li>双飞翼布局</li>
-</ul>
-</li>
-<li>定位布局(Position Layout)</li>
-<li>网格布局(Gird Layout)</li>
+        <h3 id="虚拟DOM-amp-diff算法"><a href="#虚拟DOM-amp-diff算法" class="headerlink" title="虚拟DOM &amp; diff算法"></a>虚拟DOM &amp; diff算法</h3><p>在前端性能优化的一个秘诀就是尽可能的<code>减少DOM的操作</code>，不仅仅是DOM相对较慢，更是因为变动DOM会造成浏览器的<code>回流和重绘</code>，这些都会降低性能，因此，我们需要虚拟DOM，在<code>patch（比较新旧虚拟DOM更新去更新视图）</code>过程中尽可能的<code>一次性将差异更新到DOM中</code>，这样就保证了DOM不会出现了性能很差的情况。</p>
+<p>使用 <code>虚拟DOM </code>改变了当前的状态不需要立即去更新DOM，而是对更新的内容进行更新，对于没有改变的内容不做任何处理，通过<code>前后两次差异进行比较</code>。</p>
+<p><strong>虚拟DOM</strong></p>
+<p>Virtual DOM 其实就是一棵以 JavaScript 对象（VNode 节点）作为基础的树，用对象属性来描述节点，相当于在js和真实dom中间加来一个缓存，利用diff算法避免没有必要的dom操作，从而提高性能。</p>
+<p><strong>底层的实现可以简单理解为三个步骤</strong></p>
+<ol>
+<li>用JavaScript对象结构表述dom树的结构，然后用这个树构建一个真正的dom树，插到浏览器的页面中。</li>
+<li>当状态改变了，vue 便会重新构造一棵树的对象树，然后用这个新构建出来的树和旧树进行对比（只进行同层对比），记录两棵树之间的差异。</li>
+<li>把记录的差异在重新应用到真正的dom树，视图就更新了。</li>
 </ol>
-<hr>
-<h4 id="静态布局"><a href="#静态布局" class="headerlink" title="静态布局"></a>静态布局</h4><p>所有元素一律使用 px 作单位。在屏幕宽高有所调整时，使用横向和竖向的滚动条来查阅被遮掩部分。即不管浏览器尺寸多少，网页布局就按当时写代码的布局来布置;</p>
-<p><strong>优点</strong>：这种布局方式最简单，亦没有兼容性问题；</p>
-<p><strong>缺点</strong>：不能根据用户的屏幕尺寸做出不同的表现，体验较差。</p>
-<hr>
-<h4 id="弹性布局（🌟）"><a href="#弹性布局（🌟）" class="headerlink" title="弹性布局（🌟）"></a>弹性布局（🌟）</h4><p>弹性布局是轴线布局，一次只能处理一个维度（一行或者一列）上的元素布局。采用Flex布局的元素，称为Flex容器（flex container），简称”容器”。它的所有子元素自动成为容器成员，称为Flex项目（flex item），简称”项目”。弹性布局的主要思想是让容器有能力让其子项目能够改变其宽度、高度(甚至顺序)，以最佳方式填充可用空间（主要是为了适应所有类型的显示设备和屏幕大小）</p>
-<p><strong>优点</strong>：弹性布局实现快捷，易维护；适应性强，在做不同屏幕分辨率的界面时非常实用；</p>
-<p><strong>缺点</strong>：浏览器兼容性比较差</p>
-<p>参照：<a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_43307658/article/details/86629318">Flex 布局</a></p>
-<hr>
-<h4 id="自适应布局"><a href="#自适应布局" class="headerlink" title="自适应布局"></a>自适应布局</h4><p>自适应布局的特点是分别为不同的屏幕分辨率定义布局，即创建多个静态布局，每个静态布局对应一个屏幕分辨率范围。改变屏幕分辨率可以切换不同的静态局部（页面元素位置发生改变），但在每个静态布局中，页面元素不随窗口大小的调整发生变化。可以把自适应布局看作是静态布局的一个系列。</p>
-<p><strong>优点</strong>：自适应网站设计可以在网页地址不变的情况下满足用户在不同设备上浏览访问的需求，同时方便网站内容的管理与更新、针对搜索引擎友好等特点</p>
-<p><strong>缺点</strong>：设计难、实现难、成本大</p>
-<hr>
-<h4 id="流式布局"><a href="#流式布局" class="headerlink" title="流式布局"></a>流式布局</h4><p>流式布局的布局方式是页面的元素的宽度按照屏幕的分辨率进行适配的调整，但是整体布局不变，也称之为栅栏系统。使用%百分比定义宽度，高度大都是用px来固定住，可以根据可视区域 (viewport) 和父元素的实时尺寸进行调整，尽可能的适应各种分辨率。往往配合 max-width/min-width 等属性控制尺寸流动范围以免过大或者过小影响阅读。</p>
-<p><strong>优点</strong>：能够灵活去适配各类分辨率，移动端常用；</p>
-<p><strong>缺点</strong>：屏幕大小变化时，页面元素也随之变化但是布局不变。这就会因为如果屏幕太大或太小都会布局时元素无法正常显示。</p>
-<hr>
-<h4 id="响应式布局（⭐️）"><a href="#响应式布局（⭐️）" class="headerlink" title="响应式布局（⭐️）"></a>响应式布局（⭐️）</h4><p>响应式布局就是一个网站能够兼容多个终端——而不是为每个终端做一个特定的版本，即同一页面在不同屏幕尺寸下有不同的布局，可以为不同终端的用户提供更加舒适的界面和更好的用户体验。</p>
-<p><strong>优点</strong>：面对不同分辨率设备灵活性强；能够快捷解决多设备显示适应问题</p>
-<p><strong>缺点</strong>：不能完全兼容所有浏览器，代码累赘，会出现隐藏无用的元素,加载时间加长；一定程度上改变了网站原有的布局结构，会出现用户混淆的情况。</p>
-<p>参照：媒体查询+流式布局，通常使用@media媒体查询来判断我们的终端设备宽度在多少像素内，然后和网格系统配合相对布局单位执行与之对应的CSS样式。</p>
-<hr>
-<h4 id="表格布局"><a href="#表格布局" class="headerlink" title="表格布局"></a>表格布局</h4><p>将整个页面作为一个表格进行处理，通过设置单元格的大小来实现布局（已被淘汰）</p>
-<p><strong>优点</strong>：简单、兼容性好</p>
-<p><strong>缺点</strong>：灵活性差，占用资源多，页面渲染慢，搜索引擎抓取信息不方便</p>
-<p>参照：<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_39877681/article/details/109737777">五种前端布局之table布局</a></p>
-<hr>
-<h4 id="浮动布局"><a href="#浮动布局" class="headerlink" title="浮动布局"></a>浮动布局</h4><p>浮动布局进行调用浮动属性改变页面中元素的位置，浮动布局应该是目前各大网站用的最多的一种布局方式了，但是也特别复杂。浮动元素是脱离文档流的，但不脱离文本流。浮动元素有左浮动（float : left）和右浮动（float : right）两种</p>
-<p><strong>优点：</strong> 兼容性比较好</p>
-<p><strong>缺点：</strong> 浮动带来的影响比较多，页面宽度不够的时候会影响布局。</p>
-<p>PS: <a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_39877681/article/details/109765371">五种前端布局之float布局</a></p>
-<p>三栏布局：<a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_43974265/article/details/115427185">圣杯布局和双飞翼布局的区别</a></p>
+<p><strong>模版（template）编译过程</strong></p>
 <ul>
-<li>圣杯布局是利用<strong>父容器的左、右内边距+两个列的相对定位</strong>;</li>
-<li>双飞翼布局是把<strong>主列嵌套在一个新的父级块中并利用主列的左、右外边距</strong>进行布局调整。</li>
+<li><p><strong>parse</strong>：会使用正则等方式解析template模版中的指令、class、style等数据，形成抽象语法树(AST)</p>
+</li>
+<li><p><strong>optimize</strong>：对抽象语法树(AST) 进行静态节点标记，减少不必要的比较和计算，优化后文diff算法</p>
+</li>
+<li><p><strong>generate</strong>：抽象语法树(AST) 生成 render 函数代码字符串，等待后面的调用</p>
+</li>
 </ul>
-<hr>
-<h4 id="定位布局"><a href="#定位布局" class="headerlink" title="定位布局"></a>定位布局</h4><p>定位布局时利用position属性控制页面元素设置一些不规则布局。</p>
-<p>类型：<strong>static</strong>、<strong>fixed</strong>、<strong>relative</strong>、<strong>absolute</strong>、<strong>sticky</strong>、<strong>z-index</strong></p>
-<p><strong>优点：</strong> 提供了多种定位方式，方便调整元素位置</p>
-<p><strong>缺点：</strong> 使用起来不够清晰</p>
-<p>参照： <a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_51047154/article/details/115794785">定位布局（position）</a></p>
-<hr>
-<h4 id="网格布局（🌟）"><a href="#网格布局（🌟）" class="headerlink" title="网格布局（🌟）"></a>网格布局（🌟）</h4><p>网格布局（Grid）是最强大的 CSS 布局方案。Grid 布局将网页划分成一个个网格，可以任意组合不同的网格，做出各种各样的布局，尤其是将容器划分成”行”和”列”，产生单元格，然后指定”项目所在”的单元格，可以看作是<strong>二维布局</strong>。</p>
-<p><strong>优点</strong>：可以分别对容器、项目、区域、顺序和位置的属性值分别自定义</p>
-<p><strong>缺点</strong>：复杂，设定较多</p>
-<p>参照： <a target="_blank" rel="noopener" href="http://www.ruanyifeng.com/blog/2019/03/grid-layout-tutorial.html">CSS Grid 网格布局教程</a></p>
+<p><strong>diff算法（<a href="https://link.juejin.cn/?target=https://github.com/snabbdom/snabbdom">snabbdom</a>）</strong></p>
+<p>当 Virtual DOM 中状态改变了，vue便会重新构造一棵树的对象树，然后用这个新构建出来的树和旧树进行对比。</p>
+<p><strong>核心概念</strong></p>
+<ol>
+<li>只比较同一级，不跨级比较</li>
+<li>只有是同一个虚拟节点(tag &amp; key)，diff算法才进行精细化比较，否则直接删掉重建，不再深度比较</li>
+</ol>
+<p><strong>具体实现（patch &amp; updateChildren）</strong></p>
+<p>在 <code>patch方法</code> 中，有两种使用场景：1-第一个参数为元素。作用是将 Virtual DOM 挂载到该元素节点上。2-第一个参数是 Virtual DOM 。此时作用是比较新旧 Virtual DOM，将二者差异更新到视图上。首先比较新旧虚拟节点是否是同一个节点，如果不是同一个节点，那么就会将旧的节点删除掉，插入新的虚拟节点，然后再使用 <code>createElement方法</code> 创建真实DOM，渲染到真实的 DOM树。如果是同一个节点，使用 <code>patchVnode方法</code> 比较新旧节点，包括属性更新、文本更新、子节点更新。节点内容有两种类型：<strong>文本节点 &amp; 子节点</strong>。新旧节点均有子节点，则需要进行 <code>diff算法</code>，调用<code>updateChildren方法</code>；否则直接用新节点的内容替换旧节点的内容。</p>
+<p>在<code>updateChildren方法</code>中，首先将新旧节点的子节点都提取出来，然后使用的是<code> 双指针</code> 的方式进行<code>四种优化策略</code>循环比较。分别是：新前与旧前比较、新后与旧后比较、新后与旧前比较、新前与旧后比较。如果四种优化策略方法均没有命中，则会进行遍历方法进行比较（源码中使用了Map对象进行了缓存，加快了比较的速率），如果设置了 key，就会使用 key 进行比较，找到当前的新节点的子节点在 Map 中的映射位置，如果不存在，则需要添加节点，存在则需要移动节点。最后，循环结束之后，如果新节点还有剩余节点，则说明需要添加节点，如果旧节点还有剩余节点，则说明需要删除节点。</p>
+<p>PS:  v-for 中 key 的作用?</p>
+<ol>
+<li>key 是当前节点的唯一标识</li>
+<li>Vue 在 patch 过程中判断两个节点是否是相同节点的依据：<code>元素类型 </code>和 <code>key</code>。</li>
+</ol>
+<p>参照：<a target="_blank" rel="noopener" href="https://juejin.cn/post/7071806518483484703">Vue 虚拟DOM 和 Diff 算法</a></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://xiaodanye.github.io/2022/05/21/JS%E5%89%8D%E7%AB%AF%E4%B8%BB%E6%B5%81%E5%B8%83%E5%B1%80/" data-id="cl3fsl3fm000e9b5jceli2lc3" class="article-share-link">Share</a>
+      <a data-url="http://xiaodanye.github.io/2022/05/24/Vue%E8%99%9A%E6%8B%9FDOM-diff%E7%AE%97%E6%B3%95/" data-id="cl3jw7tiz001c9o5j3yi5bdzt" class="article-share-link">Share</a>
       
       
     </footer>
@@ -165,10 +137,10 @@
 
 
   
-    <article id="post-JS浏览器输入URL后" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-Vue父子组件" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2022/05/21/JS%E6%B5%8F%E8%A7%88%E5%99%A8%E8%BE%93%E5%85%A5URL%E5%90%8E/" class="article-date">
-  <time datetime="2022-05-21T11:30:47.000Z" itemprop="datePublished">2022-05-21</time>
+    <a href="/2022/05/24/Vue%E7%88%B6%E5%AD%90%E7%BB%84%E4%BB%B6/" class="article-date">
+  <time datetime="2022-05-24T08:15:03.000Z" itemprop="datePublished">2022-05-24</time>
 </a>
     
   </div>
@@ -179,7 +151,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2022/05/21/JS%E6%B5%8F%E8%A7%88%E5%99%A8%E8%BE%93%E5%85%A5URL%E5%90%8E/">JS浏览器输入URL后</a>
+      <a class="article-title" href="/2022/05/24/Vue%E7%88%B6%E5%AD%90%E7%BB%84%E4%BB%B6/">Vue父子组件</a>
     </h1>
   
 
@@ -187,130 +159,173 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="浏览器输入URL之后"><a href="#浏览器输入URL之后" class="headerlink" title="浏览器输入URL之后"></a>浏览器输入URL之后</h3><ol>
-<li>URL解析</li>
-<li>DNS查询</li>
-<li>查询缓存</li>
-<li>建立TCP连接</li>
-<li>发送HTTP请求</li>
-<li>服务端处理请求</li>
-<li>服务端返回响应结果</li>
-<li>关闭TCP连接</li>
-<li>浏览器渲染</li>
-</ol>
-<hr>
-<h4 id="URL解析"><a href="#URL解析" class="headerlink" title="URL解析"></a>URL解析</h4><p>判断你输入的是一个合法的 URL 还是一个待搜索的关键词。一个URL包括：协议、域名、端口号以及资源路径；如果是不合法的地址，会转给默认的搜索引擎，然后搜索引擎会根据关键字进行搜索。</p>
-<hr>
-<h4 id="DNS查询"><a href="#DNS查询" class="headerlink" title="DNS查询"></a>DNS查询</h4><p>DNS服务提供了<code>域名</code>到<code>IP地址</code>之间的解析服务。我们访问一个网站的时候，可以通过<code>主机名或者域名</code>来访问。但是绝大多数的时候是<code>使用域名来访问</code>网站。因为相对于<code>主机名的ip地址</code>，域名更能让人记住。但是<code>TCP/IP协议是通过IP地址来访问</code>的，所以就需要一个机制，将域名转换为IP地址。</p>
-<p><strong>优先级</strong></p>
-<img src="/Users/fjp_xiaoye999/Desktop/FJP/工作/知识图谱/DNS缓存.png" style="zoom: 50%;" />
+        <h3 id="父子组件传值"><a href="#父子组件传值" class="headerlink" title="父子组件传值"></a>父子组件传值</h3><p><strong>方式一：props &amp; event</strong></p>
+<p>在Vue中，父子组件的关系可以总结为props向下传递，事件向上传递。父组件向子组件传递props数据，子组件通过触发事件向父组件回传数据。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">//子组件 </span><br><span class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> @<span class="attr">click</span>=<span class="string">&quot;changeName(&#x27;YYY&#x27;)&quot;</span>&gt;</span>&#123;&#123;name&#125;&#125;<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript"><span class="keyword">export</span> <span class="keyword">default</span>&#123;</span></span><br><span class="line"><span class="language-javascript">    <span class="attr">props</span>:[<span class="string">&#x27;name&#x27;</span>],<span class="comment">//or props:&#123;name:&#123;type:String,default:&#x27;&#x27;&#125;&#125;</span></span></span><br><span class="line"><span class="language-javascript">    <span class="attr">methods</span>:&#123;</span></span><br><span class="line"><span class="language-javascript">        <span class="comment">//不能在子组件修改props数据，应触发事件让父组件处理</span></span></span><br><span class="line"><span class="language-javascript">        <span class="title function_">changeName</span>(<span class="params">newName</span>)&#123;</span></span><br><span class="line"><span class="language-javascript">            <span class="variable language_">this</span>.$emit(<span class="string">&#x27;changeName&#x27;</span>,newName)</span></span><br><span class="line"><span class="language-javascript">        &#125;</span></span><br><span class="line"><span class="language-javascript">    &#125;</span></span><br><span class="line"><span class="language-javascript">&#125;</span></span><br><span class="line"><span class="language-javascript"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"> </span><br><span class="line">//父组件</span><br><span class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">child-comp</span> <span class="attr">:name</span>=<span class="string">&quot;name&quot;</span> @<span class="attr">changeName</span>=<span class="string">&quot;changeName&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">child-comp</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">    <span class="keyword">import</span> childComp <span class="keyword">from</span> <span class="string">&#x27;path&#x27;</span></span></span><br><span class="line"><span class="language-javascript">    <span class="keyword">export</span> <span class="keyword">default</span>&#123;</span></span><br><span class="line"><span class="language-javascript">        <span class="title function_">data</span>(<span class="params"></span>)&#123;</span></span><br><span class="line"><span class="language-javascript">            <span class="keyword">return</span> &#123;<span class="attr">name</span>:<span class="string">&#x27;XXX&#x27;</span>&#125;</span></span><br><span class="line"><span class="language-javascript">        &#125;,</span></span><br><span class="line"><span class="language-javascript">        <span class="attr">components</span>:&#123;</span></span><br><span class="line"><span class="language-javascript">            childComp</span></span><br><span class="line"><span class="language-javascript">        &#125;,</span></span><br><span class="line"><span class="language-javascript">        <span class="attr">methods</span>:&#123;</span></span><br><span class="line"><span class="language-javascript">            <span class="title function_">changeName</span>(<span class="params">newName</span>)&#123;</span></span><br><span class="line"><span class="language-javascript">                <span class="variable language_">this</span>.<span class="property">name</span> = newName;</span></span><br><span class="line"><span class="language-javascript">            &#125;</span></span><br><span class="line"><span class="language-javascript">        &#125;</span></span><br><span class="line"><span class="language-javascript">    &#125;</span></span><br><span class="line"><span class="language-javascript">&lt;/scritp&gt;</span></span><br></pre></td></tr></table></figure>
 
-<p><strong>查询方式：递归 + 迭代</strong></p>
-<img src="/Users/fjp_xiaoye999/Desktop/FJP/工作/知识图谱/DNS查询.png" style="zoom:80%;" />
-
-<hr>
-<h4 id="查询缓存"><a href="#查询缓存" class="headerlink" title="查询缓存"></a>查询缓存</h4><p>当客户端发起一个 HTTP 请求时，不会说立即发到服务器处，而是从浏览器缓存里面找匹配：</p>
+<p><strong>兄弟组件之间的传值</strong>：兄弟组件之间的传值和父子组件之间的传值非常相似，都是通过$emit。通过新建一个新的vue实例，连接着两个组件，也就是一个中央事件总线Event Bus。</p>
 <ol>
-<li>通过<code>Cache-Control</code>和<code>Expires</code>来检查是否命中强缓存，命中则直接取本地磁盘的html（状态码为200 from disk(or memory)  cache，内存or磁盘）；</li>
-<li>如果没有命中强缓存，则会向服务器发起请求（先进行下一步的TCP连接），服务器通过<code>Etag</code>和<code>Last-Modify</code>来与服务器确认返回的响应是否被更改（协商缓存），若无更改则返回状态码（304 Not Modified）,浏览器取本地缓存；</li>
-<li>若强缓存和协商缓存都没有命中则返回请求结果。</li>
+<li>首先创建一个事件总线，例如Event Bus，作为一个通讯的桥梁；</li>
+<li>在需要传值的组件中，通过 $emit 触发一个自定义事件，并传递参数；</li>
+<li>在接收数据的组件中，通过 $on 监听自定义事件，并处理传递过来的参数；</li>
 </ol>
-<hr>
-<h4 id="建立TCP链接"><a href="#建立TCP链接" class="headerlink" title="建立TCP链接"></a>建立TCP链接</h4><p>TCP 协议通过三次握手建立连接</p>
+<p><strong>方式二：ref</strong></p>
+<p>ref 属性可定义在子组件或原生DOM上，如果在子组件上，则指向子组件实例，如果在原生DOM上，则指向原生DOM元素（可以用做元素选择，省去querySelector的烦恼）。</p>
+<p>传递数据的思路：在父组件内通过 ref 获取子组件实例，然后调用子组件方法，并传递相关数据作为参数。</p>
+<p><strong>方式三：children &amp; parent</strong></p>
+<p>与 ref 类似，例如 $children 可以返回一个子组件集合，通过下标可以访问各个子组件的实例，然后进行操作。</p>
+<p><strong>方式四：provide &amp; inject（官方不推荐在生产环境使用）</strong></p>
+<p>provide意为提供，当一个组件通过provide提供了一个数据，那么它的子孙组件就可以使用inject接受注入，从而可以使用祖先组件传递过来的数据。</p>
+<p><strong>方式五：vuex</strong></p>
+<p>vue官方推荐的全局状态管理插件，可以理解为一个全局的空间，所有的组件都可以通过特定的方式获取到数据。<a target="_blank" rel="noopener" href="https://vuex.vuejs.org/zh/">Vuex 是什么？</a></p>
+<p>参照：<a target="_blank" rel="noopener" href="https://www.jb51.net/article/212876.htm">Vue中父组件向子组件传递数据的几种方法</a>; <a target="_blank" rel="noopener" href="https://blog.csdn.net/tianjian_zhou/article/details/85077563">VUE父子组件之间的传值，以及兄弟组件之间的传值</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://xiaodanye.github.io/2022/05/24/Vue%E7%88%B6%E5%AD%90%E7%BB%84%E4%BB%B6/" data-id="cl3jw7tix00199o5jexlxgt5s" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-Vue双向绑定" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2022/05/24/Vue%E5%8F%8C%E5%90%91%E7%BB%91%E5%AE%9A/" class="article-date">
+  <time datetime="2022-05-24T08:10:42.000Z" itemprop="datePublished">2022-05-24</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2022/05/24/Vue%E5%8F%8C%E5%90%91%E7%BB%91%E5%AE%9A/">Vue双向绑定</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="双向绑定"><a href="#双向绑定" class="headerlink" title="双向绑定"></a>双向绑定</h3><p>双向绑定依赖于<strong>数据劫持</strong> + <strong>发布-订阅者</strong>的方式，包括两个方面：数据变化更新视图，视图变化更新数据。视图变化更新数据可以通过事件监听实现，比如 input 标签监听 input 事件就可以实现了。重点在于数据变化更新视图。</p>
+<p>当一个 Vue 实例创建时，Vue 会遍历 data 选项的属性，通过 Object.defineProperty() 重写 getter/setter 实现数据劫持；并且在内部追踪相关依赖（订阅者），在属性被修改时通知变化（监听者）。具体实现通过为每个属性分配一个订阅者集合的管理数组，然后在编译的时候在访问相关属性会触发 get 方法，在 get 方法中向该属性的数组中添加订阅者（理论上只要用到该属性的指令：v-model、v-bind以及字符串模版）。之后当相关属性发生变更时，会触发该属性的 set 方法，在 set 方法内发布通知订阅者数组，订阅者数组循环调用各订阅者的 update 方法更新视图。</p>
+<p>参照：<a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_43912081/article/details/119708969">Vue数据双向绑定</a>；<a target="_blank" rel="noopener" href="https://juejin.cn/post/6844903942254510087">Vue数据双向绑定</a></p>
+<p>PS：实现双向绑定 Proxy 与 Object.defineProperty 相比优劣如何?</p>
 <ol>
-<li>第一次握手：客户端通过 <code>SYN</code> 报文段发送连接请求，确定服务端是否开启端口准备连接。然后客户端就进入了<code>SYN_SEND状态</code>，等待服务器确认</li>
-<li>第二次握手：服务器接收到了客户端的请求并且决定接受连接，就会返回一个 <code>SYN+ACK</code> 报文段给客户端，并将状态设置为 <code>SYN_RECV</code></li>
-<li>第三次握手：客户端收到服务器的 <code>SYN+ACK</code> 报文段，向服务器发送 <code>ACK</code> 报文段表示确认。此时客户端和服务器的状态都设置为 <code>ESTABLISHED</code> ，连接建立，可以开始数据传输了。</li>
+<li>Object.definedProperty 的作用是劫持一个对象的属性，劫持属性的 getter 和 setter 方法，在对象的属性发生变化时进行特定的操作。而 Proxy 劫持的是整个对象。</li>
+<li>Proxy 会返回一个代理对象，我们只需要操作新对象即可，而 Object.defineProperty 只能遍历对象属性直接修改。</li>
+<li>Object.definedProperty 不支持数组，更准确的说是不支持数组的各种API，因为如果仅仅考虑arry[i] = value 这种情况，是可以劫持的，但是这种劫持意义不大。而 Proxy 可以支持数组的各种API。</li>
+<li>尽管 Object.defineProperty 有诸多缺陷，但是其兼容性要好于 Proxy 。</li>
 </ol>
-<p>PS：<code>TCP/IP协议族</code>：由<code>四层协议</code>组成的系统，分别是应用层、传输层、网络层和链路层。</p>
-<p>三次握手：根本原因就是为了确保客户端和服务端双方的接收和发送能力都是ok的</p>
-<hr>
-<h4 id="发送HTTP请求"><a href="#发送HTTP请求" class="headerlink" title="发送HTTP请求"></a>发送HTTP请求</h4><p>建立TCP连接之后，就可以发送HTTP请求了</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 请求行(方法/路径/协议)</span></span><br><span class="line"><span class="variable constant_">GET</span> / <span class="variable constant_">HTTP</span>/<span class="number">1.1</span></span><br><span class="line"><span class="comment">// 请求头</span></span><br><span class="line"><span class="title class_">Host</span>: www.<span class="property">baidu</span>.<span class="property">com</span></span><br><span class="line"><span class="title class_">User</span>-<span class="title class_">Agent</span>:curl/<span class="number">7.54</span><span class="number">.0</span></span><br><span class="line"><span class="title class_">Accept</span>: *</span><br><span class="line"></span><br><span class="line"><span class="comment">// 空行</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 请求体（空）</span></span><br></pre></td></tr></table></figure>
 
-<p><strong>常用报文头</strong></p>
-<ul>
-<li><code>Accept</code>: 客户端可以接受的响应类型</li>
-<li><code>Accept-Encoding</code>: 浏览器申明自己的编码方法/压缩方法</li>
-<li><code>Accept-Language</code>: 浏览器申明自己的语言（+权重）</li>
-<li><code>Connection:keep-alive</code>: 保持TCP连接</li>
-<li><code>Host</code>: 被请求资源的 Interent 主机名和端口号</li>
-<li><code>Referer</code>: 告知服务器是从哪个链接过来的</li>
-<li><code>User-Agent</code>: 告诉服务器 客户端使用的操作系统的名称和版本</li>
-<li><code>Content-Type</code>: 说明报文体内对象的类型</li>
-</ul>
-<hr>
-<h4 id="服务端处理请求"><a href="#服务端处理请求" class="headerlink" title="服务端处理请求"></a>服务端处理请求</h4><p>指定的资源经服务器端解析才能返回响应内容</p>
-<ul>
-<li>如果请求的资源是文本，那就保持原样返回</li>
-<li>如果是CGI（通用网关接口）那样的程序，则返回经过执行后的输出结果</li>
-</ul>
-<hr>
-<h4 id="服务端返回响应结果"><a href="#服务端返回响应结果" class="headerlink" title="服务端返回响应结果"></a>服务端返回响应结果</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 响应行（协议及版本 状态码 状态描述）</span></span><br><span class="line"><span class="variable constant_">HTTP</span>/<span class="number">1.1</span> <span class="number">200</span> <span class="variable constant_">OK</span></span><br><span class="line"><span class="comment">// 响应头</span></span><br><span class="line"><span class="title class_">Accept</span>-<span class="title class_">Ranges</span>: bytes</span><br><span class="line"><span class="title class_">Cache</span>-<span class="title class_">Control</span>: private, no-cache, no-store, proxy-revalidate, no-transform</span><br><span class="line"><span class="title class_">Connection</span>: keep-alive</span><br><span class="line"><span class="title class_">Content</span>-<span class="title class_">Length</span>: <span class="number">2381</span></span><br><span class="line"><span class="title class_">Content</span>-<span class="title class_">Type</span>: text/html</span><br><span class="line"><span class="title class_">Date</span>: <span class="title class_">Thu</span>, <span class="number">19</span> <span class="title class_">May</span> <span class="number">2022</span> <span class="number">02</span>:<span class="number">00</span>:<span class="number">54</span> <span class="variable constant_">GMT</span></span><br><span class="line"><span class="title class_">Etag</span>: <span class="string">&quot;588604f8-94d&quot;</span></span><br><span class="line"><span class="title class_">Last</span>-<span class="title class_">Modified</span>: <span class="title class_">Mon</span>, <span class="number">23</span> <span class="title class_">Jan</span> <span class="number">2017</span> <span class="number">13</span>:<span class="number">28</span>:<span class="number">24</span> <span class="variable constant_">GMT</span></span><br><span class="line"><span class="title class_">Pragma</span>: no-cache</span><br><span class="line"><span class="title class_">Server</span>: bfe/<span class="number">1.0</span><span class="number">.8</span><span class="number">.18</span></span><br><span class="line"><span class="title class_">Set</span>-<span class="title class_">Cookie</span>: <span class="variable constant_">BDORZ</span>=<span class="number">27315</span>; max-age=<span class="number">86400</span>; domain=.<span class="property">baidu</span>.<span class="property">com</span>; path=/</span><br><span class="line"></span><br><span class="line"><span class="comment">// 空行</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 响应体（html文档）</span></span><br><span class="line">&lt;!<span class="variable constant_">DOCTYPE</span> html&gt;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://xiaodanye.github.io/2022/05/24/Vue%E5%8F%8C%E5%90%91%E7%BB%91%E5%AE%9A/" data-id="cl3jw7tix00189o5j1z28bf4w" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
 
-<p><strong>常用状态码</strong></p>
+
+  
+    <article id="post-Vue-SPA" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2022/05/24/Vue-SPA/" class="article-date">
+  <time datetime="2022-05-24T08:07:39.000Z" itemprop="datePublished">2022-05-24</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2022/05/24/Vue-SPA/">Vue-SPA</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="SPA"><a href="#SPA" class="headerlink" title="SPA"></a>SPA</h3><p><code>SPA（single-page application）</code>仅在 Web 页面初始化时加载相应的 HTML、JavaScript 和 CSS。一旦页面加载完成，SPA 不会因为用户的操作而进行页面的重新加载或跳转；取而代之的是利用路由机制实现 HTML 内容的变换，数据则需要通过ajax请求获取。</p>
+<p><strong>单页应用与多页应用的区别</strong></p>
 <table>
 <thead>
 <tr>
-<th>状态码</th>
-<th>类别</th>
-<th>原因短语</th>
+<th></th>
+<th>单页面应用（SPA）</th>
+<th>多页面应用（MPA）</th>
 </tr>
 </thead>
 <tbody><tr>
-<td>1xx</td>
-<td>信息状态码</td>
-<td>接受的请求正在处理</td>
+<td>组成</td>
+<td>一个主页面和多个页面片段</td>
+<td>多个主页面</td>
 </tr>
 <tr>
-<td>2xx</td>
-<td>成功状态码</td>
-<td>请求正常处理完毕</td>
+<td>刷新方式</td>
+<td>局部刷新</td>
+<td>整页刷新</td>
 </tr>
 <tr>
-<td>3xx</td>
-<td>重定向状态码</td>
-<td>需要进行附加操作以完成请求</td>
+<td>url模式</td>
+<td>哈希模式</td>
+<td>历史模式</td>
 </tr>
 <tr>
-<td>4xx</td>
-<td>客户端错误状态码</td>
-<td>服务器无法处理请求</td>
+<td>SEO搜索引擎优化</td>
+<td>难实现，可使用SSR方式改善</td>
+<td>容易实现</td>
 </tr>
 <tr>
-<td>5xx</td>
-<td>服务器错误状态码</td>
-<td>服务器处理请求出错</td>
+<td>数据传递</td>
+<td>容易</td>
+<td>通过url、cookie、localStorage等传递</td>
+</tr>
+<tr>
+<td>页面切换</td>
+<td>速度快，用户体验良好</td>
+<td>切换加载资源，速度慢，用户体验差</td>
+</tr>
+<tr>
+<td>维护成本</td>
+<td>相对容易</td>
+<td>相对复杂</td>
 </tr>
 </tbody></table>
-<hr>
-<h4 id="关闭TCP连接"><a href="#关闭TCP连接" class="headerlink" title="关闭TCP连接"></a>关闭TCP连接</h4><p>当客户端和浏览器双方请求和响应完毕后，任意一方都可以发起断开TCP连接的请求。</p>
-<p>断开TCP连接要通过<code>四次挥手</code>来实现：</p>
+<p><strong>优劣：</strong></p>
+<p>优点：用户体验好；对服务器压力小；前后端分离（前端逻辑，后端数据）；</p>
+<p>劣势：</p>
+<ul>
+<li>初次加载耗时多：为实现单页 Web 应用功能及显示效果，需要在加载页面的时候将 JavaScript、CSS 统一加载，部分页面按需加载；</li>
+<li>不利于 SEO：由于所有的内容都在一个页面中动态替换显示，所以在 SEO 上其有着天然的弱势。</li>
+</ul>
+<p><strong>实现</strong>：核心通过监听<code>url</code>中的<code>hash</code>来进行路由跳转</p>
 <ol>
-<li>第一次挥手：客户端发起中断请求，发送<code>FIN</code>到服务端。然后客户端进入<code>FIN_WAIT状态</code>，等待服务器确认</li>
-<li>第二次挥手：服务端收到请求，此时可能数据还没有发完，还不会关闭连接，而是回复<code>ACK</code>确认该请求</li>
-<li>第三次挥手：服务器端发送完毕后，会向客户端发送<code>FIN</code>。然后服务端进入到<code>LAST-ACK状态</code>(最后确认状态)</li>
-<li>第四次挥手：客户端收到<code>FIN</code>后还会向服务端发送<code>ACK</code>确认，然后进入<code>TIME_WAIT</code>状态。服务器接收到<code>ACK</code>后就关闭连接。此时客户端在等待<code>2MSL(报文最大生存时间)</code>时间后没有收到回复，则证明服务器端已正常关闭，那么，客户端也可以关闭连接了。此时<code>四次挥手</code>成功，客户端和服务器端双方都已关闭TCP连接。</li>
+<li>监听地址栏中<code>hash</code>变化驱动界面变化</li>
+<li>用<code>pushsate</code>记录浏览器的历史，驱动界面发送变化</li>
 </ol>
-<p><strong>关于第四次挥手中最后客户端会等待一段时间之后才会进入关闭状态？</strong></p>
-<p>因为最后一次挥手客户端发送给服务端的确认信息，服务端可能会没有收到。那么如果服务端没有收到客户端发送的最后确认信息，那么服务端会认为：我本身发送给客户端的关闭请求，因为客户端没有收到该请求，所以客户端才没有给我发送确认信息，我才会收不到。所以<strong>服务端会再次向客户端发送该关闭请求</strong>。为了避免客户端真的没有收到服务端的关闭请求，客户端会等待一段时间(报文最大生存时间)之后，再进入关闭状态。</p>
-<hr>
-<h4 id="浏览器渲染"><a href="#浏览器渲染" class="headerlink" title="浏览器渲染"></a>浏览器渲染</h4><p>客户端浏览器在收到服务端的响应结果后，就要开始解析并渲染了，JS引擎渲染大致过程：<br><img src="https://segmentfault.com/img/bVbDvVq" alt="image.png"></p>
-<ol>
-<li><code>HTML</code> 经过 <code>HTML Parser</code> 转成 <code>DOM Tree</code>(DOM 树)</li>
-<li><code>CSS</code> 按照 <code>CSS 规则</code>和 <code>CSS Parser</code> 转成 <code>CSS Tree</code>(CSSOM 树)</li>
-<li><code>DOM Tree</code> 和 <code>CSS Tree</code> 结合形成 <code>Render Tree</code></li>
-<li>通过<code>Layout</code>精确的计算出要显示的<code>DOM</code>真正的位置</li>
-<li>浏览器通过<code>Paint</code>显示出最终的页面效果</li>
-</ol>
-<p>PS：页面布局过程即排除 <code>script、meta</code> 等功能化、非视觉节点，排除 <code>display: none</code> 的节点，计算元素的位置信息，确定元素的位置，构建一棵只包含可见元素布局树。</p>
-<p>页面中有很多复杂的效果，如一些复杂的 3D 变换、页面滚动，z 轴排序等，为了更加方便地实现这些效果，渲染引擎还需要为特定的节点生成专用的图层，并生成一棵对应的图层树（LayerTree）。</p>
-<p>为了避免阻塞：CSS 资源排在 JavaScript 资源前面；JS脚本 放在 HTML 最底部，也就是 <code>&lt;/body&gt;</code>前；</p>
+<p>PS: 如何给SPA做SEO：SSR服务端渲染；静态化；使用<code>Phantomjs</code>针对爬虫处理</p>
+<p>参照：<a target="_blank" rel="noopener" href="https://www.cnblogs.com/xiaozhuangge/p/15396609.html">什么是SPA单页面应用</a>；</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://xiaodanye.github.io/2022/05/21/JS%E6%B5%8F%E8%A7%88%E5%99%A8%E8%BE%93%E5%85%A5URL%E5%90%8E/" data-id="cl3fsl3fp000j9b5jdlzw6160" class="article-share-link">Share</a>
+      <a data-url="http://xiaodanye.github.io/2022/05/24/Vue-SPA/" data-id="cl3jw7tiq000x9o5j7t26bmk9" class="article-share-link">Share</a>
       
       
     </footer>
@@ -320,10 +335,10 @@
 
 
   
-    <article id="post-JS优雅降级与渐进增强" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-Vue-computed-methods-watch" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2022/05/21/JS%E4%BC%98%E9%9B%85%E9%99%8D%E7%BA%A7%E4%B8%8E%E6%B8%90%E8%BF%9B%E5%A2%9E%E5%BC%BA/" class="article-date">
-  <time datetime="2022-05-21T11:30:19.000Z" itemprop="datePublished">2022-05-21</time>
+    <a href="/2022/05/24/Vue-computed-methods-watch/" class="article-date">
+  <time datetime="2022-05-24T08:01:33.000Z" itemprop="datePublished">2022-05-24</time>
 </a>
     
   </div>
@@ -334,7 +349,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2022/05/21/JS%E4%BC%98%E9%9B%85%E9%99%8D%E7%BA%A7%E4%B8%8E%E6%B8%90%E8%BF%9B%E5%A2%9E%E5%BC%BA/">JS优雅降级与渐进增强</a>
+      <a class="article-title" href="/2022/05/24/Vue-computed-methods-watch/">Vue-computed_methods_watch</a>
     </h1>
   
 
@@ -342,430 +357,42 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="优雅降级-amp-逐进增强"><a href="#优雅降级-amp-逐进增强" class="headerlink" title="优雅降级 &amp; 逐进增强"></a>优雅降级 &amp; 逐进增强</h3><ol>
-<li><p>优雅降级</p>
-<p>一开始就针对比较完整，兼容性比较好的浏览器版本进行开发，然后在项目后期对低版本进行兼容</p>
+        <h3 id="computed-amp-methods-amp-watch"><a href="#computed-amp-methods-amp-watch" class="headerlink" title="computed &amp; methods &amp; watch"></a>computed &amp; methods &amp; watch</h3><p><strong>methods：函数方法</strong></p>
+<ul>
+<li>methods 里面定义的是函数，适合用于业务逻辑处理</li>
+<li>methods 每次需要重新加载，调用需要执行函数</li>
+</ul>
+<p><strong>computed：计算属性（一个数据受多个数据影响）</strong></p>
+<ul>
+<li>computed 是计算属性，与 data 对象里的数据属性类似，用来防止文本插值中逻辑过重，导致不易维护</li>
+<li>computed 支持缓存数据，如果函数所依赖的属性没有发生变化，那么调用当前的函数的时候会从缓存中读取</li>
+<li>computed 可以完成各种复杂的逻辑，但无法传递参数，函数最后必须有 return 返回值</li>
+</ul>
+<p><strong>watch：属性监听（一个数据影响多个数据）</strong></p>
+<ul>
+<li><p>当想要执行异步或者路由变化时使用watch，函数名称必须要和data中的属性名一致</p>
 </li>
-<li><p>逐进增强</p>
-<p>一开始就针对低版本浏览器进行构建页面，完成基本的功能，然后再针对高级浏览器进行效果、交互、追加功能达到更好的体验。</p>
+<li><p>watch只会监听数据的值是否发生改变，而不会去监听数据的地址是否发生改变（引用无效）</p>
 </li>
-</ol>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.transition</span> &#123; <span class="comment">/*渐进增强写法*/</span></span><br><span class="line">  -webkit-<span class="attribute">transition</span>: all .<span class="number">5s</span>;</span><br><span class="line">     -moz-<span class="attribute">transition</span>: all .<span class="number">5s</span>;</span><br><span class="line">       -o-<span class="attribute">transition</span>: all .<span class="number">5s</span>;</span><br><span class="line">          <span class="attribute">transition</span>: all .<span class="number">5s</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.transition</span> &#123; <span class="comment">/*优雅降级写法*/</span></span><br><span class="line">          <span class="attribute">transition</span>: all .<span class="number">5s</span>;</span><br><span class="line">       -o-<span class="attribute">transition</span>: all .<span class="number">5s</span>;</span><br><span class="line">     -moz-<span class="attribute">transition</span>: all .<span class="number">5s</span>;</span><br><span class="line">  -webkit-<span class="attribute">transition</span>: all .<span class="number">5s</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://xiaodanye.github.io/2022/05/21/JS%E4%BC%98%E9%9B%85%E9%99%8D%E7%BA%A7%E4%B8%8E%E6%B8%90%E8%BF%9B%E5%A2%9E%E5%BC%BA/" data-id="cl3fsl3fk000b9b5jhln7h2nx" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-JS项目优化" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2022/05/21/JS%E9%A1%B9%E7%9B%AE%E4%BC%98%E5%8C%96/" class="article-date">
-  <time datetime="2022-05-21T11:29:37.000Z" itemprop="datePublished">2022-05-21</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2022/05/21/JS%E9%A1%B9%E7%9B%AE%E4%BC%98%E5%8C%96/">JS项目优化</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="项目性能优化"><a href="#项目性能优化" class="headerlink" title="项目性能优化"></a>项目性能优化</h3><p>前端性能优化主要有七种方法，包括减少请求数量、减少资源大小、优化网络连接、优化资源加载、减少重绘回流、使用性能更好的API和webpack优化。</p>
-<p><strong>减少请求数量</strong>：图片处理、减少重定向、使用http缓存、不使用css@import、避免使用空的src和href</p>
-<p><strong>减少资源大小</strong>：去除 SourceMap、gzip 压缩、CDN减少打包体积</p>
-<p><strong>优化网络连接</strong>：使用CDN、使用DNS预解析、持久连接</p>
-<p><strong>优化资源加载</strong>：资源加载位置、资源加载时机</p>
-<p><strong>webpack性能优化</strong>：打包公共代码、动态导入和按需加载、删除无用的代码、长缓存优化、公共代码内联</p>
-<p><strong>性能更好的API</strong></p>
-<p><strong>减少重绘回流</strong></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://xiaodanye.github.io/2022/05/21/JS%E9%A1%B9%E7%9B%AE%E4%BC%98%E5%8C%96/" data-id="cl3fsl3g6000v9b5j6sdb56q5" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-JS内存泄漏" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2022/05/21/JS%E5%86%85%E5%AD%98%E6%B3%84%E6%BC%8F/" class="article-date">
-  <time datetime="2022-05-21T11:29:07.000Z" itemprop="datePublished">2022-05-21</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2022/05/21/JS%E5%86%85%E5%AD%98%E6%B3%84%E6%BC%8F/">JS内存泄漏</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="内存泄漏"><a href="#内存泄漏" class="headerlink" title="内存泄漏"></a>内存泄漏</h3><h4 id="内存管理"><a href="#内存管理" class="headerlink" title="内存管理"></a>内存管理</h4><p>在JavaScript中，当我们创建变量、函数或任何你能想到的东西时，JS引擎会为此分配内存，并在不再需要时释放它。PS：内存管理上下文中的“对象”不仅包括JS对象，还包括函数和函数作用域。</p>
-<p>JavaScript引擎有两个地方可以存储数据：内存堆和栈。堆和栈是引擎用于不同目的的两种数据结构。</p>
-<p><strong>栈</strong>是JavaScript用来存储静态数据的数据结构。静态数据是引擎在编译时知道大小的数据。在JavaScript中，这包括原始值（字符串、数字、布尔值、未定义和null）和指向对象和函数的引用。</p>
-<p><strong>堆</strong>是JavaScript用来存储动态数据的数据结构，动态数据是引擎在运行时根据需要分配空间。在JavaScript中，这包括对象和函数。</p>
-<h4 id="垃圾回收"><a href="#垃圾回收" class="headerlink" title="垃圾回收"></a>垃圾回收</h4><p>JavaScript的垃圾回收机制是是一种自动的内存管理机制，为了防止内存泄漏（已经不需要的某一块内存还一直存在着）。垃圾回收就是找出不再使用的变量，然后释放掉其占用的内存。</p>
-<p><strong>垃圾回收方式</strong></p>
-<ol>
-<li><p>标记清除（主要）</p>
-<p>标记清除的主要概念是可达性。浏览器中的根是window对象，定期的，垃圾回收器将从这个对象开始，将不可访问的对象标记为垃圾，然后对其进行清理（收集）。</p>
+<li><p>watch 不支持数据缓存，在每次监听的值发生变化的时候都会执行回调</p>
 </li>
-<li><p>引用计数</p>
-<p>引用计数的机制就是跟踪某一个值得引用次数，当声明一个变量并且将一个引用类型赋值给变量得时候引用次数加1，当这个变量指向其他一个时引用次数减1，当为0时触发回收机制进行回收。（循环引用问题）</p>
+<li><p>watch 中的函数有两个参数，前者是newVal，后者是oldVal</p>
 </li>
-</ol>
-<h4 id="内存泄漏-1"><a href="#内存泄漏-1" class="headerlink" title="内存泄漏"></a>内存泄漏</h4><p>内存泄漏（Memory leak）指的是当不再用到的对象内存，没有及时被回收。</p>
-<p><strong>原因</strong></p>
-<ol>
-<li><p>意外的全局变量：在浏览器的JavaScript中，如果省略var、const或let，变量将附加到window对象</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">foo</span>(<span class="params"></span>) &#123;</span><br><span class="line">  x = <span class="string">&#x27;未使用var声明，将自动创建全局变量&#x27;</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="variable language_">this</span>.<span class="property">y</span> = <span class="string">&#x27;默认this将绑定到全局变量&#x27;</span>;</span><br></pre></td></tr></table></figure></li>
-<li><p>被遗忘的定时器和回调函数</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> object = &#123;&#125;;</span><br><span class="line"><span class="keyword">const</span> intervalId = <span class="built_in">setInterval</span>(<span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="comment">// everything used in here can&#x27;t be collected</span></span><br><span class="line">  <span class="comment">// until the interval is cleared</span></span><br><span class="line">  <span class="title function_">doSomething</span>(object);</span><br><span class="line">&#125;, <span class="number">2000</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 清除定时器（正确的情况下）</span></span><br><span class="line"><span class="built_in">clearInterval</span>(intervalId);</span><br></pre></td></tr></table></figure></li>
-<li><p>不正当的闭包</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">closure</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">var</span> arr = [];</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line">    ...</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> temp = <span class="title function_">closure</span>();</span><br><span class="line">...</span><br><span class="line"><span class="comment">// 清除闭包（正确的情况下）</span></span><br><span class="line">temp = <span class="literal">null</span>;</span><br></pre></td></tr></table></figure></li>
-<li><p>DOM外引用</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;root&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">ul</span> <span class="attr">id</span>=<span class="string">&quot;ul&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span> <span class="attr">id</span>=<span class="string">&quot;li3&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">  <span class="keyword">let</span> root = <span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&#x27;#root&#x27;</span>)</span></span><br><span class="line"><span class="language-javascript">  <span class="keyword">let</span> ul = <span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&#x27;#ul&#x27;</span>)</span></span><br><span class="line"><span class="language-javascript">  <span class="keyword">let</span> li3 = <span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&#x27;#li3&#x27;</span>)</span></span><br><span class="line"><span class="language-javascript">    </span></span><br><span class="line"><span class="language-javascript">  root.<span class="title function_">removeChild</span>(ul); <span class="comment">// 由于ul变量存在，整个ul及其子元素都不能回收</span></span></span><br><span class="line"><span class="language-javascript">  ul = <span class="literal">null</span>; <span class="comment">// 虽置空了ul变量，但由于li3变量引用ul的子节点，所以ul元素依然不能被回收</span></span></span><br><span class="line"><span class="language-javascript">  li3 = <span class="literal">null</span>; <span class="comment">// 已无变量引用，此时可以回收</span></span></span><br><span class="line"><span class="language-javascript"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure></li>
-</ol>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://xiaodanye.github.io/2022/05/21/JS%E5%86%85%E5%AD%98%E6%B3%84%E6%BC%8F/" data-id="cl3fsl3fl000d9b5j8lb70mi5" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-JS防抖与节流" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2022/05/21/JS%E9%98%B2%E6%8A%96%E4%B8%8E%E8%8A%82%E6%B5%81/" class="article-date">
-  <time datetime="2022-05-21T11:28:31.000Z" itemprop="datePublished">2022-05-21</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2022/05/21/JS%E9%98%B2%E6%8A%96%E4%B8%8E%E8%8A%82%E6%B5%81/">JS防抖与节流</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="防抖-amp-节流"><a href="#防抖-amp-节流" class="headerlink" title="防抖 &amp; 节流"></a>防抖 &amp; 节流</h3><h4 id="防抖-debounce"><a href="#防抖-debounce" class="headerlink" title="防抖(debounce)"></a><strong>防抖(debounce)</strong></h4><p>在事件被触发n秒后再执行回调，如果在这n秒内又被触发，则重新计时</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/***   防抖(debounce)   ***/</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">debounce</span>(<span class="params">fn, wait</span>) &#123;</span><br><span class="line">  <span class="keyword">var</span> timeout; <span class="comment">// 闭包 私有化变量</span></span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">var</span> context = <span class="variable language_">this</span>, args = <span class="variable language_">arguments</span>; <span class="comment">// context：绑定this；args：接收传入参数</span></span><br><span class="line">    <span class="built_in">clearTimeout</span>(timeout); <span class="comment">// 清除计时</span></span><br><span class="line"></span><br><span class="line">    timeout = <span class="built_in">setTimeout</span>(<span class="keyword">function</span> (<span class="params"></span>) &#123; <span class="comment">// 重新计时</span></span><br><span class="line">      fn.<span class="title function_">apply</span>(context, args)</span><br><span class="line">    &#125;, wait);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><strong>应用场景</strong></p>
-<ul>
-<li>search搜索联想，用户在不断输入值时，用防抖来节约请求资源。</li>
-<li>window触发resize的时候，不断的调整浏览器窗口大小会不断的触发这个事件，用防抖来让其只触发一次</li>
-</ul>
-<h4 id="节流-throttle"><a href="#节流-throttle" class="headerlink" title="节流(throttle)"></a><strong>节流(throttle)</strong></h4><p>规定在一个单位时间内，只能触发一次函数。如果这个单位时间内触发多次函数，只有一次生效。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/***   节流(throttle)   ***/</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">throttle</span>(<span class="params">fn, wait</span>) &#123;</span><br><span class="line">  <span class="keyword">var</span> timeout; <span class="comment">// 闭包 私有化变量</span></span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">var</span> context = <span class="variable language_">this</span>, args = <span class="variable language_">arguments</span>; <span class="comment">// context：绑定this；args：接收传入参数</span></span><br><span class="line">    <span class="keyword">if</span> (!timeout) &#123; <span class="comment">// 如果timeout为假，说明值为 undefined | null，可以触发</span></span><br><span class="line">      timeout = <span class="built_in">setTimeout</span>(<span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line">        timeout = <span class="literal">null</span>; <span class="comment">// 清除 变量</span></span><br><span class="line">        fn.<span class="title function_">apply</span>(context, args);</span><br><span class="line">      &#125;, wait);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><strong>应用场景</strong></p>
-<ul>
-<li>鼠标不断点击触发，mousedown(单位时间内只触发一次)</li>
-<li>监听滚动事件，比如是否滑到底部自动加载更多，用throttle来判断</li>
-</ul>
-<p><strong>总结</strong>：函数节流与函数防抖都是为了限制函数的执行频次，都是一种性能优化的方法。区别是防抖是有条件的周期性动作，而节流是无条件的周期性动作。对于防抖和节流一个最主观的判断方法就是：在10s内你疯狂点击一个按钮，如果使用了防抖则会只执行一次，而你使用了节流则会每隔一段时间执行一次，这个时间可以自己来掌控。</p>
-<p>PS：函数节流与函数防抖的实现细节：</p>
-<ol>
-<li>外部函数中都定义了一个私有化变量timeout，这也是使用<strong>闭包</strong>的原因</li>
-<li>闭包中重新定义了context、args，这是为了避免修改 this 指向和默认参数</li>
-<li>二者都有对应的立即执行版本：触发事件后函数会立即执行，主要依据是对timeout的判断。</li>
-</ol>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://xiaodanye.github.io/2022/05/21/JS%E9%98%B2%E6%8A%96%E4%B8%8E%E8%8A%82%E6%B5%81/" data-id="cl3fsl3g5000u9b5jh2mjdvf7" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-JS同步与异步" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2022/05/21/JS%E5%90%8C%E6%AD%A5%E4%B8%8E%E5%BC%82%E6%AD%A5/" class="article-date">
-  <time datetime="2022-05-21T11:28:00.000Z" itemprop="datePublished">2022-05-21</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2022/05/21/JS%E5%90%8C%E6%AD%A5%E4%B8%8E%E5%BC%82%E6%AD%A5/">JS同步与异步</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="同步-amp-异步"><a href="#同步-amp-异步" class="headerlink" title="同步 &amp; 异步"></a>同步 &amp; 异步</h3><h4 id="同步任务"><a href="#同步任务" class="headerlink" title="同步任务"></a>同步任务</h4><p>当我们调用一个方法的时候，js会生成一个与这个方法对应的<strong>执行环境</strong>（context），又叫执行上下文。这个执行环境中存在着这个方法的作用域链以及this对象。其中，不同的变量存于内存中的不同位置：堆里存放着一些对象，而栈中则存放着一些基础类型变量以及对象的指针（上下文）。</p>
-<p>当一系列方法被依次调用的时候，因为js是单线程的，同一时间只能执行一个方法，于是这些方法被排队在一个单独的地方。这个地方被称为<strong>执行栈</strong>。</p>
-<p>当一个脚本第一次执行的时候，js引擎会解析这段代码，并将其中的同步代码按照执行顺序加入执行栈中，然后从头开始<strong>顺序执行</strong>。如果当前执行的是一个方法，那么js会向执行栈中添加这个方法的执行环境，然后进入这个执行环境继续执行其中的代码。当这个执行环境中的代码执行完毕并返回结果后，js会退出这个执行环境并把这个执行环境销毁，回到上一个方法的执行环境……这个过程反复进行，直到执行栈中的代码全部执行完毕。</p>
-<h4 id="异步任务"><a href="#异步任务" class="headerlink" title="异步任务"></a>异步任务</h4><p>js引擎遇到一个异步事件后并不会一直等待其返回结果，而是会将这个事件挂起，继续执行执行栈中的其他任务。当一个异步事件返回结果后，js会将这个事件加入与当前执行栈不同的另一个队列，我们称之为事件队列。被放入事件队列不会立刻执行其回调，而是等待当前执行栈中的所有任务都执行完毕， 主线程处于闲置状态时，主线程会去查找事件队列是否有任务。如果有，那么主线程会从中取出排在第一位的事件，并把这个事件对应的回调放入执行栈中，然后执行其中的同步代码，如此反复。</p>
-<p><strong>异步编程</strong>：异步特别适用于大多数 IO 密集型的应用程序</p>
-<ul>
-<li>回调函数：<code>setTimeout(callback, 1000);</code> | <code>ajax(url, () =&gt; &#123; ... &#125;)</code></li>
-<li>事件监听：<code>element.addEventListener(&quot;click&quot;, callback);</code></li>
-<li>发布/订阅（观察者模式）：<code>jQuery.subscribe(&quot;done&quot;, f2); //f2向&quot;信号中心&quot;jQuery订阅&quot;done&quot;信号。</code></li>
-<li>Promise 对象：<code>var prom = new Promise(fun); prom.then(resolve, reject);</code></li>
-<li>Generator 函数：<code>function * gen() &#123; var i = 0; while(i &lt; 10) &#123; i = yield i + 1; &#125; &#125;</code></li>
-<li>async/await（推荐）：<code>async function foo() &#123; const result = await doSomething(); &#125;</code></li>
-</ul>
-<h5 id="宏任务-amp-微任务"><a href="#宏任务-amp-微任务" class="headerlink" title="宏任务 &amp; 微任务"></a>宏任务 &amp; 微任务</h5><p>不同的异步任务被分为两类：微任务（micro task）和宏任务（macro task）。其中微任务必然是在某个宏任务执行的过程中创建的，例如在执行宏任务时遇到Promise等，会创建微任务（.then()里面的回调），并加入到微任务队列队尾。二者一般所使用的方法如下：</p>
-<p><strong>宏任务</strong>：主代码块、setTimeout、setInterval等</p>
-<p><strong>微任务</strong>：Promise、process.nextTick等</p>
-<p><strong>执行机制</strong></p>
-<ol>
-<li>执行一个宏任务（栈中没有就从事件队列中获取）</li>
-<li>执行过程中如果遇到微任务，就将它添加到微任务的任务队列中</li>
-<li>宏任务执行完毕后，立即执行当前微任务队列中的所有微任务（依次执行）</li>
-<li>当前宏任务执行完毕，开始检查渲染，然后GUI线程接管渲染</li>
-<li>渲染完毕后，JS引擎线程继续，开始下一个宏任务（从宏任务队列中获取）</li>
-</ol>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://xiaodanye.github.io/2022/05/21/JS%E5%90%8C%E6%AD%A5%E4%B8%8E%E5%BC%82%E6%AD%A5/" data-id="cl3fsl3fn000f9b5j0w38cu22" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-JS事件循环" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2022/05/21/JS%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF/" class="article-date">
-  <time datetime="2022-05-21T11:27:25.000Z" itemprop="datePublished">2022-05-21</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2022/05/21/JS%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF/">JS事件循环</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="事件循环"><a href="#事件循环" class="headerlink" title="事件循环"></a>事件循环</h3><h4 id="进程-amp-线程"><a href="#进程-amp-线程" class="headerlink" title="进程 &amp; 线程"></a>进程 &amp; 线程</h4><p><strong>定义</strong></p>
-<ul>
-<li>进程是 CPU <strong>资源分配</strong>的最小单位（是能拥有资源和独立运行的最小单位）</li>
-<li>线程是 CPU <strong>调度</strong>的最小单位（线程是建立在进程的基础上的一次程序运行单位，一个进程中可以有多个线程）</li>
-</ul>
-<p>浏览器是多进程的，主要包含：Browser进程、GPU进程、Renderer进程、Plugin进程等。其中，Browser进程是浏览器的主进程，只有一个；而 Renderer进程 则默认每个Tab页面都有一个，互不影响。</p>
-<p>一般说 <strong>JavaScript是单线程语言</strong>，原因主要是由于<strong>GUI渲染线程与JS引擎线程是互斥的（避免 DOM 操作的冲突）</strong>。即在 Renderer进程 中，只能运行其中一个线程，而不能多个线程同时运行。Renderer进程是多线程的，主要线程如下：</p>
-<ul>
-<li>GUI渲染线程：主要负责渲染浏览器界面</li>
-<li>JS引擎线程：主要负责解析Javascript脚本</li>
-<li>事件触发线程：主要负责异步事件回调</li>
-<li>定时触发器线程：主要负责处理<code>setInterval</code>与<code>setTimeout</code></li>
-<li>异步http请求线程：主要负责处理<code>XMLHttpRequest</code>请求</li>
-</ul>
-<p>基于上述原因，当JS引擎执行大量计算，时间过长阻塞页面的渲染，就会导致页面卡顿，俗称<strong>JS阻塞页面加载</strong></p>
-<p><strong>解决方法</strong>：<a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API"><strong>Web Workers</strong></a> 通过调用work构造函数可以创建一个新的子线程来单独处理传入的JS脚本</p>
-<h4 id="事件循环-1"><a href="#事件循环-1" class="headerlink" title="事件循环"></a>事件循环</h4><p>Javascript是一门<strong>单线程</strong>的<strong>非阻塞</strong>的脚本语言。单线程意味着，javascript代码在执行的任何时候，都只有一个主线程来处理所有的<strong>同步任务</strong>。而非阻塞则是当代码需要进行一项<strong>异步任务</strong>（无法立刻返回结果，需要花一定时间才能返回的任务，如I/O事件）的时候，主线程会挂起（pending）这个任务，然后在异步任务返回结果的时候再根据一定规则去执行相应的回调。</p>
-<p><strong>事件循环运行机制</strong></p>
-<ol>
-<li>所有同步任务都在主线程上执行，形成一个执行栈（execution context stack）</li>
-<li>当遇到异步任务时，该异步任务进入等待状态，执行栈继续执行。同时通知事件触发线程：当触发该事件时（或该异步操作响应返回时），向任务队列插入一个事件消息</li>
-<li>当事件触发或响应返回时，线程向任务队列插入该事件消息（包含消息及回调）；</li>
-<li>当执行栈内同步任务执行完毕（空闲：执行栈清空）后，主线程从任务队列取出一个事件消息，其对应异步任务进入执行栈，执行回调函数，如果未绑定回调，这个消息会被丢弃，执行完任务后退栈；</li>
-<li>主线程不断重复上面的第4步，称为事件循环(Event Loop)。</li>
-</ol>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://xiaodanye.github.io/2022/05/21/JS%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF/" data-id="cl3fsl3fi000a9b5jc1vqbyqw" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-JS缓存" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2022/05/21/JS%E7%BC%93%E5%AD%98/" class="article-date">
-  <time datetime="2022-05-21T11:24:05.000Z" itemprop="datePublished">2022-05-21</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2022/05/21/JS%E7%BC%93%E5%AD%98/">JS缓存</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="缓存"><a href="#缓存" class="headerlink" title="缓存"></a>缓存</h3><p><strong>http缓存（又称浏览器缓存）</strong>其实就是指在本地使用的计算机中开辟一个内存区，同时也开辟一个硬盘区作为数据传输的缓冲区，然后用这个缓冲区来暂时保存用户以前访问过的信息。在介绍 http缓存 的时候，我们习惯将缓存分为<strong>强缓存</strong>和<strong>协商缓存</strong>两种。两者的主要区别是使用本地缓存的时候，是否需要向服务器验证本地缓存是否依旧有效。</p>
-<p><img src="/Users/fjp_xiaoye999/Desktop/FJP/%E5%B7%A5%E4%BD%9C/%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1/%E6%9F%A5%E8%AF%A2%E7%BC%93%E5%AD%98.png"></p>
-<h4 id="强缓存"><a href="#强缓存" class="headerlink" title="强缓存"></a>强缓存</h4><p>第一次请求时，服务器把资源的过期时间通过响应头中的<code>Expires</code>和<code>Cache-Control</code>两个字段告诉浏览器，之后再请求这个资源的话，会判断有没有过期，没有过期就直接拿来用，不向服务器发起请求，这就是强缓存。</p>
-<h4 id="协商缓存"><a href="#协商缓存" class="headerlink" title="协商缓存"></a>协商缓存</h4><p>强缓存的弊端就是缓存过期之后，不管资源有没有变化，都会重新发起请求，重新获取资源。而<strong>协商缓存</strong>就是在强缓存过期的情况下，再走协商缓存的流程，判断文件有没有更新。</p>
-<p>第一次请求资源时，服务器除了会返回给浏览器上面说的过期时间，还会在响应头添加 <code>Last-Modified</code> 字段，告诉浏览器该资源的最后修改时间；然后浏览器再次请求的时候就把这个时间再通过另一个字段<code>If-Modified-Since</code>，发送给服务器；服务器再把这两个字段的时间对比，如果是一样的，就说明文件没有被更新过，就返回状态码304和空响应体给浏览器，浏览器直接拿过期了的资源继续使用即可；如果对比不一样说明资源有更新，就返回状态码200和新的资源。</p>
-<p><strong>比对策略</strong></p>
-<ul>
-<li><p><code>Last-Modified</code>/<code>If-Modified-Since</code>：对比文件最后修改时间</p>
-</li>
-<li><p><code>ETag</code>/<code>If-None-Match</code>：对比文件内容标识</p>
-<p>PS：Last-Modified 和 ETag 的区别：</p>
-<ul>
-<li><code>Etag</code> 感知文件精准度要高于 <code>Last-Modified</code></li>
-<li>同时使用时，服务器校验优先级 <code>Etag</code>/<code>If-None-Match</code></li>
-<li><code>Last-Modified</code> 性能上要优于 <code>Etag</code>，因为 <code>Etag</code> 生成过程中需要服务器付出额外开销，会影响服务器端的性能，所以它并不能完全替代 <code>Last-Modified</code>，只能作为补充和强化</li>
-</ul>
+<li><p>页面首次加载的时候做一次监听 immediate: true</p>
 </li>
 </ul>
-<p><strong>优先级</strong>：强制缓存的优先级高于协商缓存（<code>Pragma</code> &gt; <code>Cache-Control</code> &gt; <code>Expires</code> &gt; <code>ETag</code> &gt; <code>Last-Modified</code>）</p>
-<p><strong>方案</strong>：协商缓存一般存储：<code>HTML</code>；强缓存一般存储：<code>css</code>, <code>image</code>, <code>js</code>，文件名带上 <code>hash</code></p>
-<hr>
-<h3 id="Storage"><a href="#Storage" class="headerlink" title="Storage"></a>Storage</h3><p>常见的轻量浏览器存储技术包括<code>Cookie</code>和<code>WebStorage</code>。</p>
-<table>
-    <tbody align="center">
-    <tr>
-      <th>特性</th>
-      <th>Cookie</th>
-      <th>sessionStorage</th>
-      <th>localStorage</th>
-    </tr>
-    <tr>
-      <td>数据生命期</td>
-      <td>生成时会被指定一个maxAge值，这就是cookie的生存周期，在这个周期内cookie有效，默认关闭浏览器失效</td>
-      <td>页面会话期间可用</td>
-      <td>除非数据被清除，否则一直存在</td>
-    </tr>
-    <tr>
-      <td>数据存放大小</td>
-      <td>4K左右</td>
-      <td colspan="2">一般5M或更大</td>
-    </tr>
-    <tr>
-      <td>与服务器通信</td>
-      <td>由对服务器的请求来传递，每次都会携带在HTTP请求头中，如果使用cookie保存过多的数据会带来性能问题</td>
-      <td colspan="2">数据不是由每个服务器请求传递的，而且只有在请求时使用数据，不参与和服务器的通信</td>
-    </tr>
-    <tr>
-      <td>易用性</td>
-      <td>Cookie需要自己封装：setCookie & getCookie</td>
-      <td colspan="2">可以用原生接口，也可再次封装对Object和Array有更好的支持</td>
-    </tr>
-    <tr>
-      <td>共同点</td>
-      <td colspan="3">都是保存在浏览器端，和服务器端的session机制不同</td>
-    </tr>
-  </tbody>
-</table>
-
-
-<h4 id="Cookie"><a href="#Cookie" class="headerlink" title="Cookie"></a>Cookie</h4><p>Cookie 是服务器发送到用户浏览器并保存在本地的一小块数据，它会在浏览器下次向同一服务器再发起请求时被携带并发送到服务器上。通常，它用于告知服务端两个请求是否来自同一浏览器，如保持用户的登录状态。每个 Cookie 都会绑定单一的域名，无法在别的域名下获取使用，换言之，Cookie 不可跨域。</p>
-<p>Cookie 主要用于以下三个方面：会话状态管理、个性化设置、浏览器行为跟踪</p>
-<p>Cookie 的生命周期可以通过两种方式定义：</p>
-<ul>
-<li>会话期 Cookie 是最简单的 Cookie：浏览器关闭之后它会被自动删除，也就是说它仅在会话期内有效。会话期Cookie不需要指定过期时间（<code>Expires</code>）或者有效期（<code>Max-Age</code>）。</li>
-<li>持久性 Cookie 的生命周期取决于过期时间（<code>Expires</code>）或有效期（<code>Max-Age</code>）指定的一段时间。</li>
-</ul>
-<p>有两种方法可以确保 <code>Cookie</code> 被安全发送，并且不会被意外的参与者或脚本访问：<code>Secure</code> 属性和<code>HttpOnly</code> 属性</p>
-<p>PS：<strong>session</strong> 是另一种记录服务器和客户端会话状态的机制。session 是基于 cookie 实现的，与 cookie 储存在浏览器端不同，session 存储在服务器端，sessionId 会被存储到客户端的 cookie 中。</p>
-<p><strong>Cookie 和 Session 的区别</strong></p>
-<ul>
-<li><strong>安全性：</strong> Session 比 Cookie 安全，Session 是存储在服务器端的；Cookie 是存储在客户端的。</li>
-<li><strong>存取值的类型不同</strong>：Cookie 只支持存字符串数据，想要设置其他类型的数据，需要将其转换成字符串；Session 可以存任意数据类型。</li>
-<li><strong>有效期不同：</strong> Cookie 可设置为长时间保持，比如我们经常使用的默认登录功能；Session 一般失效时间较短，客户端关闭（默认情况下）或者 Session 超时都会失效。</li>
-<li><strong>存储大小不同：</strong> 单个 Cookie 保存的数据不能超过 4K；Session 可存储数据远高于 Cookie，但是当访问量过多，会占用过多的服务器资源。</li>
-</ul>
-<p><strong>session 储存 &amp; 同步</strong></p>
-<ul>
-<li>session共享：将 session 提取出来，集中存放。</li>
-<li>token令牌（推荐）：服务器不需要进行存储，服务可以通过解析 token 里面的信息来验证有效性。</li>
-</ul>
-<h4 id="Web-Storage"><a href="#Web-Storage" class="headerlink" title="Web Storage"></a>Web Storage</h4><p>由于 Cookie 存储机制有很多缺点，HTML5中重新提供了一种在客户端本地保存数据的功能，即<strong>Web Storage</strong>，使浏览器能以一种比使用 Cookie 更直观的方式存储键/值对。Web Storage 包含如下两种机制：</p>
-<ul>
-<li><code>sessionStorage</code> （临时保存）为每一个给定的源维持一个独立的存储区域，该存储区域在页面会话期间可用（即只要浏览器处于打开状态，包括页面重新加载和恢复）。</li>
-<li><code>localStorage</code> （永久保存）同样的功能，但是在浏览器关闭，然后重新打开后数据仍然存在。</li>
-</ul>
-<p>这两种机制是通过 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/API/Window/sessionStorage"><code>Window.sessionStorage</code></a> 和 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/API/Window/localStorage"><code>Window.localStorage</code></a> 属性使用。应该注意，存储在 <code>sessionStorage</code> 或 <code>localStorage</code> 中的数据<strong>特定于页面的协议</strong>，也就是说，不同源的 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/API/Storage"><code>Storage</code></a> 对象相互隔离。</p>
-<p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/API/Storage"><code>Storage</code></a> 对象语法：<code>setItem(&#39;key&#39;, &#39;value&#39;)</code>、<code>getItem(&#39;key&#39;)</code>、<code>removeItem(&#39;key&#39;)</code>、<code>clear()</code></p>
-<p>参照：<a target="_blank" rel="noopener" href="https://juejin.cn/post/6844904034181070861">Cookie、Session、Token、JWT</a></p>
+<p><strong>总结</strong>：</p>
+<ol>
+<li>methods，watch 和 computed 都是以函数为基础的，但各自却都不同</li>
+<li>methods 里面是用来定义函数的，它需要手动调用才能执行。而不像 watch 和 computed 那样，“自动执行”预先定义的函数，相比于 watch / computed，methods 不处理数据逻辑关系，只提供可调用的函数</li>
+<li>watch 和 computed 都是以 Vue 的依赖追踪机制为基础的，当某一个数据发生变化的时候，所有依赖这个数据的“相关”数据“自动”发生变化，也就是自动调用相关的函数去实现数据的变动</li>
+</ol>
+<p>参照：<a target="_blank" rel="noopener" href="https://cloud.tencent.com/developer/article/1705551">Vue核心知识：computed、methods和watch的区别</a>; <a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_52998620/article/details/122861912">vue中Computed、Methods、Watch区别</a></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://xiaodanye.github.io/2022/05/21/JS%E7%BC%93%E5%AD%98/" data-id="cl3fsl3fv000p9b5j7nssa2np" class="article-share-link">Share</a>
+      <a data-url="http://xiaodanye.github.io/2022/05/24/Vue-computed-methods-watch/" data-id="cl3jw7tiq000y9o5jd2993acc" class="article-share-link">Share</a>
       
       
     </footer>
@@ -775,10 +402,10 @@
 
 
   
-    <article id="post-JS继承" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-Vue-v-if-v-for" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2022/05/21/JS%E7%BB%A7%E6%89%BF/" class="article-date">
-  <time datetime="2022-05-21T11:23:36.000Z" itemprop="datePublished">2022-05-21</time>
+    <a href="/2022/05/24/Vue-v-if-v-for/" class="article-date">
+  <time datetime="2022-05-24T07:59:58.000Z" itemprop="datePublished">2022-05-24</time>
 </a>
     
   </div>
@@ -789,7 +416,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2022/05/21/JS%E7%BB%A7%E6%89%BF/">JS继承</a>
+      <a class="article-title" href="/2022/05/24/Vue-v-if-v-for/">Vue-v-if_v-for</a>
     </h1>
   
 
@@ -797,65 +424,211 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h3><p>继承可以使得子类别具有父类的各种方法和属性</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">Parent</span>(<span class="params"></span>)&#123;</span><br><span class="line">	<span class="variable language_">this</span>.<span class="property">name</span> = <span class="string">&#x27;Hello world&#x27;</span>;</span><br><span class="line">  <span class="variable language_">this</span>.<span class="property">friends</span> = [<span class="string">&#x27;AAA&#x27;</span>, <span class="string">&#x27;BBB&#x27;</span>,<span class="string">&#x27;CCC&#x27;</span>];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="title class_">Parent</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">getName</span> = <span class="keyword">function</span>(<span class="params"></span>)&#123;</span><br><span class="line">	<span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">this</span>.<span class="property">name</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><img src="/Users/fjp_xiaoye999/Desktop/FJP/%E5%B7%A5%E4%BD%9C/%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1/%E7%BB%A7%E6%89%BF.png"></p>
-<p><strong>方式一：原型链继承（★★）</strong></p>
-<p>特点：让新实例的原型等于父类的实例。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">Child</span>(<span class="params"></span>)&#123;&#125;</span><br><span class="line"><span class="title class_">Child</span>.<span class="property"><span class="keyword">prototype</span></span> = <span class="keyword">new</span> <span class="title class_">Parent</span>();</span><br></pre></td></tr></table></figure>
-
-<p>缺点：</p>
-<ol>
-<li>无法实现多继承，继承单一</li>
-<li>来自原型对象的所有属性被所有实例共享</li>
-<li>创建子类实例时，无法向父类构造函数传参</li>
-</ol>
-<p><strong>方式二：构造函数继承（★★）</strong></p>
-<p>特点：在子类构造函数中调用父类构造函数，即使用call() /apply()的方法以新创建的对象为上下文执行函数</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">Child</span>(<span class="params">age</span>)&#123;</span><br><span class="line">  <span class="title class_">Parent</span>.<span class="title function_">call</span>(<span class="variable language_">this</span>);</span><br><span class="line">  <span class="variable language_">this</span>.<span class="property">age</span> = age</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>缺点：</p>
-<ol>
-<li>只能继承父类的实例属性和方法，不能继承原型属性/方法</li>
-<li>无法实现函数复用，每个子类都有父类实例函数的副本，影响性能</li>
-</ol>
-<p><strong>方式三：组合继承（★★★★）</strong></p>
-<p>特点：通过调用父类构造，继承父类的属性并保留传参的优点，然后通过将父类实例作为子类原型，实现函数复用</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">Child</span>(<span class="params">name,age</span>)&#123;</span><br><span class="line">  <span class="title class_">Parent</span>.<span class="title function_">call</span>(<span class="variable language_">this</span>,name);<span class="comment">// 第二次调用 Parent()</span></span><br><span class="line">  <span class="variable language_">this</span>.<span class="property">age</span> = age;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="title class_">Child</span>.<span class="property"><span class="keyword">prototype</span></span> = <span class="keyword">new</span> <span class="title class_">Parent</span>(); <span class="comment">// 第一次调用 Parent()</span></span><br><span class="line"><span class="title class_">Child</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">constructor</span> = <span class="title class_">Child</span>; <span class="comment">// 手动挂上构造器，指向自己的构造函数</span></span><br></pre></td></tr></table></figure>
-
-<p>缺点：</p>
-<ol>
-<li>调用了两次父类构造函数，生成了两份实例（子类实例将子类原型上的那份屏蔽了）</li>
-</ol>
-<p><strong>方式四：原型式继承（★★）</strong></p>
-<p>特点：**<code>Object.create()</code>**方法创建一个新对象，使用现有的对象来提供新创建的对象的<code>__proto__</code></p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> child = <span class="title class_">Object</span>.<span class="title function_">create</span>(<span class="keyword">new</span> <span class="title class_">Parent</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// Object.create()方法实现方式如下</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">create</span>(<span class="params">parent</span>) &#123;</span><br><span class="line">  <span class="keyword">function</span> <span class="title function_">F</span>(<span class="params"></span>) &#123;&#125;</span><br><span class="line">  F.<span class="property"><span class="keyword">prototype</span></span> = parent;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="title function_">F</span>();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>缺点：</p>
-<ol>
-<li>来自原型对象的所有属性被所有实例共享</li>
-</ol>
-<p><strong>方式五：寄生式继承（★★）</strong></p>
-<p>特点：在原型式继承的基础上再进行增强。即创建一个实现继承的函数，以某种方式增强对象，然后返回这个对象</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">clone</span>(<span class="params">Parent</span>) &#123;</span><br><span class="line">  <span class="keyword">let</span> child = <span class="title class_">Object</span>.<span class="title function_">create</span>(<span class="keyword">new</span> <span class="title class_">Parent</span>);</span><br><span class="line">  child.<span class="property">getFriends</span> = <span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="variable language_">this</span>.<span class="property">friends</span></span><br><span class="line">  &#125;;</span><br><span class="line">  <span class="keyword">return</span> child;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>缺点：</p>
-<ol>
-<li>来自原型对象的所有属性被所有实例共享</li>
-</ol>
-<p><strong>方式六：寄生组合式继承（★★★★★）</strong></p>
-<p>特点：基于组合继承的原理，不通过调用父类构造函数给子类原型赋值，而是取得父类原型的一个副本。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">Child</span>(<span class="params">name, age</span>)&#123;</span><br><span class="line">  <span class="title class_">Parent</span>.<span class="title function_">call</span>(<span class="variable language_">this</span>,name); <span class="comment">// 仅一次调用 Parent()</span></span><br><span class="line">  <span class="variable language_">this</span>.<span class="property">age</span> = age;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">clone</span>(<span class="params">Parent, Child</span>) &#123;</span><br><span class="line">  <span class="comment">// 这里改用 Object.create 就可以减少组合继承中多进行一次构造的过程</span></span><br><span class="line">  <span class="title class_">Child</span>.<span class="property"><span class="keyword">prototype</span></span> = <span class="title class_">Object</span>.<span class="title function_">create</span>(<span class="title class_">Parent</span>.<span class="property"><span class="keyword">prototype</span></span>);</span><br><span class="line">  <span class="title class_">Child</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">constructor</span> = <span class="title class_">Child</span>; <span class="comment">// 手动挂上构造器，指向自己的构造函数</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="title function_">clone</span>(<span class="title class_">Parent</span>, <span class="title class_">Child</span>);</span><br></pre></td></tr></table></figure>
-
-<p><strong>方式七：ES6 class-extends继承（★★★★★）</strong></p>
-<p>特点：ES6 寄生组合继承方式的语法糖</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Parent</span>()&#123;</span><br><span class="line">  <span class="title function_">constructor</span>(<span class="params"></span>) &#123;</span><br><span class="line">  	<span class="variable language_">this</span>.<span class="property">name</span> = <span class="string">&#x27;Hello world&#x27;</span>;</span><br><span class="line">  	<span class="variable language_">this</span>.<span class="property">friends</span> = [<span class="string">&#x27;AAA&#x27;</span>, <span class="string">&#x27;BBB&#x27;</span>,<span class="string">&#x27;CCC&#x27;</span>];  </span><br><span class="line">  &#125;</span><br><span class="line">  <span class="title function_">getName</span>(<span class="params"></span>)&#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">this</span>.<span class="property">name</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Child</span> <span class="keyword">extends</span> <span class="title class_ inherited__">Parent</span>&#123;</span><br><span class="line">  <span class="title function_">constructor</span>(<span class="params">age</span>) &#123;</span><br><span class="line">    <span class="comment">// 子类中存在构造函数，则需要在使用“this”之前首先调用 super()。</span></span><br><span class="line">    <span class="variable language_">super</span>();</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">age</span> = age;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> asuna = <span class="keyword">new</span> <span class="title class_">Child</span>(<span class="number">20</span>)</span><br></pre></td></tr></table></figure>
+        <h3 id="v-for-amp-v-if"><a href="#v-for-amp-v-if" class="headerlink" title="v-for &amp; v-if"></a>v-for &amp; v-if</h3><p>从源码的角度（compiler/codegen/index.js）</p>
+<ul>
+<li>在 vue 2.x 中，在一个元素上同时使用 v-if 和 v-for 时，v-for 会优先作用。</li>
+<li>在 vue 3.x 中，v-if 总是优先于 v-for 生效。</li>
+</ul>
+<p>v-for 和 v-if 不应该一起使用，如果两者同时出现的话，那每次循环都会执行 v-if，会很浪费性能。正确的做法应该是再 v-for 的外面新增一个模板标签<code>template</code>，在<code>template</code>上使用 v-if。</p>
+<p>我们经常会遇见这种情况，在 v-for 的时候，在数组中会有一些需要进行 v-if 的判断，这种情况下，我们如果先使用<code>computed</code>将不需要渲染的项过滤出来，那么在进行 v-for 的时候，循环的就只是需要渲染的项，这也是提升vue性能的一种方式。</p>
+<p>参照：<a target="_blank" rel="noopener" href="https://www.jianshu.com/p/d32cc1592c10">v-if和v-for的优先级</a></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://xiaodanye.github.io/2022/05/21/JS%E7%BB%A7%E6%89%BF/" data-id="cl3fsl3fs000n9b5j6pj2dfav" class="article-share-link">Share</a>
+      <a data-url="http://xiaodanye.github.io/2022/05/24/Vue-v-if-v-for/" data-id="cl3jw7tiu00139o5je1pzbvwg" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-Vue-v-if-v-show" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2022/05/24/Vue-v-if-v-show/" class="article-date">
+  <time datetime="2022-05-24T07:57:31.000Z" itemprop="datePublished">2022-05-24</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2022/05/24/Vue-v-if-v-show/">Vue-v-if_v-show</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="v-if-amp-v-show"><a href="#v-if-amp-v-show" class="headerlink" title="v-if &amp; v-show"></a>v-if &amp; v-show</h3><p>vue中显隐方法常用两种，v-if 和 v-show，但这两种是有区别的。</p>
+<ol>
+<li><strong>实现手段</strong>：v-if是动态的向DOM树内添加或者删除DOM元素来控制元素的显隐；v-show 是通过设置DOM元素的display样式：block为显示，none为隐藏；</li>
+<li><strong>编译过程</strong>：v-if 切换有一个局部编译/卸载的过程，切换过程中合适地销毁和重建内部的事件监听和子组件；v-show只是简单的基于css切换；</li>
+<li><strong>编译条件</strong>：v-if 是惰性的，如果初始条件为假，则什么也不做，只有在条件第一次变为真时才开始局部编译； v-show 是在任何条件下（首次条件是否为真）都被编译，然后被缓存，而且DOM元素保留；</li>
+<li><strong>性能消耗</strong>：一般来说，v-if 有更高的切换消耗而 v-show 有更高的初始渲染消耗。因此，如果需要频繁切换 v-show 较好，如果在运行时条件不大可能改变 v-if 较好。</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://xiaodanye.github.io/2022/05/24/Vue-v-if-v-show/" data-id="cl3jw7tiu00149o5jhamggco8" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-Vue-v-model" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2022/05/24/Vue-v-model/" class="article-date">
+  <time datetime="2022-05-24T07:54:35.000Z" itemprop="datePublished">2022-05-24</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2022/05/24/Vue-v-model/">Vue-v-model</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="v-model"><a href="#v-model" class="headerlink" title="v-model"></a>v-model</h3><p><code>v-model</code>是Vue中双向绑定的一个指令，可以绑定一个动态值到视图，同时视图中变化能改变该值。<code>v-model</code>是语法糖，监听用户的输入事件，并及时更新数据。默认情况下相于:<code>value</code>和<code>@input</code>。</p>
+<p>通常在表单项上使用<code>v-model</code>： <code>&lt;input&gt;</code>、<code>&lt;textarea&gt; </code>及 <code>&lt;select&gt;</code> 元素上创建双向数据绑定</p>
+<p><code>v-model </code>在内部为不同的输入元素使用不同的属性并抛出不同的事件：<code>@change</code> 或者 <code>@input</code></p>
+<p>PS：<code>v-model</code> 会忽略所有表单元素的<code> value</code>、<code>checked</code>、<code>selected </code>的初始值，而是总是将当前活动实例的数据作为数据来源</p>
+<p>参照：<a target="_blank" rel="noopener" href="https://v3.cn.vuejs.org/api/directives.html#v-model">v-model</a>; <a target="_blank" rel="noopener" href="https://juejin.cn/post/6983325702825345054">v-model双向数据绑定及其修饰符</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://xiaodanye.github.io/2022/05/24/Vue-v-model/" data-id="cl3jw7tiv00159o5j3ysu9az3" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-Vue-scoped-样式穿透" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2022/05/24/Vue-scoped-%E6%A0%B7%E5%BC%8F%E7%A9%BF%E9%80%8F/" class="article-date">
+  <time datetime="2022-05-24T07:49:58.000Z" itemprop="datePublished">2022-05-24</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2022/05/24/Vue-scoped-%E6%A0%B7%E5%BC%8F%E7%A9%BF%E9%80%8F/">Vue-scoped_样式穿透</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="scoped-amp-式样穿透"><a href="#scoped-amp-式样穿透" class="headerlink" title="scoped &amp; 式样穿透"></a>scoped &amp; 式样穿透</h3><p><strong>定义</strong>：在vue文件中的style标签上，有一个特殊的属性：scoped。scoped设计的初衷就是不能让当前组件的样式修改其他任何地方的样式。当一个style标签拥有scoped属性时，它的CSS样式就只能作用于当前的组件，也就是说，该样式只能适用于当前组件元素。通过该属性，可以使得组件之间的样式不互相污染。如果一个项目中的所有style标签全部加上了scoped，相当于实现了样式的模块化。</p>
+<p>Scope CSS 的本质是基于<strong>HTML 和 CSS 属性选择器</strong>，即分别给 HTML 标签和 CSS 选择器添加 <code>data-v-xxx</code>(唯一)</p>
+<p>具体来说，它是通过 <strong>vue-loader</strong> 实现的，实现过程大致分 3 步：</p>
+<ol>
+<li>首先 vue-loader 会解析 .vue 组件，提取出 template、script、style 对应的代码块；</li>
+<li>然后构造组件实例，在组件实例的选项上绑定 Scoped-Id；</li>
+<li>最后对 style 的 CSS 代码进行编译转化，应用 Scoped-Id 生成选择器的属性；</li>
+</ol>
+<p>PS：如果组件内部包含有其他组件，只会给其他组件的最外层标签加上当前组件的Scoped-Id</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;example&quot;</span>&gt;</span>h1<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">style</span> <span class="attr">scoped</span>&gt;</span><span class="language-css"></span></span><br><span class="line"><span class="language-css">  <span class="selector-class">.example</span>&#123;</span></span><br><span class="line"><span class="language-css">    <span class="attribute">color</span>:red;</span></span><br><span class="line"><span class="language-css">  &#125;</span></span><br><span class="line"><span class="language-css"></span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!--- vue编译渲染完之后，如下所示 ---&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">tempalte</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;example&quot;</span> <span class="attr">data-v-2311c06a</span>&gt;</span>hi<span class="tag">&lt;/<span class="name">div</span>&gt;</span> </span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="language-css"></span></span><br><span class="line"><span class="language-css">  <span class="selector-class">.example</span><span class="selector-attr">[data-v-2311c06a]</span>&#123;</span></span><br><span class="line"><span class="language-css">    <span class="attribute">color</span>:red</span></span><br><span class="line"><span class="language-css">  &#125;</span></span><br><span class="line"><span class="language-css"></span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>样式穿透</strong>：默认父组件添加scoped则父组件无法修改子组件的样式（即使通过权重也不行），如果需要在局部组件中修改引入的第三方组件库的样式，又不想去除scoped属性造成组件之间的样式覆盖，可以通过特殊的方式穿透scoped：</p>
+<ol>
+<li>采用全局属性和局部属性混合的方式</li>
+<li>每个组件在最外层添加一个唯一的class区分不同的组件</li>
+<li>使用深层选择器deep</li>
+</ol>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--     方式一，在同一个组件里采用局部全局的方式     --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="language-css"></span></span><br><span class="line"><span class="language-css">  <span class="comment">/* 全局样式 */</span></span></span><br><span class="line"><span class="language-css"></span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">style</span> <span class="attr">scoped</span>&gt;</span><span class="language-css"></span></span><br><span class="line"><span class="language-css">  <span class="comment">/* 本地样式 */</span></span></span><br><span class="line"><span class="language-css"></span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!--     方式三，Scoped     --&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- 子组件 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;gHeader&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;name&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- 父组件 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;app&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">gHeader</span>&gt;</span><span class="tag">&lt;/<span class="name">gHeader</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">style</span> <span class="attr">lang</span>=<span class="string">&quot;css&quot;</span> <span class="attr">scoped</span>&gt;</span><span class="language-xml"></span></span><br><span class="line"><span class="language-xml">  <span class="comment">&lt;!-- 第一种写法  &gt;&gt;&gt; --&gt;</span></span></span><br><span class="line"><span class="language-xml">  .gHeader &gt;&gt;&gt; .name &#123;</span></span><br><span class="line"><span class="language-xml">    color:red;</span></span><br><span class="line"><span class="language-xml">  &#125;</span></span><br><span class="line"><span class="language-xml">  <span class="comment">&lt;!-- 第二种写法  deep,sass之类的预处理器无法解析&gt;&gt;&gt;操作，可以采用此种方式 --&gt;</span></span></span><br><span class="line"><span class="language-xml">  .gHeader /deep/ .name&#123;     </span></span><br><span class="line"><span class="language-xml">    color:red;</span></span><br><span class="line"><span class="language-xml">  &#125;</span></span><br><span class="line"><span class="language-xml"></span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>参照：<a target="_blank" rel="noopener" href="https://vue-loader-v14.vuejs.org/zh-cn/features/scoped-css.html">有作用域的 CSS</a>; <a target="_blank" rel="noopener" href="https://www.jianshu.com/p/e03ec0f0c0f5">vue scoped详解</a>; </p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://xiaodanye.github.io/2022/05/24/Vue-scoped-%E6%A0%B7%E5%BC%8F%E7%A9%BF%E9%80%8F/" data-id="cl3jw7tit00129o5jecnsdo69" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-Vue-nextTick" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2022/05/24/Vue-nextTick/" class="article-date">
+  <time datetime="2022-05-24T07:44:48.000Z" itemprop="datePublished">2022-05-24</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2022/05/24/Vue-nextTick/">Vue-nextTick</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="nextTick"><a href="#nextTick" class="headerlink" title="nextTick"></a>nextTick</h3><p>首先我们要对 Vue 的数据更新有一定理解： Vue 是依靠数据驱动视图更新的，该更新的过程是<strong>异步</strong>的，即修改数据时，视图不会立即更新，而是会开启1个队列，监听数据变化，并缓存在同一事件循环中发生的所有数据变化（如果同一个 watcher 被多次触发，只会被推入到队列中一次，这种在缓冲时去除重复数据对于避免不必要的计算和 DOM 操作是非常重要的），最后统一进行视图更新。为了确保得到更新后的DOM，所以设置了 <code>Vue.nextTick()</code>方法。</p>
+<p><code>Vue.nextTick([callback, context])</code>用于在下次 DOM 更新循环结束之后执行延迟回调，它接受2个参数（回调函数和执行回调函数的上下文环境）。回调函数会在 DOM 更新完成后就会调用，回调函数中的执行的应该是会对 DOM 进行操作的 js 代码。</p>
+<ul>
+<li><code>&#123;Function&#125; [callback]</code>：回调函数，不传时提供promise调用</li>
+<li><code>&#123;Object&#125; [context]</code>：回调函数执行的上下文环境，不传默认是自动绑定到调用它的实例上。</li>
+</ul>
+<p><strong>应用场景</strong>：</p>
+<ul>
+<li><p>在 Vue 生命周期的<code>created()</code>钩子函数进行的 DOM 操作一定要放在<code>Vue.nextTick()</code>的回调函数中。</p>
+<p><strong>原因</strong>：<code>created()</code>钩子函数执行时 DOM 其实并未进行渲染。</p>
+</li>
+<li><p>在数据变化后要执行的某个操作，而这个操作需要使用随数据改变而改变的 DOM 结构的时候，这个操作应该放在<code>Vue.nextTick()</code>的回调函数中。</p>
+<p><strong>原因</strong>：数据与视图的数据尚未完成同步，此时操作DOM元素的得到的是更新前的对象。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 通常与 ref 一起使用：</span></span><br><span class="line"><span class="variable language_">this</span>.$nextTick(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>( <span class="variable language_">this</span>.<span class="property">$refs</span>.<span class="property">msgDiv</span>.<span class="property">innerHTML</span> );</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></li>
+</ul>
+<p>参照：<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/174396758">Vue.nextTick 的原理和用途</a>; <a target="_blank" rel="noopener" href="https://www.jianshu.com/p/a7550c0e164f">简单理解Vue中的nextTick</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://xiaodanye.github.io/2022/05/24/Vue-nextTick/" data-id="cl3jw7tis00109o5j4iep03qc" class="article-share-link">Share</a>
       
       
     </footer>
@@ -869,7 +642,7 @@
 
   <nav id="page-nav">
     
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/2/">Next &amp;raquo;</a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/2/">Next &amp;raquo;</a>
   </nav>
 
 </section>
@@ -901,23 +674,23 @@
       <ul>
         
           <li>
-            <a href="/2022/05/21/JS%E5%89%8D%E7%AB%AF%E4%B8%BB%E6%B5%81%E5%B8%83%E5%B1%80/">JS前端主流布局</a>
+            <a href="/2022/05/24/Vue%E8%99%9A%E6%8B%9FDOM-diff%E7%AE%97%E6%B3%95/">Vue虚拟DOM-diff算法</a>
           </li>
         
           <li>
-            <a href="/2022/05/21/JS%E6%B5%8F%E8%A7%88%E5%99%A8%E8%BE%93%E5%85%A5URL%E5%90%8E/">JS浏览器输入URL后</a>
+            <a href="/2022/05/24/Vue%E7%88%B6%E5%AD%90%E7%BB%84%E4%BB%B6/">Vue父子组件</a>
           </li>
         
           <li>
-            <a href="/2022/05/21/JS%E4%BC%98%E9%9B%85%E9%99%8D%E7%BA%A7%E4%B8%8E%E6%B8%90%E8%BF%9B%E5%A2%9E%E5%BC%BA/">JS优雅降级与渐进增强</a>
+            <a href="/2022/05/24/Vue%E5%8F%8C%E5%90%91%E7%BB%91%E5%AE%9A/">Vue双向绑定</a>
           </li>
         
           <li>
-            <a href="/2022/05/21/JS%E9%A1%B9%E7%9B%AE%E4%BC%98%E5%8C%96/">JS项目优化</a>
+            <a href="/2022/05/24/Vue-SPA/">Vue-SPA</a>
           </li>
         
           <li>
-            <a href="/2022/05/21/JS%E5%86%85%E5%AD%98%E6%B3%84%E6%BC%8F/">JS内存泄漏</a>
+            <a href="/2022/05/24/Vue-computed-methods-watch/">Vue-computed_methods_watch</a>
           </li>
         
       </ul>
